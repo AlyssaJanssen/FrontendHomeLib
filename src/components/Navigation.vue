@@ -10,27 +10,26 @@ import { RouterLink, RouterView } from 'vue-router'
 </script>
 
 <template>
-<nav class="bg-gray-900 text-white relative
-w-full
-flex flex-wrap
+<nav class="bg-gray-900 text-white relative w-full flex flex-wrap
 items-center
 justify-between
 py-4
 shadow-2xl
-navbar navbar-expand-lg navbar-light border border-sky-700">
+sticky top-0 z-20 ease-in-out duration-400 translate-y-0
+navbar navbar-expand-lg navbar-light border border-gray-700">
     <div class="container-fluid w-full flex flex-wrap items-center justify-between px-4 text-white">  
         <!-- Website Logo and Title w/ home link -->
-        <a href="#" class="flex items-center hover:bg-blue-900 text-white">
+        <RouterLink to="/" class="flex items-center hover:bg-blue-900 text-white">
             <img src="/book.png" alt="logo" style="width:48px;height:48px;" class="mx-2 ">
-            <span class="font-semibold text-xl text-white"><RouterLink to="/">Home Lib</RouterLink></span>
-        </a> 
+            <span class="font-semibold text-xl text-white">HomeLib</span>
+        </RouterLink>
             <!-- Left Navbar items -->
             <div class="mx-10 navbar-nav flex flex-col pl-0 list-style-none mr-auto">
     
             </div>
                 <!-- Right Side Navbar items, login, join -->
                 <div class="flex items-center relative text-white">
-                    <a href="" class="text-sm py-2 px-4 font-bold  rounded hover:bg-purple-600 text-white transition duration-300">LogIn</a>
+                    <a href="" class="text-sm py-2 px-4 font-bold  rounded hover:bg-indigo-600 text-white transition duration-300">LogIn</a>
                     <a href="" class="text-sm mx-2 bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-2 rounded">Join</a>
                 </div>
                     <!--Dark or light mode toggle here-->
