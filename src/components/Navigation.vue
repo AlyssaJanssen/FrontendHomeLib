@@ -10,7 +10,7 @@ import { RouterLink, RouterView } from 'vue-router'
 </script>
 
 <template>
-<nav class="bg-gray-900 text-white relative w-full flex flex-wrap
+<nav class="bg-gray-900 text-white w-full flex flex-wrap
 items-center
 justify-between
 py-4
@@ -29,8 +29,8 @@ navbar navbar-expand-lg navbar-light border border-gray-700">
             </div>
                 <!-- Right Side Navbar items, login, join -->
                 <div class="flex items-center relative text-white">
-                    <a href="" class="text-sm py-2 px-4 font-bold  rounded hover:bg-indigo-600 text-white transition duration-300">LogIn</a>
-                    <a href="" class="text-sm mx-2 bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-2 rounded">Join</a>
+                    <RouterLink to='/login' class="link shadow-xl text-sm py-2 px-4 font-bold  rounded hover:bg-indigo-600 text-white transition duration-300">Login</RouterLink>
+                    <RouterLink to='/register' class="link shadow-xl text-sm mx-2 bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-2 rounded">Join</RouterLink>
                 </div>
                     <!--Dark or light mode toggle here-->
                     <div>
