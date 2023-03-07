@@ -1,8 +1,8 @@
 <template>
-  <div class="book-item border border-gray-500">
+  <div class="border border-gray-500 rounded hover:bg-slate-700">
     <RouterLink :to="{ name: 'Book', params: { id: book.id } }" class="link">
-      <template v-if="volumeInfo.imageLinks">
-        <img :src="volumeInfo.imageLinks.thumbnail" :alt="volumeInfo.title" />
+      <template v-if="volumeInfo.imageLinks" >
+        <img :src="volumeInfo.imageLinks.thumbnail" :alt="volumeInfo.title" class="rounded" />
       </template>
       <template v-else>
         <img
@@ -32,11 +32,7 @@
         </span>
       </p>
     </RouterLink>
-    <button
-      class="text-sm items-center mx-2 my-2 bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-2 rounded"
-    >
-      Add Book
-    </button>
+    
   </div>
 </template>
 
@@ -58,7 +54,6 @@ export default {
 
 <style scoped>
 img {
-  display: block;
   margin: 0 auto;
   margin-top: 0.5rem;
   width: 40%;

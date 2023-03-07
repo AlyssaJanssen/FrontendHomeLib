@@ -28,14 +28,18 @@ export default {
 </script>
 
 <template>
-  <div v-if="book" class="mx-16 grid-column col-start-2 col-span-4">
-    <br /><br />
+  <div v-if="book" class="mx-80">
     <template v-if="book">
       <img
         :src="book.volumeInfo.imageLinks.thumbnail"
         :alt="book.volumeInfo.title"
-        class="border border-gray-900"
+        class="border border-gray-900 rounded"
       />
+      <button
+      class="text-sm my-4 block items-left bg-blue-600 hover:bg-blue-800 font-bold py-2 px-2 rounded"
+    >
+      Add Book To Library
+    </button>
     </template>
     <template v-else>
       <img
@@ -44,7 +48,7 @@ export default {
       />
     </template>
     <!--Book Title and Author here-->
-    <h4 class="mt-4 font-bold">{{ book.volumeInfo.title }}</h4>
+    <h4 class="mt-2 font-bold">{{ book.volumeInfo.title }}</h4>
     <p>
       <span v-if="!book.volumeInfo.authors">No authors to display</span>
       <span v-else>
@@ -66,17 +70,12 @@ export default {
     <div v-if="book">
       <p v-html="book.volumeInfo.description"></p>
     </div>
-    <button
-      class="text-sm items-center mx-2 my-2 bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-2 rounded"
-    >
-      Add Book
-    </button>
   </div>
 </template>
 <style scoped>
 img {
   display: inline-block;
-  margin-top: 0.5rem;
-  width: 13%;
+  margin-top: 2rem;
+  width: 18%;
 }
 </style>

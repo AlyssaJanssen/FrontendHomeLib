@@ -13,7 +13,9 @@ import Footer from "./components/Footer.vue";
     </nav> -->
   <div>
     <Navigation />
+    <div class="min-h-screen text-gray-200 bg-slate-800">
     <RouterView />
+  </div>
     <!--These are the page views-->
     <Footer />
   </div>

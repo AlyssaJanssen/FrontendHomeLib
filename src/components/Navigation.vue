@@ -23,7 +23,7 @@ import { RouterLink, RouterView } from "vue-router";
           style="width: 48px; height: 48px"
           class="mx-2"
         />
-        <span class="font-semibold text-xl text-white">HomeLib</span>
+        <span class="font-bold text-xl font-sans ">HomeLib</span>
       </RouterLink>
       <!-- Left Navbar items -->
       <div

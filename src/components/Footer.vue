@@ -1,9 +1,9 @@
 <script></script>
 <template>
   <footer
-    class="text-center text-white fixed inset-x-0 bottom-0 border border-gray-700"
+    class="fixed inset-x-0 bottom-0 border border-gray-700"
   >
-    <div class="">
+    <div class="text-center text-white">
       <div class="bg-gray-700">
         <p class="flex justify-center items-center">
           <span class="">Register for Free</span>
@@ -16,9 +16,9 @@
       </div>
     </div>
 
-    <div class="text-center p-3 bg-gray-900">
+    <div class="text-center p-3 bg-gray-900 text-white">
       © 2023
-      <a class="text-white">Home Lib LLC. All Rights Reserved.</a>
+      <a class="">Home Lib LLC. All Rights Reserved.</a>
     </div>
   </footer>
 </template>
