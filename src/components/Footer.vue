@@ -1,12 +1,24 @@
-<script></script>
+<script>
+
+  // function scrollToTop() {
+  //   window.scrollTo(0,0);
+  // }
+
+</script>
 <template>
+  <div
+    class="text-sm bg-gray-300 hover:bg-gray-400 dark:bg-gray-700 dark:text-white shadow-2xl dark:hover:bg-gray-600 mx-auto flex flex-col justify-center items-center p-3"
+  >
+    <RouterLink to="#" class="text-md transition hover:opacity-75"> Back to top </RouterLink>
+  </div>
+
   <footer
     aria-label="Site Footer"
-    class="bg-white dark:bg-gray-900 dark:text-white border shadow-2xl border-gray-700 lg:grid lg:grid-cols-5"
+    class="bg-white dark:bg-gray-900 dark:text-white shadow-2xl lg:grid lg:grid-cols-5"
   >
     <div class="relative block h-32 lg:col-span-2 lg:h-full">
       <img
-        src="./../../public/colorBookShelf.jpg"
+        src="./../../colorBookShelf.jpg"
         alt=""
         class="absolute inset-0 object-cover w-full h-full"
       />
@@ -201,7 +213,7 @@
         </div>
       </div>
 
-      <div class="pt-12 mt-12 border-t border-gray-100">
+      <div class="pt-12 mt-12 border-t border-gray-900 dark:border-white">
         <div class="sm:flex sm:items-center sm:justify-between">
           <nav aria-label="Footer Navigation - Support">
             <ul class="flex flex-wrap gap-4 text-xs">
@@ -216,15 +228,6 @@
                   Privacy Policy
                 </a>
               </li>
-
-              <li>
-                <a
-                  href="#"
-                  class="text-blue-500 text-md transition hover:opacity-75"
-                >
-                  Go To Top Of Page
-                </a>
-              </li>
             </ul>
           </nav>
 
@@ -235,4 +238,16 @@
       </div>
     </div>
   </footer>
+  <div
+    class="bg-gray-300 hover:bg-gray-400 dark:bg-gray-700 dark:text-white shadow-2xl mx-auto flex flex-col justify-center items-center p-6"
+  >
+    <RouterLink to="/">
+      <img
+        src="/book.png"
+        alt="logo"
+        style="width: 62px; height: 62px"
+        class="mx-2"
+      />
+    </RouterLink>
+  </div>
 </template>

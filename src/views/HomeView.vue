@@ -28,11 +28,12 @@ body {
     </div>
     <br />
     <div class="items-center justify-center text-center">
-      <RouterLink
-        to="/register"
-        class="link shadow-xl text-sm mx-2 bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-2 rounded"
-        >Create Your Account</RouterLink
-      >
+      <RouterLink to="/register">
+        <button class="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 text-sm mx-2 
+        bg-blue-600 text-white font-bold py-2 px-2 rounded ">
+        Create Your Account</button>
+        </RouterLink>
+
       <p class="my-2 text-sm  dark:text-gray-300 font-extralight">
         Sign up to start managing your library today.
       </p>

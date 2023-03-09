@@ -4,8 +4,6 @@ export default {
   data() {
     return {
       book: null,
-      myAPIKey: "AIzaSyA9WUIoWCn5SxSX1Kw9nK_7gFK1Xao2DFk",
-      countryName: "US",
     };
   },
   created() {
@@ -28,13 +26,13 @@ export default {
 </script>
 
 <template>
-  <br><br><br>
-  <div v-if="book" class="font-serif mx-64">
+  <div v-if="book" class="font-serif sm:mx-64 mt-12 mb-44">
     <template v-if="book">
       <img
+ 
         :src="book.volumeInfo.imageLinks.thumbnail"
         :alt="book.volumeInfo.title"
-        class="border border-gray-900 rounded"
+        class="border border-gray-900 rounded align-bottom object-contain object-bottom h-72 w-62"
       />
       <br>
       <RouterLink

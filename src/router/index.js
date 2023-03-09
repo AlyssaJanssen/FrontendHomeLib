@@ -35,6 +35,9 @@ const router = createRouter({
             component: Dashboard,
         },
     ],
+    scrollBehavior() {
+        document.getElementById('app').scrollIntoView({ behavior: 'smooth' });
+    }
 });
 
 export default router;

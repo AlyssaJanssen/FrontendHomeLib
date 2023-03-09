@@ -1,13 +1,15 @@
 <template>
   
-<div class="container mx-auto flex flex-col justify-center items-center mt-8">
-  <img
-  src="/book.png"
-  alt="logo"
-  style="width: 66px; height: 66px"
-  class="mx-2"
-/>
-<div class="w-full mb-6 max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700 ">
+<div class="container mx-auto flex flex-col justify-center items-center mt-6 ">
+  
+  <a href="/">
+    <img
+      src="/book.png"
+      alt="logo"
+      style="width: 62px; height: 62px"
+    />
+  </a>
+<div class="w-full mt-4 mb-6 max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-900 dark:border-gray-700 ">
     <form class="space-y-6" action="#">
         <h5 class="text-xl font-medium text-gray-900 dark:text-white">Sign in to HomeLib</h5>
         <div>
