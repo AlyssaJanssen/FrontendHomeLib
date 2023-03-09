@@ -10,7 +10,7 @@ const isDark = ref('');
 
 <template>
   <div :class="isDark ? 'dark' : ''">
-    <div class="bg-gray-300 text-black dark:bg-gray-800 dark:text-gray-100 ">
+    <div class="bg-slate-400 text-black dark:bg-gray-800 dark:text-gray-100 ">
 
     <Navigation />
     <div class="min-h-screen">

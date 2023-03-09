@@ -1,5 +1,5 @@
 <template>
-  <div class="border border-gray-500 rounded dark:hover:bg-gray-700 hover:bg-gray-400">
+  <div class="border border-gray-700 rounded dark:hover:bg-gray-700 hover:bg-slate-300">
     <RouterLink :to="{ name: 'Book', params: { id: book.id } }" class="link">
       <template v-if="volumeInfo.imageLinks" class="inline-block align-bottom">
         <img :src="volumeInfo.imageLinks.thumbnail" :alt="volumeInfo.title" class="py-2 rounded inline-block align-bottom object-contain object-bottom h-52 w-42 " />

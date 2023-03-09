@@ -33,11 +33,11 @@ body {
         class="link shadow-xl text-sm mx-2 bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-2 rounded"
         >Create Your Account</RouterLink
       >
-      <p class="mt-2 text-sm text-gray-700 dark:text-gray-300 font-extralight">
+      <p class="my-2 text-sm  dark:text-gray-300 font-extralight">
         Sign up to start managing your library today.
       </p>
     </div>
-    <div class="mb-16 mx-auto py-4 text-center">
+    <div class="mb-16 mx-auto pb-4 text-center">
       <!--Search Bar w/ results-->
       <div class="mb-16 mx-16">
         <form @submit.prevent="search">
@@ -46,7 +46,7 @@ body {
               type="text"
               v-model="keyword"
               placeholder="Search for a book..."
-              class="bg-transparent dark:text-white text-black w-4/12 border border-sky-600 py-2 px-2 rounded h-9 hover:border-sky-400"
+              class="bg-white dark:text-white dark:bg-transparent text-black w-4/12 border border-sky-600 py-2 px-2 rounded h-9 hover:border-sky-400"
               required
             />
             <button
@@ -96,12 +96,20 @@ body {
         />
       </div>
     </div>
+
+
+    
     <a
       href="https://www.care.org/"
-      class="hidden fixed lg:block z-30 bottom-8 right-8 bg-white dark:bg-gray-700 dark:hover:bg-gray-800 border border-stone-300 dark:border-gray-700 dark:text-gray-200 rounded-lg px-2 py-1"
+      target="_blank"
+      class="hidden fixed lg:block z-30 bottom-8 right-8 bg-gray-300 hover:bg-white dark:bg-gray-700 dark:hover:bg-gray-800 border border-stone-300 dark:border-gray-700 dark:text-gray-200 rounded-lg px-2 py-1"
     >
       Support Ukraine</a
     >
+
+  
+
+
   </div>
 </template>
 <script>
