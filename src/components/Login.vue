@@ -54,7 +54,12 @@
 </template>
 
 <script>
-export default {};
+export default {
+  name:'login',
+  data: function() {
+    return {};
+  }
+};
 </script>
 
 <style></style>

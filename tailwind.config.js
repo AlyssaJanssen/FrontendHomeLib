@@ -6,7 +6,7 @@ module.exports = {
         "./index.html",
         "./src/App.vue"
     ],
-    darkMode: 'media', // or 'class'
+    darkMode: 'class', // or 'class'
     theme: {
         accentColor: ({ theme }) => ({
             ...theme('colors'),

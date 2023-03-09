@@ -1,8 +1,8 @@
 <template>
-  <div class="border border-gray-500 rounded hover:bg-slate-700">
+  <div class="border border-gray-500 rounded dark:hover:bg-gray-700 hover:bg-gray-400">
     <RouterLink :to="{ name: 'Book', params: { id: book.id } }" class="link">
-      <template v-if="volumeInfo.imageLinks" >
-        <img :src="volumeInfo.imageLinks.thumbnail" :alt="volumeInfo.title" class="rounded" />
+      <template v-if="volumeInfo.imageLinks" class="inline-block align-bottom">
+        <img :src="volumeInfo.imageLinks.thumbnail" :alt="volumeInfo.title" class="py-2 rounded inline-block align-bottom object-contain object-bottom h-52 w-42 " />
       </template>
       <template v-else>
         <img
@@ -11,6 +11,7 @@
         />
       </template>
       <!--Book Title and Author here-->
+      <div class="object-bottom align-bottom">
       <h4>{{ volumeInfo.title }}</h4>
       <p>
         <span v-if="!volumeInfo.authors">No authors to display</span>
@@ -31,6 +32,7 @@
           </span>
         </span>
       </p>
+    </div>
     </RouterLink>
     
   </div>
@@ -51,11 +53,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-img {
-  margin: 0 auto;
-  margin-top: 0.5rem;
-  width: 40%;
-}
-</style>

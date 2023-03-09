@@ -28,18 +28,20 @@ export default {
 </script>
 
 <template>
-  <div v-if="book" class="mx-80">
+  <br><br><br>
+  <div v-if="book" class="font-serif mx-64">
     <template v-if="book">
       <img
         :src="book.volumeInfo.imageLinks.thumbnail"
         :alt="book.volumeInfo.title"
         class="border border-gray-900 rounded"
       />
-      <button
-      class="text-sm my-4 block items-left bg-blue-600 hover:bg-blue-800 font-bold py-2 px-2 rounded"
-    >
-      Add Book To Library
-    </button>
+      <br>
+      <RouterLink
+        to="/register"
+        class="link shadow-xl text-sm bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-2 rounded"
+        >Add Book To Library</RouterLink
+      >
     </template>
     <template v-else>
       <img
@@ -72,10 +74,3 @@ export default {
     </div>
   </div>
 </template>
-<style scoped>
-img {
-  display: inline-block;
-  margin-top: 2rem;
-  width: 18%;
-}
-</style>
