@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import HomeView from "../views/HomeView.vue";
 import Book from "../views/Book.vue";
 import Login from "../components/Login.vue";
@@ -30,13 +31,43 @@ const router = createRouter({
             component: Register,
         },
         {
-            path: "/",
+            path: "/dashboard",
             name: "Dashboard",
             component: Dashboard,
+            // this route requires authentication
+            meta: {
+                requiresAuth: true,
+            },
         },
     ],
     scrollBehavior() {
-        document.getElementById('app').scrollIntoView({ behavior: 'smooth' });
+        document.getElementById("app").scrollIntoView({ behavior: "smooth" });
+    },
+});
+
+const getCurrentUser = () => {
+    return new Promise((resolve, reject) => {
+        const removeListener = onAuthStateChanged(
+            getAuth(),
+            (user) => {
+                removeListener();
+                resolve(user);
+            },
+            reject
+        );
+    })
+}
+
+router.beforeEach(async(to, from, next) => {
+    if (to.matched.some((record) => record.meta.requiresAuth)) {
+        if (await getCurrentUser()) {
+            next();
+        } else {
+            alert("you dont have access!");
+            next("/")
+        }
+    } else {
+        next();
     }
 });
 

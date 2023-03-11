@@ -2,7 +2,9 @@
   <div class="border border-gray-700 rounded dark:hover:bg-gray-700 hover:bg-slate-300">
     <RouterLink :to="{ name: 'Book', params: { id: book.id } }" class="link">
       <template v-if="volumeInfo.imageLinks" class="inline-block align-bottom">
-        <img :src="volumeInfo.imageLinks.thumbnail" :alt="volumeInfo.title" class="py-2 rounded inline-block align-bottom object-contain object-bottom h-52 w-42 " />
+        <img :src="volumeInfo.imageLinks.thumbnail" :alt="volumeInfo.title" class="rounded inline-block align-bottom object-contain object-bottom "
+        width="180"
+        height="290" />
       </template>
       <template v-else>
         <img

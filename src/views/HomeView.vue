@@ -6,6 +6,7 @@ body {
 </style>
 
 <template>
+  
   <div class="mb-20 h-full">
     <div class="pt-8 text-center">
       <h2 class="text-4xl font-semibold font-serif">
@@ -21,13 +22,11 @@ body {
         <li>Catalog your home library</li>
         <li>Discover new books to read</li>
         <li>Create personal reading Lists</li>
-        <li>Create yearly reading goals</li>
-        <li>View personalized book stats</li>
         <li>HomeLib is entirely free</li>
       </ul>
     </div>
     <br />
-    <div class="items-center justify-center text-center">
+    <div class="items-center justify-center text-center m-0">
       <RouterLink to="/register">
         <button class="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 text-sm mx-2 
         bg-blue-600 text-white font-bold py-2 px-2 rounded ">

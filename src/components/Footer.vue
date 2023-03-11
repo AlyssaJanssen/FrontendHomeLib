@@ -20,7 +20,7 @@
       <img
         src="./../../colorBookShelf.jpg"
         alt=""
-        class="absolute inset-0 object-cover w-full h-full"
+        class="absolute inset-0 object-cover w-full h-full  dark:-hue-rotate-90"
       />
     </div>
 
