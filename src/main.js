@@ -5,7 +5,7 @@ import './assets/main.css'
 
 import { initializeApp } from "firebase/app";
 import firebaseConfig from './firebase.config';
-
+// Initialize Firebase
 initializeApp(firebaseConfig);
 
 const app = createApp(App)

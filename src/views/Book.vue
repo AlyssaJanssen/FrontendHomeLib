@@ -87,3 +87,10 @@ export default {
    
   </div>
 </template>
+<style scoped>
+img {
+  width: 28vh;
+  object-fit: fill;
+  height: 35vh;
+}
+</style>

@@ -6,6 +6,7 @@ import { useRouter } from "vue-router";
 const router = useRouter();
 
 const isLoggedIn = ref(false);
+
 let auth;
 onMounted(() => {
   auth = getAuth();
@@ -18,10 +19,11 @@ onMounted(() => {
   });
 });
 
+
 const handleSignOut = () => {
   signOut(auth).then(() => {
     router.push("/");
-  })
+  });
 };
 </script>
 
@@ -48,6 +50,7 @@ const handleSignOut = () => {
       <!-- Left Navbar items -->
       <div class="mx-6 navbar-nav flex flex-row list-style-none mr-auto">
         <!--Add new navbar items here-->
+        <span v-if="isLoggedIn" class="font-sans align-text-bottom hover:underline text-black dark:hover:text-white dark:text-gray-200"><RouterLink to="/dashboard">Dashboard</RouterLink></span>
       </div>
 
       <!-- Right Side Navbar items, login, join -->
@@ -76,21 +79,30 @@ const handleSignOut = () => {
 
         <RouterLink
           to="/register"
+          v-if="!isLoggedIn"
           class="link shadow-xl text-sm ml-2 py-2 px-2 bg-blue-600 hover:bg-blue-800 text-white font-bold rounded"
           >Join</RouterLink
         >
         <RouterLink
           to="/login"
           class="link ml-2 shadow-xl text-sm py-2 px-2 font-bold rounded bg-indigo-500 hover:bg-indigo-600 text-white transition duration-300"
+         v-if="!isLoggedIn"
           >Login</RouterLink
         >
 
         <button
-          class="link ml-2 shadow-xl text-sm py-2 px-2 font-bold rounded bg-indigo-500 hover:bg-indigo-600 text-white transition duration-300"
-          @click="handleSignOut"
-          v-if="isLoggedIn"
-          >Sign out</button
+        class="link ml-2 shadow-xl text-sm py-2 px-2 font-bold rounded bg-indigo-500 hover:bg-indigo-600 text-white transition duration-300"
+        @click="handleSignOut"
+        v-if="isLoggedIn"
         >
+        Logout
+      </button>
+      <img
+      v-if="isLoggedIn"
+        src="https://tecdn.b-cdn.net/img/new/avatars/2.webp"
+        class="ml-2 rounded-full w-12"
+        alt="Avatar"
+      />
       </div>
     </div>
   </nav>

@@ -6,8 +6,7 @@ body {
 </style>
 
 <template>
-  
-  <div class="mb-20 h-full">
+  <div class="mb-20 h-full mx-auto container">
     <div class="pt-8 text-center">
       <h2 class="text-4xl font-semibold font-serif">
         Manage Your Home Library
@@ -28,7 +27,8 @@ body {
     <br />
     <div class="items-center justify-center text-center m-0">
       <RouterLink to="/register">
-        <button class="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 text-sm mx-2 
+        <button 
+        class="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 text-sm mx-2 
         bg-blue-600 text-white font-bold py-2 px-2 rounded ">
         Create Your Account</button>
         </RouterLink>
@@ -40,13 +40,13 @@ body {
     <div class="mb-16 mx-auto pb-4 text-center">
       <!--Search Bar w/ results-->
       <div class="mb-16 mx-16">
-        <form @submit.prevent="search">
+        <form @submit.prevent="search" class="mx-auto container">
           <div>
             <input
               type="text"
               v-model="keyword"
               placeholder="Search for a book..."
-              class="bg-white dark:text-white dark:bg-transparent text-black w-4/12 border border-sky-600 py-2 px-2 rounded h-9 hover:border-sky-400"
+              class="bg-white container dark:text-white dark:bg-transparent text-black w-4/12 border border-sky-600 py-2 px-2 rounded h-9 hover:border-sky-400"
               required
             />
             <button
@@ -57,7 +57,7 @@ body {
             </button>
           </div>
           <div>
-            <select
+            <select v-if="loadState == 'success'"
               name="order"
               class="inline-block rounded my-1 py-1 px-2 border border-gray-800 text-black  bg-gray-300  font-semibold hover:bg-slate-200"
               v-model="orderBy"
@@ -69,7 +69,7 @@ body {
           </div>
         </form>
       </div>
-      <div class="text-center mx-14 mt-0 pt-0">
+      <div class="text-center container mx-auto flex flex-col justify-center items-center">
         <div role="status" v-if="loadState == 'loading'">
           <svg
             aria-hidden="true"
@@ -97,8 +97,6 @@ body {
       </div>
     </div>
 
-
-    
     <a
       href="https://www.care.org/"
       target="_blank"
@@ -107,14 +105,13 @@ body {
       Support Ukraine</a
     >
 
-  
-
-
   </div>
 </template>
 <script>
 import BookList from "../components/BookList.vue";
 import axios from "axios";
+
+
 export default {
   data() {
     return {
@@ -124,6 +121,8 @@ export default {
       maxResults: "20",
       loadState: "",
       countryName: "US",
+      isLoggedIn: false,
+ 
     };
   },
   methods: {

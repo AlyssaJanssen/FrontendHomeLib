@@ -1,10 +1,10 @@
 <template>
-  <div class="border border-gray-700 rounded dark:hover:bg-gray-700 hover:bg-slate-300">
+  <div class="border border-gray-700 rounded dark:hover:bg-gray-700 hover:bg-slate-300 flex justify-center items-end ">
     <RouterLink :to="{ name: 'Book', params: { id: book.id } }" class="link">
-      <template v-if="volumeInfo.imageLinks" class="inline-block align-bottom">
-        <img :src="volumeInfo.imageLinks.thumbnail" :alt="volumeInfo.title" class="rounded inline-block align-bottom object-contain object-bottom "
-        width="180"
-        height="290" />
+      <div class="items-baseline align-bottom mx-6">
+      <template v-if="volumeInfo.imageLinks">
+        <img :src="volumeInfo.imageLinks.thumbnail" :alt="volumeInfo.title" class="rounded inline-block m-2 object-fill shadow-2xl"
+         />
       </template>
       <template v-else>
         <img
@@ -12,10 +12,11 @@
           :alt="volumeInfo.title"
         />
       </template>
+    </div>
       <!--Book Title and Author here-->
-      <div class="object-bottom align-bottom">
-      <h4>{{ volumeInfo.title }}</h4>
-      <p>
+      <div class="flex flex-col ">
+      <h3 class="text-lg flex flex-col h-14 justify-start text-ellipsis overflow-hidden">{{ volumeInfo.title }}</h3>
+      <p class="text-sm flex flex-col h-10 justify-start m-2 text-ellipsis overflow-hidden">
         <span v-if="!volumeInfo.authors">No authors to display</span>
         <span v-else>
           By
@@ -36,7 +37,7 @@
       </p>
     </div>
     </RouterLink>
-    
+
   </div>
 </template>
 
@@ -55,3 +56,11 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+img {
+  width: 20vh;
+  object-fit: fill;
+  height: 25vh;
+}
+</style>

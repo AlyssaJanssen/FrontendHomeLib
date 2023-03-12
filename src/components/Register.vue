@@ -1,18 +1,25 @@
 <script setup>
 import { ref } from "vue";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
+} from "firebase/auth";
 import { useRouter } from "vue-router";
 const router = useRouter();
 const email = ref("");
 const pw = ref("");
 // need .value because of ref
 // signUp calls createUserWithEmailAndPassword(auth, email, pw),
+const auth = getAuth();
 const register = () => {
-  createUserWithEmailAndPassword(getAuth(), email.value, pw.value)
+  createUserWithEmailAndPassword(auth, email.value, pw.value)
     .then((data) => {
       console.log("Successfully registered!");
-      console.log(auth.currentUser);// this is saved in local storage so if you open app in another tab, you'll still be logged in.
-      router.push('/dashboard'); // redirects users to the dashboard
+      // You might want to add more validation and error messaging  here but the basics of logging in work for now - MVP
+      console.log(auth.currentUser); // this is saved in local storage so if you open app in another tab, you'll still be logged in.
+      router.push("/dashboard"); // redirects users to the dashboard
     })
     .catch((error) => {
       console.log(error.code);
@@ -20,9 +27,18 @@ const register = () => {
     });
 };
 
-// const signInWithGoogle = () => {
-
-// }
+const signInWithGoogle = () => {
+  const provider = new GoogleAuthProvider();
+  signInWithPopup(getAuth(), provider)
+    .then((result) => {
+      console.log(result.user);
+      router.push("/dashboard");
+    })
+    .catch((error) => {
+      // handle error
+      console.log(error);
+    });
+};
 </script>
 
 <template>
@@ -96,6 +112,13 @@ const register = () => {
           class="w-full text-white bg-indigo-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-indigo-500 dark:hover:bg-indigo-600 dark:focus:ring-blue-800"
         >
           Create Your Account
+        </button>
+
+        <button
+          @click="signInWithGoogle"
+          class="w-full text-white bg-indigo-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-indigo-500 dark:hover:bg-indigo-600 dark:focus:ring-blue-800"
+        >
+          Sign in With Google
         </button>
         <div class="text-sm font-medium text-gray-500 dark:text-gray-300">
           Already a member?

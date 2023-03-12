@@ -4,7 +4,6 @@ import HomeView from "../views/HomeView.vue";
 import Book from "../views/Book.vue";
 import Login from "../components/Login.vue";
 import Register from "../components/Register.vue";
-import Dashboard from "../components/Dashboard.vue";
 
 const router = createRouter({
     history: createWebHistory(
@@ -33,13 +32,15 @@ const router = createRouter({
         {
             path: "/dashboard",
             name: "Dashboard",
-            component: Dashboard,
+            component: () => // this is lazy loaded when user logs in
+                import ("../components/Dashboard.vue"),
             // this route requires authentication
             meta: {
                 requiresAuth: true,
             },
         },
     ],
+    // when users click links to home or top of page, then it scrolls smoothly instead of suddenly. This looks nicer.
     scrollBehavior() {
         document.getElementById("app").scrollIntoView({ behavior: "smooth" });
     },
@@ -58,9 +59,11 @@ const getCurrentUser = () => {
     })
 }
 
+// Navigation Guards: this checks if user is authenticated to see the page
 router.beforeEach(async(to, from, next) => {
     if (to.matched.some((record) => record.meta.requiresAuth)) {
         if (await getCurrentUser()) {
+            // proceed to next route
             next();
         } else {
             alert("you dont have access!");
