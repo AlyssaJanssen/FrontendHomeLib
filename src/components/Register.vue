@@ -1,43 +1,47 @@
-<script setup>
+<script>
 import { ref } from "vue";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  GoogleAuthProvider,
-  signInWithPopup,
-} from "firebase/auth";
 import { useRouter } from "vue-router";
-const router = useRouter();
-const email = ref("");
-const pw = ref("");
-// need .value because of ref
-// signUp calls createUserWithEmailAndPassword(auth, email, pw),
-const auth = getAuth();
-const register = () => {
-  createUserWithEmailAndPassword(auth, email.value, pw.value)
-    .then((data) => {
-      console.log("Successfully registered!");
-      // You might want to add more validation and error messaging  here but the basics of logging in work for now - MVP
-      console.log(auth.currentUser); // this is saved in local storage so if you open app in another tab, you'll still be logged in.
-      router.push("/dashboard"); // redirects users to the dashboard
-    })
-    .catch((error) => {
-      console.log(error.code);
-      alert(error.message);
-    });
-};
+import { useStore } from "vuex";
 
-const signInWithGoogle = () => {
-  const provider = new GoogleAuthProvider();
-  signInWithPopup(getAuth(), provider)
-    .then((result) => {
-      console.log(result.user);
-      router.push("/dashboard");
-    })
-    .catch((error) => {
-      // handle error
-      console.log(error);
-    });
+export default {
+  name: "RegisterComponent",
+  setup() {
+    const email = ref("");
+    const password = ref("");
+    const name = ref("");
+    const error = ref(null);
+    const store = useStore();
+    const router = useRouter();
+
+    const Register = async () => {
+      try {
+        await store.dispatch("register", {
+          email: email.value,
+          password: password.value,
+          name: name.value,
+        });
+        router.push("/dashboard");
+      } catch (err) {
+        error.value = err.message;
+        console.log(error);
+      }
+    };
+
+    // const signInWithGoogle = () => {
+    //   const provider = new GoogleAuthProvider();
+    //   signInWithPopup(getAuth(), provider)
+    //     .then((result) => {
+    //       console.log(result.user);
+    //       router.push("/dashboard");
+    //     })
+    //     .catch((error) => {
+    //       // handle error
+    //       console.log(error);
+    //     });
+    // };
+
+    return { Register, name, email, password, error };
+  },
 };
 </script>
 
@@ -49,7 +53,7 @@ const signInWithGoogle = () => {
     <div
       class="w-full mt-4 mb-6 max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-900 dark:border-gray-700"
     >
-      <form class="space-y-6" @submit.prevent="register">
+      <form class="space-y-6" action="#" @submit.prevent="Register">
         <h5 class="text-xl font-medium text-gray-900 dark:text-white">
           Join HomeLib
         </h5>
@@ -82,9 +86,26 @@ const signInWithGoogle = () => {
             placeholder="••••••••"
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
             required
-            v-model="pw"
+            v-model="password"
           />
         </div>
+        <div>
+          <label
+            for="name"
+            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >Your name</label
+          >
+          <input
+            type="name"
+            name="name"
+            id="name"
+            placeholder="Enter name..."
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+            required
+            v-model="name"
+          />
+        </div>
+        <div v-if="error" class="text-yellow-400">{{ error }}</div>
         <div class="flex items-start">
           <div class="flex items-start">
             <div class="flex items-center h-5">
@@ -111,15 +132,15 @@ const signInWithGoogle = () => {
           type="submit"
           class="w-full text-white bg-indigo-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-indigo-500 dark:hover:bg-indigo-600 dark:focus:ring-blue-800"
         >
-          Create Your Account
+          Join HomeLib
         </button>
-
+        <!-- 
         <button
           @click="signInWithGoogle"
           class="w-full text-white bg-indigo-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-indigo-500 dark:hover:bg-indigo-600 dark:focus:ring-blue-800"
         >
           Sign in With Google
-        </button>
+        </button> -->
         <div class="text-sm font-medium text-gray-500 dark:text-gray-300">
           Already a member?
           <RouterLink

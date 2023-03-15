@@ -1,30 +1,40 @@
-<script setup>
-import { RouterLink } from "vue-router";
-import { onMounted, ref } from "vue";
-import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+<script>
+import { useStore } from "vuex";
 import { useRouter } from "vue-router";
-const router = useRouter();
+import {computed} from "vue";
+import { auth } from "../firebase.config";
 
-const isLoggedIn = ref(false);
+export default {
+  name: "NavbarComponent",
+  setup() {
+  const store = useStore()
+  const router = useRouter()
 
-let auth;
-onMounted(() => {
-  auth = getAuth();
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      isLoggedIn.value = true;
-    } else {
-      isLoggedIn.value = false;
-    }
+  auth.onAuthStateChanged(user => { // fetch from store when user has been authenticated
+    store.dispatch("fetchUser", user);
   });
-});
 
-
-const handleSignOut = () => {
-  signOut(auth).then(() => {
-    router.push("/");
+  const user = computed(() => { // update the user object from the store getters:
+    return store.getters.user;
   });
+
+  const signOut = async () => {
+        await store.dispatch('logOut')
+        console.log("User signed out")
+        router.push('/')
+  }
+
+    return { user, signOut}
+ }
+
+
+
 };
+// const handleSignOut = () => {
+//   signOut(auth).then(() => {
+//     router.push("/");
+//   });
+// };
 </script>
 
 <template>
@@ -35,7 +45,7 @@ const handleSignOut = () => {
       class="container-fluid w-full flex flex-wrap items-center justify-between px-4 text-white"
     >
       <!-- Website Logo and Title w/ home link -->
-      <RouterLink to="/" class="flex items-center">
+      <a href="/" class="flex items-center">
         <img
           src="/book.png"
           alt="logo"
@@ -46,11 +56,15 @@ const handleSignOut = () => {
           class="font-bold text-xl font-sans hover:text-gray-600 text-black dark:hover:text-white dark:text-gray-200"
           >HomeLib</span
         >
-      </RouterLink>
+      </a>
       <!-- Left Navbar items -->
       <div class="mx-6 navbar-nav flex flex-row list-style-none mr-auto">
         <!--Add new navbar items here-->
-        <span v-if="isLoggedIn" class="font-sans align-text-bottom hover:underline text-black dark:hover:text-white dark:text-gray-200"><RouterLink to="/dashboard">Dashboard</RouterLink></span>
+        <span
+          v-if="user.isLoggedIn"
+          class="font-sans align-text-bottom hover:underline text-black dark:hover:text-white dark:text-gray-200"
+          ><RouterLink to="/dashboard">Dashboard</RouterLink></span
+        >
       </div>
 
       <!-- Right Side Navbar items, login, join -->
@@ -79,30 +93,30 @@ const handleSignOut = () => {
 
         <RouterLink
           to="/register"
-          v-if="!isLoggedIn"
+          v-if="!user.isLoggedIn"
           class="link shadow-xl text-sm ml-2 py-2 px-2 bg-blue-600 hover:bg-blue-800 text-white font-bold rounded"
           >Join</RouterLink
         >
         <RouterLink
           to="/login"
           class="link ml-2 shadow-xl text-sm py-2 px-2 font-bold rounded bg-indigo-500 hover:bg-indigo-600 text-white transition duration-300"
-         v-if="!isLoggedIn"
+          v-if="!user.isLoggedIn"
           >Login</RouterLink
         >
 
         <button
-        class="link ml-2 shadow-xl text-sm py-2 px-2 font-bold rounded bg-indigo-500 hover:bg-indigo-600 text-white transition duration-300"
-        @click="handleSignOut"
-        v-if="isLoggedIn"
+          class="link ml-2 shadow-xl text-sm py-2 px-2 font-bold rounded bg-indigo-500 hover:bg-indigo-600 text-white transition duration-300"
+          @click="signOut"
+          v-if="user.isLoggedIn"
         >
-        Logout
-      </button>
-      <img
-      v-if="isLoggedIn"
-        src="https://tecdn.b-cdn.net/img/new/avatars/2.webp"
-        class="ml-2 rounded-full w-12"
-        alt="Avatar"
-      />
+          Logout
+        </button>
+        <img
+          v-if="user.isLoggedIn"
+          src="https://tecdn.b-cdn.net/img/new/avatars/2.webp"
+          class="ml-2 rounded-full w-12"
+          alt="Avatar"
+        />
       </div>
     </div>
   </nav>

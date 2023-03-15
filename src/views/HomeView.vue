@@ -1,10 +1,3 @@
-<style>
-body {
-  font-family: Helvetica, Arial, sans-serif;
-  color: #2c3e50;
-}
-</style>
-
 <template>
   <div class="mb-20 h-full mx-auto container">
     <div class="pt-8 text-center">
@@ -28,6 +21,7 @@ body {
     <div class="items-center justify-center text-center m-0">
       <RouterLink to="/register">
         <button 
+        v-if="!user.isLoggedIn"
         class="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 text-sm mx-2 
         bg-blue-600 text-white font-bold py-2 px-2 rounded ">
         Create Your Account</button>
@@ -110,7 +104,9 @@ body {
 <script>
 import BookList from "../components/BookList.vue";
 import axios from "axios";
-
+import { useStore } from "vuex";
+import { computed } from "vue";
+import { auth } from "../firebase.config";
 
 export default {
   data() {
@@ -121,9 +117,20 @@ export default {
       maxResults: "20",
       loadState: "",
       countryName: "US",
-      isLoggedIn: false,
- 
     };
+  },
+  setup() {
+    const store = useStore();
+
+    auth.onAuthStateChanged((user) => {
+      store.dispatch("fetchUser", user);
+    });
+
+    const user = computed(() => {
+      return store.getters.user;
+    });
+
+    return { user };
   },
   methods: {
     search() {
@@ -146,5 +153,13 @@ export default {
   components: {
     BookList,
   },
+  
 };
 </script>
+
+<style>
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  color: #2c3e50;
+}
+</style>

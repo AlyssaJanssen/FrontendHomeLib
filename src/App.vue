@@ -1,14 +1,19 @@
-<script setup>
+<script>
 import { RouterLink, RouterView } from "vue-router";
 import Navigation from "./components/Navigation.vue";
 import Footer from "./components/Footer.vue";
 import { ref } from "vue";
 
 
-
+export default{
+  data() {
+    return {
+      isDark: '',
+    };
+  },
+setup(){
 // Dark Mode: Detect in local storage
-let isDark = ref("");
-// On page load or when changing themes, best to add inline in `head` to avoid FOUC
+// On page load or when changing themes
 if (
   localStorage.theme === "dark" ||
   (!("theme" in localStorage) &&
@@ -31,6 +36,13 @@ document.addEventListener("DOMContentLoaded", function () {
   bar.classList.remove("w-0");
   bar.classList.add("w-full");
 });
+
+},
+
+components:{
+  Navigation, Footer,
+}
+}
 </script>
 
 <template>
@@ -53,5 +65,3 @@ document.addEventListener("DOMContentLoaded", function () {
     </div>
   </div>
 </template>
-
-<style></style>

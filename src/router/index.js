@@ -4,6 +4,7 @@ import HomeView from "../views/HomeView.vue";
 import Book from "../views/Book.vue";
 import Login from "../components/Login.vue";
 import Register from "../components/Register.vue";
+import Dashboard from "../components/Dashboard.vue";
 
 const router = createRouter({
     history: createWebHistory(
@@ -32,9 +33,7 @@ const router = createRouter({
         {
             path: "/dashboard",
             name: "Dashboard",
-            component: () => // this is lazy loaded when user logs in
-                import ("../components/Dashboard.vue"),
-            // this route requires authentication
+            component: Dashboard,
             meta: {
                 requiresAuth: true,
             },
