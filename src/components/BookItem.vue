@@ -43,6 +43,7 @@
 
 <script>
 export default {
+  name: "BookItemComponent",
   props: {
     book: {
       type: Object,

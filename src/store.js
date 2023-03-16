@@ -44,7 +44,6 @@ const store = createStore({
                     })
                     .then(() => {
                         // Profile updated!
-                        console.log(displayName);
                         // ...
                     })
                     .catch((error) => {
@@ -52,6 +51,8 @@ const store = createStore({
                         console.log(error);
                         // ...
                     });
+                //dispatch.fetchUser(context, response) // gets the displayName on register to dashboard screen
+                //console.log(this.displayName); // says not defined right after user registers but is fine on login
             } else {
                 throw new Error("Unable to register user");
             }

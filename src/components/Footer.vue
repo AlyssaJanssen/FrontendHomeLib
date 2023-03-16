@@ -1,22 +1,41 @@
 <script>
-
+import { computed } from "vue";
+import { useStore } from "vuex";
+export default {
+  name: "FooterComponent",
+  setup() {
+    const store = useStore();
+    const user = computed(() => {
+      return store.getters.user;
+    });
+    return { user };
+  },
+};
 </script>
+<style scoped>
+footer, div {
+  position: relative;
+  z-index:1000;
+}
+</style>
 <template>
   <div
-    class="text-sm bg-gray-300 hover:bg-gray-400 dark:bg-gray-700 dark:text-white shadow-2xl dark:hover:bg-gray-600 mx-auto flex flex-col justify-center items-center p-3"
+    class="text-sm z-40 bg-gray-300 hover:bg-gray-400 dark:bg-gray-700 dark:text-white shadow-2xl dark:hover:bg-gray-600 mx-auto flex flex-col justify-center items-center p-3"
   >
-    <RouterLink to="#" class="text-md transition hover:opacity-75"> Back to top </RouterLink>
+    <RouterLink to="#" class="text-md transition hover:opacity-75">
+      Back to top
+    </RouterLink>
   </div>
 
   <footer
     aria-label="Site Footer"
-    class="bg-white dark:bg-gray-900 dark:text-white shadow-2xl lg:grid lg:grid-cols-5"
+    class="bg-white z-40 dark:bg-gray-900 dark:text-white shadow-2xl lg:grid lg:grid-cols-5"
   >
     <div class="relative block h-32 lg:col-span-2 lg:h-full">
       <img
         src="./../../colorBookShelf.jpg"
         alt=""
-        class="absolute inset-0 object-cover w-full h-full  dark:-hue-rotate-90"
+        class="absolute inset-0 object-cover w-full h-full dark:-hue-rotate-90"
       />
     </div>
 
@@ -122,61 +141,30 @@
 
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div>
-            <p class="font-medium text-gray-900 dark:text-white">Services</p>
-
-            <nav aria-label="Footer Navigation - Services" class="mt-6">
-              <ul class="space-y-4 text-sm dark:text-white">
-                <li>
-                  <a
-                    href="#"
-                    class="text-gray-700 dark:text-white transition hover:opacity-75"
-                  >
-                    Company Review
-                  </a>
-                </li>
-
-                <li>
-                  <a
-                    href="#"
-                    class="text-gray-700 dark:text-white transition hover:opacity-75"
-                  >
-                    Accounts Review
-                  </a>
-                </li>
-
-                <li>
-                  <a
-                    href="#"
-                    class="text-gray-700 dark:text-white transition hover:opacity-75"
-                  >
-                    HR Consulting
-                  </a>
-                </li>
-
-                <li>
-                  <a
-                    href="#"
-                    class="text-gray-700 dark:text-white transition hover:opacity-75"
-                  >
-                    SEO Optimisation
-                  </a>
-                </li>
-                <li>
-                  <RouterLink
-                    to="/register/"
-                    class="link shadow-xl text-sm bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-2 rounded"
-                    >Sign Up</RouterLink
-                  >
-                </li>
-              </ul>
-            </nav>
-          </div>
-
-          <div>
-            <p class="font-medium text-gray-900 dark:text-white">Company</p>
+            <p class="font-medium text-gray-900 dark:text-white">HomeLib</p>
 
             <nav aria-label="Footer Navigation - Company" class="mt-6">
               <ul class="space-y-4 text-sm">
+                <li>
+                  <div v-if="user.isLoggedIn">
+                  <RouterLink
+                    to="/home"
+                    class="text-gray-700 dark:text-white transition hover:opacity-75"
+                  >
+                    Home
+                  </RouterLink>
+                </div>
+                <div v-else>
+                  <RouterLink
+                    to="/"
+                    class="text-gray-700 dark:text-white transition hover:opacity-75"
+                  >
+                    Home
+                  </RouterLink>
+                </div>
+
+
+                </li>
                 <li>
                   <a
                     href="#"
@@ -185,23 +173,13 @@
                     About
                   </a>
                 </li>
-
                 <li>
-                  <a
-                    href="#"
+                  <RouterLink
+                    to="/search"
                     class="text-gray-700 dark:text-white transition hover:opacity-75"
                   >
-                    Meet the Team
-                  </a>
-                </li>
-
-                <li>
-                  <a
-                    href="#"
-                    class="text-gray-700 dark:text-white transition hover:opacity-75"
-                  >
-                    Accounts Review
-                  </a>
+                    Discover
+                  </RouterLink>
                 </li>
               </ul>
             </nav>
@@ -235,15 +213,28 @@
     </div>
   </footer>
   <div
-    class="bg-gray-300 hover:bg-gray-400 dark:bg-gray-700 dark:text-white shadow-2xl mx-auto flex flex-col justify-center items-center p-6"
+    class="bg-gray-300 z-40 hover:bg-gray-400 dark:bg-gray-700 dark:text-white shadow-2xl dark:hover:bg-gray-600 mx-auto flex flex-col justify-center items-center p-6"
   >
-    <RouterLink to="/">
-      <img
-        src="/book.png"
-        alt="logo"
-        style="width: 62px; height: 62px"
-        class="mx-2"
-      />
-    </RouterLink>
+    <!-- Website Logo and Title w/ home link -->
+    <div v-if="user.isLoggedIn">
+      <RouterLink to="/home" class="flex items-center">
+        <img
+          src="/book.png"
+          alt="logo"
+          style="width: 46px; height: 46px"
+          class="mx-2"
+        />
+      </RouterLink>
+    </div>
+    <div v-else>
+      <RouterLink to="/" class="flex items-center">
+        <img
+          src="/book.png"
+          alt="logo"
+          style="width: 46px; height: 46px"
+          class="mx-2"
+        />
+      </RouterLink>
+    </div>
   </div>
 </template>

@@ -1,40 +1,47 @@
 <script>
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
-import {computed} from "vue";
+import { computed } from "vue";
 import { auth } from "../firebase.config";
 
 export default {
   name: "NavbarComponent",
   setup() {
-  const store = useStore()
-  const router = useRouter()
+    const store = useStore();
+    const router = useRouter();
 
-  auth.onAuthStateChanged(user => { // fetch from store when user has been authenticated
-    store.dispatch("fetchUser", user);
-  });
+    auth.onAuthStateChanged((user) => {
+      // fetch from store when user has been authenticated
+      store.dispatch("fetchUser", user);
+    });
 
-  const user = computed(() => { // update the user object from the store getters:
-    return store.getters.user;
-  });
+    const user = computed(() => {
+      // update the user object from the store getters:
+      return store.getters.user;
+    });
 
-  const signOut = async () => {
-        await store.dispatch('logOut')
-        console.log("User signed out")
-        router.push('/')
-  }
+    const signOut = async () => {
+      await store.dispatch("logOut");
+      console.log("User signed out");
+      router.push("/");
+    };
 
-    return { user, signOut}
- }
-
-
-
+    return { user, signOut };
+  },
+  methods: {
+    getUserInitials() {
+      let name = this.user.data.displayName;
+      var parts = name.split(" ");
+      var initials = "";
+      for (var i = 0; i < parts.length; i++) {
+        if (parts[i].length > 0 && parts[i] !== "") {
+          initials += parts[i][0];
+        }
+      }
+      return initials;
+    },
+  },
 };
-// const handleSignOut = () => {
-//   signOut(auth).then(() => {
-//     router.push("/");
-//   });
-// };
 </script>
 
 <template>
@@ -45,25 +52,44 @@ export default {
       class="container-fluid w-full flex flex-wrap items-center justify-between px-4 text-white"
     >
       <!-- Website Logo and Title w/ home link -->
-      <a href="/" class="flex items-center">
-        <img
-          src="/book.png"
-          alt="logo"
-          style="width: 46px; height: 46px"
-          class="mx-2"
-        />
-        <span
-          class="font-bold text-xl font-sans hover:text-gray-600 text-black dark:hover:text-white dark:text-gray-200"
-          >HomeLib</span
-        >
-      </a>
+      <div v-if="user.isLoggedIn">
+        <RouterLink to="/home" class="flex items-center">
+          <img
+            src="/book.png"
+            alt="logo"
+            style="width: 46px; height: 46px"
+            class="mx-2"
+          />
+          <span
+            class="font-bold text-xl font-sans hover:text-gray-600 text-black dark:hover:text-white dark:text-gray-200"
+            >HomeLib</span
+          >
+        </RouterLink>
+      </div>
+      <div v-else>
+        <RouterLink to="/" class="flex items-center">
+          <img
+            src="/book.png"
+            alt="logo"
+            style="width: 46px; height: 46px"
+            class="mx-2"
+          />
+          <span
+            class="font-bold text-xl font-sans hover:text-gray-600 text-black dark:hover:text-white dark:text-gray-200"
+            >HomeLib</span
+          >
+        </RouterLink>
+      </div>
+
       <!-- Left Navbar items -->
       <div class="mx-6 navbar-nav flex flex-row list-style-none mr-auto">
         <!--Add new navbar items here-->
-        <span
+
+        <RouterLink
+          to="/search"
           v-if="user.isLoggedIn"
-          class="font-sans align-text-bottom hover:underline text-black dark:hover:text-white dark:text-gray-200"
-          ><RouterLink to="/dashboard">Dashboard</RouterLink></span
+          class="font-md text-lg font-sans hover:text-gray-600 text-black dark:hover:text-white dark:text-gray-200"
+          >Add Books</RouterLink
         >
       </div>
 
@@ -105,18 +131,23 @@ export default {
         >
 
         <button
-          class="link ml-2 shadow-xl text-sm py-2 px-2 font-bold rounded bg-indigo-500 hover:bg-indigo-600 text-white transition duration-300"
+          class="link ml-1 shadow-xl text-sm py-2 px-2 font-bold rounded bg-indigo-500 hover:bg-indigo-600 text-white transition duration-300"
           @click="signOut"
           v-if="user.isLoggedIn"
         >
           Logout
         </button>
-        <img
+
+        <div
           v-if="user.isLoggedIn"
-          src="https://tecdn.b-cdn.net/img/new/avatars/2.webp"
-          class="ml-2 rounded-full w-12"
-          alt="Avatar"
-        />
+          class="relative inline-flex ml-1 items-center justify-center w-10 h-10 overflow-hidden bg-gray-300 rounded-full dark:bg-gray-600"
+        >
+          <RouterLink to="/profile">
+            <span class="font-medium text-gray-600 dark:text-gray-200">
+              {{ getUserInitials() }}
+            </span>
+          </RouterLink>
+        </div>
       </div>
     </div>
   </nav>

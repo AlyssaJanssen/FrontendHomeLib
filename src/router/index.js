@@ -1,10 +1,13 @@
 import { createRouter, createWebHistory } from "vue-router";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import HomeView from "../views/HomeView.vue";
+import HomePage from "../views/Home.vue";
 import Book from "../views/Book.vue";
-import Login from "../components/Login.vue";
-import Register from "../components/Register.vue";
-import Dashboard from "../components/Dashboard.vue";
+import Login from "../views/Login.vue";
+import Register from "../views/Register.vue";
+import Profile from "../views/Profile.vue";
+import Search from "../views/Search.vue";
+import ClientHome from "../views/ClientHome.vue";
+import MyLibrary from "../views/MyLibrary.vue";
 
 const router = createRouter({
     history: createWebHistory(
@@ -12,8 +15,13 @@ const router = createRouter({
     routes: [{
             // the home path has the BookList
             path: "/",
-            name: "home",
-            component: HomeView,
+            name: "HomePage",
+            component: HomePage,
+        },
+        {
+            path: "/search",
+            name: "Search",
+            component: Search,
         },
         {
             path: "/book/:id",
@@ -26,14 +34,29 @@ const router = createRouter({
             component: Login,
         },
         {
+            path: "/home",
+            name: "ClientHome",
+            component: ClientHome,
+        },
+        {
+            path: "/mylibrary",
+            name: "MyLibrary",
+            component: MyLibrary,
+        },
+        {
+            path: "/mylibrary",
+            name: "MyLibrary",
+            component: MyLibrary,
+        },
+        {
             path: "/register",
             name: "register",
             component: Register,
         },
         {
-            path: "/dashboard",
-            name: "Dashboard",
-            component: Dashboard,
+            path: "/profile",
+            name: "Profile",
+            component: Profile,
             meta: {
                 requiresAuth: true,
             },

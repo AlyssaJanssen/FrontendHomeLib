@@ -8,6 +8,7 @@
 import BookItem from "../components/BookItem.vue";
 
 export default {
+  name: "BookListComponent",
   props: {
     books: {
       type: Array,
