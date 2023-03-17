@@ -29,7 +29,7 @@ export default {
   <div class="grid justify-center">
     <div
       v-if="book"
-      class="font-serif container justify-center max-w-5xl mx-96 px-4 lg:px-0 py-4 mt-6 mb-44"
+      class="font-serif container justify-center max-w-5xl mx-72 px-4 lg:px-0 py-4 mt-6 mb-44"
     >
       <div class="container">
         <template v-if="book">

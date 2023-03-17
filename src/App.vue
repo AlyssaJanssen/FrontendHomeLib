@@ -32,12 +32,12 @@ export default {
     // Whenever the user explicitly chooses to respect the OS preference
     localStorage.removeItem("theme");
 
-    // Top loading progress bar on initial page load
-    document.addEventListener("DOMContentLoaded", function () {
-      let bar = document.getElementById("bar");
-      bar.classList.remove("w-0");
-      bar.classList.add("w-full");
-    });
+    // // Top loading progress bar on initial page load
+    // document.addEventListener("DOMContentLoaded", function () {
+    //   let bar = document.getElementById("bar");
+    //   bar.classList.remove("w-0");
+    //   bar.classList.add("w-full");
+    // });
 
     const store = useStore();
     //var user = firebase.auth().currentUser;
@@ -63,20 +63,20 @@ export default {
 
 <template>
   <!--Loading bar at top of page-->
-  <div class="ml-0 h-0.5 relative w-full rounded-full overflow-hidden">
+  <!-- <div class="ml-0 h-1 relative w-full rounded-full overflow-hidden">
     <div class="w-full h-full bg-gray-200 absolute"></div>
     <div
       id="bar"
       class="transition-all ease-out duration-1000 h-full bg-indigo-500 relative w-0"
     ></div>
-  </div>
+  </div> -->
 
   <div :class="isDark ? 'dark' : ''">
     <div class="bg-gray-400 text-black dark:bg-gray-800 dark:text-gray-100">
       <Navigation />
       <Sidebar v-if="user.isLoggedIn" />
-      <div class="min-h-screen">
-        <RouterView />
+      <div class="min-h-screen container mx-auto">
+        <RouterView class="container justify-center items-center"/>
       </div>
       <Footer />
     </div>

@@ -46,7 +46,7 @@ export default {
 
 <template>
   <nav
-    class="bg-white dark:bg-gray-900 dark:text-white sm:justify-left w-full flex flex-wrap items-center justify-between py-4 shadow-2xl sticky top-0 z-20 ease-in-out duration-400 translate-y-0 navbar navbar-expand-lg navbar-light border border-gray-700"
+    class="bg-white dark:bg-gray-900 dark:text-white sm:justify-left w-full border border-gray-700 flex flex-wrap items-center justify-between py-4 shadow-2xl sticky top-0 z-20 ease-in-out duration-400 translate-y-0 navbar navbar-expand-lg navbar-ligh"
   >
     <div
       class="container-fluid w-full flex flex-wrap items-center justify-between px-4 text-white"
@@ -103,13 +103,14 @@ export default {
             class="hidden"
             onchange="document.documentElement.classList.toggle('dark')"
           />
+
           <label
             for="dark-mode-toggle"
-            class="w-full h-full bg-gray-400 dark:bg-gray-600 rounded-full p-1 flex justify-between cursor-pointer"
+            class="w-12 h-7 bg-gray-400 dark:bg-gray-600 rounded-full p-1 flex justify-between cursor-pointer"
           >
             <span class="inline dark:hidden"></span>
             <span
-              class="w-6 h-6 rounded-full bg-white text-gray-700 block float-right dark:float-left"
+              class="w-5 h-5 rounded-full bg-white text-gray-700 block float-right dark:float-left"
             ></span>
             <span
               class="hidden dark:inline transition ease-in-out duration-200"
@@ -120,12 +121,12 @@ export default {
         <RouterLink
           to="/register"
           v-if="!user.isLoggedIn"
-          class="link shadow-xl text-sm ml-2 py-2 px-2 bg-blue-600 hover:bg-blue-800 text-white font-bold rounded"
+          class="shadow-xl text-sm ml-2 py-2 px-2 bg-blue-600 hover:bg-blue-800 text-white font-bold rounded"
           >Join</RouterLink
         >
         <RouterLink
           to="/login"
-          class="link ml-2 shadow-xl text-sm py-2 px-2 font-bold rounded bg-indigo-500 hover:bg-indigo-600 text-white transition duration-300"
+          class="ml-2 shadow-xl text-sm py-2 px-2 font-bold rounded bg-indigo-500 hover:bg-indigo-600 text-white transition duration-300"
           v-if="!user.isLoggedIn"
           >Login</RouterLink
         >

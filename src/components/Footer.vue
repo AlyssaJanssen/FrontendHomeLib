@@ -20,7 +20,7 @@ footer, div {
 </style>
 <template>
   <div
-    class="text-sm z-40 bg-gray-300 hover:bg-gray-400 dark:bg-gray-700 dark:text-white shadow-2xl dark:hover:bg-gray-600 mx-auto flex flex-col justify-center items-center p-3"
+    class="text-sm z-40 bg-gray-300 hover:bg-gray-400 dark:bg-gray-700 dark:text-white shadow-2xl dark:hover:bg-gray-600 border-t-2 border-t-gray-600 mx-auto flex flex-col justify-center items-center p-3"
   >
     <RouterLink to="#" class="text-md transition hover:opacity-75">
       Back to top
@@ -38,7 +38,7 @@ footer, div {
         class="absolute inset-0 object-cover w-full h-full dark:-hue-rotate-90"
       />
     </div>
-
+<!--Right side footer links w/ social media-->
     <div class="px-4 py-16 sm:px-6 lg:col-span-3 lg:px-8">
       <div class="grid grid-cols-1 gap-8 sm:grid-cols-2">
         <div>
@@ -181,6 +181,16 @@ footer, div {
                     Discover
                   </RouterLink>
                 </li>
+                <li>
+                  <RouterLink to="/register">
+                    <button
+                      v-if="!user.isLoggedIn"
+                      class="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 text-sm bg-blue-600 text-white font-bold py-2 px-4 rounded-md"
+                    >
+                    Sign Up
+                    </button>
+                  </RouterLink>
+                </li>
               </ul>
             </nav>
           </div>
@@ -213,7 +223,7 @@ footer, div {
     </div>
   </footer>
   <div
-    class="bg-gray-300 z-40 hover:bg-gray-400 dark:bg-gray-700 dark:text-white shadow-2xl dark:hover:bg-gray-600 mx-auto flex flex-col justify-center items-center p-6"
+    class="bg-gray-300 z-40 hover:bg-gray-400 dark:bg-gray-700 dark:text-white shadow-2xl dark:hover:bg-gray-600 border-t-2 border-t-gray-600 mx-auto flex flex-col justify-center items-center p-4"
   >
     <!-- Website Logo and Title w/ home link -->
     <div v-if="user.isLoggedIn">
