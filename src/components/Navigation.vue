@@ -46,7 +46,7 @@ export default {
 
 <template>
   <nav
-    class="bg-white dark:bg-gray-900 dark:text-white sm:justify-left w-full border border-gray-700 flex flex-wrap items-center justify-between py-4 shadow-2xl sticky top-0 z-20 ease-in-out duration-400 translate-y-0 navbar navbar-expand-lg navbar-ligh"
+    class="bg-white dark:bg-gray-900 dark:text-white sm:justify-left w-full border border-gray-700 flex flex-wrap items-center justify-between py-4 shadow-xl sticky top-0 z-20 ease-in-out duration-400 translate-y-0 navbar navbar-expand-lg navbar-light"
   >
     <div
       class="container-fluid w-full flex flex-wrap items-center justify-between px-4 text-white"
@@ -84,15 +84,7 @@ export default {
       <!-- Left Navbar items -->
       <div class="mx-6 navbar-nav flex flex-row list-style-none mr-auto">
         <!--Add new navbar items here-->
-
-        <RouterLink
-          to="/search"
-          v-if="user.isLoggedIn"
-          class="font-md text-lg font-sans hover:text-gray-600 text-black dark:hover:text-white dark:text-gray-200"
-          >Add Books</RouterLink
-        >
       </div>
-
       <!-- Right Side Navbar items, login, join -->
       <div class="flex items-center relative text-white">
         <!--Dark mode toggle switch-->

@@ -9,8 +9,8 @@ export default {
 </script>
 <template>
   <div>
-    <div class="grid mx-56 my-12">
-       <h1 class=" my-2 text-xl font-semibold font-serif">Reading Goal</h1>
+    <div class="h-full mx-auto container mb-16 pt-4 text-center">
+       <h1 class=" my-2 text-xl font-semibold font-serif">Yearly Reading Goal</h1>
        <p>Set a reading Goal Now</p>
        <div>
          <form @submit.prevent="search" class="mx-auto container">
@@ -24,7 +24,7 @@ export default {
           type="submit"
           class="link shadow-xl text-sm bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-2 rounded"
         >
-          Search
+          Enter
         </button>
         </form>
       </div>
@@ -32,8 +32,8 @@ export default {
        <h1 class=" my-2 text-xl font-semibold font-serif">Create a Reading List</h1>
        <button
        class=" w-1/12 shadow-xl text-sm bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-2 rounded"
-     >
-       + New List
+     ><i class="fa-solid fa-plus"></i>
+       New List
      </button>
     </div>
   </div>

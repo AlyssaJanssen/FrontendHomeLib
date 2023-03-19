@@ -1,5 +1,5 @@
 <template>
-  <div class="mb-20 h-full mx-auto container">
+  <div class="mb-20  container">
     <div class="mb-16 mx-auto pb-4 text-center">
       <!--Search Bar w/ results-->
       <div class="mb-16 mx-16">
@@ -11,7 +11,7 @@
               type="text"
               v-model="keyword"
               placeholder="Search for a book..."
-              class="bg-white container dark:text-white dark:bg-transparent text-black w-4/12 border border-sky-600 py-2 px-2 rounded h-9 hover:border-sky-400"
+              class="bg-white container dark:text-white dark:bg-transparent text-black w-4/12 border border-sky-600 py-2 px-2 rounded h-8 hover:border-sky-400"
               required
             />
             <button
@@ -20,6 +20,7 @@
             >
               Search
             </button>
+            <p class="text-sm font-extralight dark:text-gray-400">Search Results from Google Books</p>
           </div>
           <div>
             <select
@@ -34,9 +35,10 @@
             </select>
           </div>
         </form>
+        
       </div>
       <div
-        class="text-center container mx-auto flex flex-col justify-center items-center"
+        class="text-center pl-14 container mx-auto flex flex-col justify-center items-center"
       >
         <div role="status" v-if="loadState == 'loading'">
           <svg
@@ -60,18 +62,11 @@
         <BookList
           v-if="loadState == 'success'"
           :books="books"
-          class="h-full font-bold text-black dark:bg-gray-800 dark:text-gray-100 p-0 mt-0 mb-60 mx-auto"
+          class="h-full font-bold text-black dark:bg-gray-800 dark:text-gray-100 p-0 mt-0 mb-60 mx-auto fade-in"
         />
       </div>
     </div>
 
-    <a
-      href="https://www.care.org/"
-      target="_blank"
-      class="hidden fixed lg:block z-30 bottom-8 right-8 bg-gray-300 hover:bg-white dark:bg-gray-700 dark:hover:bg-gray-800 border border-stone-300 dark:border-gray-700 dark:text-gray-200 rounded-lg px-2 py-1"
-    >
-      Support Ukraine</a
-    >
   </div>
 </template>
 <script>
@@ -87,7 +82,7 @@ export default {
       books: [],
       keyword: "",
       orderBy: "newest",
-      maxResults: "20",
+      maxResults: "32",
       loadState: "",
       countryName: "US",
     };
@@ -128,10 +123,3 @@ export default {
   },
 };
 </script>
-
-<style>
-body {
-  font-family: Helvetica, Arial, sans-serif;
-  color: #2c3e50;
-}
-</style>

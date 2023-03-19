@@ -60,8 +60,8 @@ export default {
 
 <style scoped>
 img {
-  width: 20vh;
+  width: 18vh;
   object-fit: fill;
-  height: 25vh;
+  height: 26vh;
 }
 </style>

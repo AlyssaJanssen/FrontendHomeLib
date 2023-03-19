@@ -42,6 +42,18 @@ aside{
 
           <li>
             <RouterLink
+              to="/search"
+              class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+            >
+              <span class="inline-flex justify-center items-center ml-4">
+                <i class="fa-solid fa-plus"></i>
+              </span>
+              <span class="ml-3">Add Books</span>
+            </RouterLink>
+          </li>
+
+          <li>
+            <RouterLink
               to="/profile"
               class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
             >

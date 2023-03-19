@@ -70,15 +70,17 @@ export default {
       class="transition-all ease-out duration-1000 h-full bg-indigo-500 relative w-0"
     ></div>
   </div> -->
-
+<div>
   <div :class="isDark ? 'dark' : ''">
-    <div class="bg-gray-400 text-black dark:bg-gray-800 dark:text-gray-100">
+    <div class="bg-gray-400 text-black dark:bg-gray-800 dark:text-gray-100 ">
       <Navigation />
       <Sidebar v-if="user.isLoggedIn" />
       <div class="min-h-screen container mx-auto">
         <RouterView class="container justify-center items-center"/>
       </div>
+      
       <Footer />
     </div>
   </div>
+</div>
 </template>

@@ -3,7 +3,7 @@ export default {};
 </script>
 <template>
   <div>
-    <div class="grid mx-56 my-12">
+    <div class="h-full mx-auto container mb-16 pt-4 text-center">
       <h1 class="text-xl font-semibold font-serif">Currently Reading</h1>
       <ul>
         <li>Book One</li>
