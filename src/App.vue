@@ -72,7 +72,7 @@ export default {
   </div> -->
 <div>
   <div :class="isDark ? 'dark' : ''">
-    <div class="bg-gray-400 text-black dark:bg-gray-800 dark:text-gray-100 ">
+    <div class="bg-gray-300 text-black dark:bg-gray-800 dark:text-gray-100 ">
       <Navigation />
       <Sidebar v-if="user.isLoggedIn" />
       <div class="min-h-screen container mx-auto">

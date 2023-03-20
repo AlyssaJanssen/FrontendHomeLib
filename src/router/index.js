@@ -8,6 +8,7 @@ import Profile from "../views/Profile.vue";
 import Search from "../views/Search.vue";
 import ClientHome from "../views/ClientHome.vue";
 import MyLibrary from "../views/MyLibrary.vue";
+import NotFound from "../views/NotFound.vue";
 
 const router = createRouter({
     history: createWebHistory(
@@ -22,6 +23,9 @@ const router = createRouter({
             path: "/search",
             name: "Search",
             component: Search,
+            meta: {
+                requiresAuth: true,
+            },
         },
         {
             path: "/book/:id",
@@ -37,16 +41,17 @@ const router = createRouter({
             path: "/home",
             name: "ClientHome",
             component: ClientHome,
+            meta: {
+                requiresAuth: true,
+            },
         },
         {
             path: "/mylibrary",
             name: "MyLibrary",
             component: MyLibrary,
-        },
-        {
-            path: "/mylibrary",
-            name: "MyLibrary",
-            component: MyLibrary,
+            meta: {
+                requiresAuth: true,
+            },
         },
         {
             path: "/register",
@@ -60,6 +65,11 @@ const router = createRouter({
             meta: {
                 requiresAuth: true,
             },
+        },
+        {
+            path: "/:pathMatch(.*)",
+            name: "not-found",
+            component: NotFound
         },
     ],
     // when users click links to home or top of page, then it scrolls smoothly instead of suddenly. This looks nicer.
@@ -78,8 +88,8 @@ const getCurrentUser = () => {
             },
             reject
         );
-    })
-}
+    });
+};
 
 // Navigation Guards: this checks if user is authenticated to see the page
 router.beforeEach(async(to, from, next) => {
@@ -89,7 +99,7 @@ router.beforeEach(async(to, from, next) => {
             next();
         } else {
             alert("you dont have access!");
-            next("/")
+            next("/");
         }
     } else {
         next();

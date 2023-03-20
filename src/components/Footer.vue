@@ -23,7 +23,7 @@ div {
   <div class="text-end m-2 mb-4">
     <RouterLink
       to="#"
-      class="text-md transition px-3 py-2 bg-gray-500 dark:bg-gray-700 hover:opacity-50 hover:bg-gray-500"
+      class="text-md transition px-3 py-2 bg-gray-400 dark:bg-gray-700 hover:opacity-50 hover:bg-gray-200"
     >
       <i class="fa-solid fa-arrow-up"></i>
     </RouterLink>
@@ -229,7 +229,7 @@ div {
     </div>
   </footer>
   <div
-    class="bg-gray-300 z-40 hover:bg-gray-400 dark:bg-gray-700 dark:text-white shadow-2xl dark:hover:bg-gray-600 border-t-2 border-t-gray-600 mx-auto flex flex-col justify-center items-center p-4"
+    class="bg-gray-300 z-40 hover:bg-gray-400 dark:bg-gray-800 dark:text-white shadow-2xl dark:hover:bg-gray-700  mx-auto flex flex-col justify-center items-center p-4"
   >
     <!-- Website Logo and Title w/ home link -->
     <div v-if="user.isLoggedIn">

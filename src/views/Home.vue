@@ -135,8 +135,8 @@ export default {
       class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5 mb-48"
     >
       <div v-for="(result, index) in results" v-bind:key="index" class="py-2">
-        <p class="text-2xl font-semibold  dark:text-gray-300 items-start justify-start text-left">#{{ result.rank }}</p>
-        <p class="text-sm font-semibold  dark:text-gray-500 items-start justify-start text-left">Weeks On The List: {{ result.weeks_on_list }}</p>
+        <p class="text-2xl font-semibold  dark:text-gray-300 items-start justify-start text-left v-cloak">#{{ result.rank }}</p>
+        <p class="text-sm font-semibold  dark:text-gray-500 items-start justify-start text-left v-cloak">Weeks On The List: {{ result.weeks_on_list }}</p>
         <img
           :src="result.book_image"
           :alt="result.title"

@@ -21,7 +21,7 @@
         <span v-else>
           By
           <span v-for="(author, index) in volumeInfo.authors" :key="index">
-            <em>
+            <em class="v-cloak">
               {{
                 index + 1 !== volumeInfo.authors.length &&
                 index + 1 !== book.volumeInfo.authors.length - 1

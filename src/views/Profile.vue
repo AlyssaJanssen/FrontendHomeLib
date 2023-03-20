@@ -32,7 +32,7 @@ export default {
         </svg>
     </div>
 
-      <h5 class="my-2 text-xl font-medium leading-tight">
+      <h5 class="my-2 text-xl font-medium leading-tight v-cloak">
         Welcome {{ user.data.displayName }}
       </h5>
 
