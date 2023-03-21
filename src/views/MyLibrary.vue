@@ -79,7 +79,7 @@ export default {
                 </div>
               </div>
             </div>
-            <button type="button" class=" justify-end items-end bg-sky-700 rounded-lg text-sm py-2 px-2 "><i class="fa-solid fa-trash-can"></i> Delete </button>
+            <!-- <button type="button" class=" justify-end items-end bg-sky-700 rounded-lg text-sm py-2 px-2 "><i class="fa-solid fa-trash-can"></i> Delete </button> -->
           </li>
         </ul>
       </div>

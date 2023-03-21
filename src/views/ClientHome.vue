@@ -67,7 +67,7 @@ export default {
       <div v-if="loaded">
         <img
           :src="cat.url"
-          class="mt-4 border inline-block border-gray-900 rounded-md hover:opacity-75"
+          class="mt-4 border inline-block border-gray-900 rounded-md"
       
         />
       </div>
@@ -76,8 +76,8 @@ export default {
 </template>
 <style scoped>
 img{
-  width: 48vh;
- 
+  width: 42vh;
+  object-fit: fill;
   height: 32vh;
 }
 </style>

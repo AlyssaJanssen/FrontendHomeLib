@@ -153,8 +153,8 @@ export default {
           <!-- Book description-->
           <div v-if="book" class="grid col-span-3 ml-4 p-4">
             <!-- <p class="v-cloak">{{ volumeInfo.categories[0].toString() }}</p> -->
-            <p class="v-cloak">Publisher: {{ volumeInfo.publisher }}</p>
-            <p class="v-cloak">Date: {{ volumeInfo.publishedDate }}</p>
+            <p class="v-cloak">{{ volumeInfo.publisher }}</p>
+            <p class="v-cloak">{{ volumeInfo.publishedDate }}</p>
             <!--Book Title and Author here-->
             <h4 class="text-3xl font-semibold font-serif v-cloak">{{ volumeInfo.title }}</h4>
             <em class="font-light text-lg mb-4 v-cloak">{{
