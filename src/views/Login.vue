@@ -15,7 +15,7 @@ export default {
 
     const Login = async () => {
       try {
-        await store.dispatch("logIn", {
+        await store.dispatch("login", {
           email: email.value,
           password: password.value,
         });

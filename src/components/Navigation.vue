@@ -21,7 +21,7 @@ export default {
     });
 
     const signOut = async () => {
-      await store.dispatch("logOut");
+      await store.dispatch("logout");
       console.log("User signed out");
       router.push("/");
     };
@@ -88,7 +88,7 @@ export default {
       <!-- Right Side Navbar items, login, join -->
       <div class="flex items-center relative text-white">
         <!--Dark mode toggle switch-->
-        <div class="w-14 h-8">
+        <div class="w-12 h-5">
           <input
             type="checkbox"
             id="dark-mode-toggle"
@@ -98,11 +98,11 @@ export default {
 
           <label
             for="dark-mode-toggle"
-            class="w-12 h-7 bg-gray-400 dark:bg-gray-600 rounded-full p-1 flex justify-between cursor-pointer"
+            class="w-11 h-6 bg-gray-400 dark:bg-gray-600 rounded-full p-1 flex justify-between cursor-pointer"
           >
             <span class="inline dark:hidden"></span>
             <span
-              class="w-5 h-5 rounded-full bg-white text-gray-700 block float-right dark:float-left"
+              class="w-4 h-4 rounded-full bg-white text-gray-700 block float-right dark:float-left"
             ></span>
             <span
               class="hidden dark:inline transition ease-in-out duration-200"
@@ -113,18 +113,18 @@ export default {
         <RouterLink
           to="/register"
           v-if="!user.isLoggedIn"
-          class="shadow-xl text-sm ml-2 py-2 px-2 bg-blue-600 hover:bg-blue-800 text-white font-bold rounded"
+          class="shadow-xl text-sm ml-2 py-2 px-2 bg-blue-500 hover:bg-blue-400 text-white font-bold rounded"
           >Join</RouterLink
         >
         <RouterLink
           to="/login"
-          class="ml-2 shadow-xl text-sm py-2 px-2 font-bold rounded bg-indigo-500 hover:bg-indigo-600 text-white transition duration-300"
+          class="ml-2 shadow-xl text-sm py-2 px-2 font-bold rounded bg-indigo-500 hover:bg-indigo-400 text-white transition duration-300"
           v-if="!user.isLoggedIn"
           >Login</RouterLink
         >
 
         <button
-          class="link ml-1 shadow-xl text-sm py-2 px-2 font-bold rounded bg-indigo-500 hover:bg-indigo-600 text-white transition duration-300"
+          class="link ml-1 shadow-xl text-sm py-2 px-2 font-bold rounded bg-indigo-500 hover:bg-indigo-400 text-white transition duration-300"
           @click="signOut"
           v-if="user.isLoggedIn"
         >

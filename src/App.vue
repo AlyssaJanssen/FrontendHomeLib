@@ -72,13 +72,11 @@ export default {
   </div> -->
 <div>
   <div :class="isDark ? 'dark' : ''">
-    <div class="bg-gray-300 text-black dark:bg-gray-800 dark:text-gray-100 ">
+    <div class="bg-gradient-to-b from-gray-200 to-gray-500 text-black dark:bg-gradient-to-b dark:from-gray-800 dark:to-gray-600 dark:text-gray-100 ">
       <Navigation />
-      <Sidebar v-if="user.isLoggedIn" />
       <div class="min-h-screen container mx-auto">
-        <RouterView class="container justify-center items-center"/>
+        <RouterView />
       </div>
-      
       <Footer />
     </div>
   </div>

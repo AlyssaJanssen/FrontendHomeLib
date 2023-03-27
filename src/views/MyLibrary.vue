@@ -1,5 +1,6 @@
 <script>
 import axios from "axios";
+import Sidebar from "../components/Sidebar.vue";
 export default {
   data() {
     return {
@@ -18,9 +19,13 @@ export default {
     };
     getBooks();
   },
+  components: {
+    Sidebar,
+  },
 };
 </script>
 <template>
+  <Sidebar />
   <div>
     <div class="h-full max-w-5xl mx-auto container mb-16 pt-4 text-center">
       <h1 class="text-xl font-semibold font-serif"><span class="inline-flex justify-center items-center ml-4">
@@ -86,3 +91,10 @@ export default {
     </div>
   </div>
 </template>
+<style scoped>
+img {
+  width: 10vh;
+  object-fit: fill;
+  height: 15vh;
+}
+</style>

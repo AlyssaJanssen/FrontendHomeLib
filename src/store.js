@@ -1,5 +1,4 @@
 import { createStore } from "vuex";
-//Firebase imports
 import { auth } from "../src/firebase.config.js";
 import {
     createUserWithEmailAndPassword,
@@ -43,13 +42,10 @@ const store = createStore({
                         photoURL: "https://example.com/jane-q-user/profile.jpg",
                     })
                     .then(() => {
-                        // Profile updated!
-                        // ...
+                        console.log("Registered successfully")
                     })
                     .catch((error) => {
-                        // An error occurred
                         console.log(error);
-                        // ...
                     });
                 //dispatch.fetchUser(context, response) // gets the displayName on register to dashboard screen
                 //console.log(this.displayName); // says not defined right after user registers but is fine on login
@@ -58,16 +54,17 @@ const store = createStore({
             }
         },
 
-        async logIn(context, { email, password }) {
+        async login(context, { email, password }) {
             const response = await signInWithEmailAndPassword(auth, email, password);
             if (response) {
                 context.commit("SET_USER", response.user);
+                console.log("Logged in successfully")
             } else {
                 throw new Error("login failed");
             }
         },
 
-        async logOut(context) {
+        async logout(context) {
             await signOut(auth);
             context.commit("SET_USER", null);
         },
@@ -86,5 +83,4 @@ const store = createStore({
     },
 });
 
-// export the store
 export default store;

@@ -17,7 +17,6 @@ export default {
           `https://api.thecatapi.com/v1/images/search`
         );
         console.log(resp.data);
-
         this.cat = resp.data[0];
         this.loaded = true;
       } catch (err) {
@@ -34,6 +33,7 @@ export default {
 };
 </script>
 <template>
+  <Sidebar />
   <div class="container items-center">
     <div class="h-full mx-auto container mb-16 pt-4 text-center">
       <h1 class="my-2 text-xl font-semibold font-serif">Yearly Reading Goal</h1>
@@ -48,7 +48,7 @@ export default {
           />
           <button
             type="submit"
-            class="link shadow-xl text-sm bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-2 rounded"
+            class="link shadow-xl text-sm bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 px-2 rounded"
           >
             Enter
           </button>
@@ -59,7 +59,7 @@ export default {
         Create a Reading List
       </h1>
       <button
-        class="w-1/12 shadow-xl text-sm bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-2 rounded"
+        class="w-1/12 shadow-xl text-sm bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 px-2 rounded"
       >
         <i class="fa-solid fa-plus"></i>
         New List
@@ -67,8 +67,7 @@ export default {
       <div v-if="loaded">
         <img
           :src="cat.url"
-          class="mt-4 border inline-block border-gray-900 rounded-md"
-      
+          class="mt-4 border inline-block border-gray-900 rounded-md"  
         />
       </div>
     </div>

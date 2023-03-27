@@ -1,4 +1,5 @@
 <template>
+  <Sidebar />
   <div class="mb-20  container">
     <div class="mb-16 mx-auto pb-4 text-center">
       <!--Search Bar w/ results-->
@@ -71,6 +72,7 @@
 </template>
 <script>
 import BookList from "../components/BookList.vue";
+import Sidebar from "../components/Sidebar.vue";
 import axios from "axios";
 import { useStore } from "vuex";
 import { computed } from "vue";
@@ -120,6 +122,7 @@ export default {
   },
   components: {
     BookList,
+    Sidebar
   },
 };
 </script>

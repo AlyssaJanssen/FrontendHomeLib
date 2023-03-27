@@ -1,4 +1,5 @@
 <script>
+import Sidebar from "../components/Sidebar.vue";
 import axios from "axios";
 export default {
   data() {
@@ -54,9 +55,13 @@ export default {
       // alert("Succesfully added book to the database!")
     },
   },
+  components: {
+    Sidebar,
+  },
 };
 </script>
 <template>
+  <Sidebar />
   <div class="max-w-4xl mx-auto px-4 lg:px-0 py-4">
     <div v-if="book" class="grid col-span-3 mt-8">
       <template v-if="book">

@@ -27,11 +27,6 @@ export default {
       });
   },
 
-  //   computed: {
-  //     bestSellers: function () {
-  //       return this.responseAvailable
-  //     },
-
   setup() {
     const store = useStore();
 
@@ -49,7 +44,7 @@ export default {
 </script>
 
 <template>
-  <div class="pt-8 text-center container grid justify-center mx-auto">
+  <div class="pt-8 text-center container grid justify-center mx-auto max-w-6xl">
     <div>
       <h2 class="text-4xl font-semibold font-serif">
         Manage Your Home Library
@@ -72,22 +67,22 @@ export default {
 
       <p
         v-if="!user.isLoggedIn"
-        class="my-1 text-sm font-serif dark:text-gray-300 font-extralight"
+        class="my-2 text-sm font-serif dark:text-gray-300 font-extralight"
       >
         Sign up to start managing your library today.
       </p>
     </div>
 
-    <section class="py-4">
+    <section class="pt-2">
       <div
-        class="grid grid-cols-1 lg:grid-cols-4 gap-2 items-center justify-center mx-auto max-w-7xl"
+        class="grid grid-cols-1 lg:grid-cols-4 gap-2 items-center justify-center mx-auto max-w-6xl"
       >
         <div
           class="text-center sm:text-left border border-gray-600 bg-gray-400 text-black dark:bg-gray-800 dark:text-gray-100 rounded-md p-6 shadow-2xl h-full"
         >
           <span><i class="fa-regular fa-credit-card"></i></span>
-          <h2 class="font-serif text-xl my-3">HomeLib is Completely Free</h2>
-          <p class="text-gray-800 dark:text-gray-400">
+          <h2 class="font-serif text-lg my-3">HomeLib is Completely Free</h2>
+          <p class="text-gray-800 dark:text-gray-300">
             Keep track of everything in one place, for free.
           </p>
         </div>
@@ -95,8 +90,8 @@ export default {
           class="text-center sm:text-left border border-gray-600 bg-gray-400 text-black dark:bg-gray-800 dark:text-gray-100 rounded-md p-6 shadow-2xl  h-full"
         >
           <span><i class="fa-solid fa-book"></i></span>
-          <h2 class="font-serif text-xl my-3">Catalog your Entire Library</h2>
-          <p class="text-gray-800 dark:text-gray-400">
+          <h2 class="font-serif text-lg my-3">Catalog your Entire Library</h2>
+          <p class="text-gray-800 dark:text-gray-300">
             Track every book you own, which ones you're currently reading, want
             to read, and did not finish.
           </p>
@@ -105,8 +100,8 @@ export default {
           class="text-center sm:text-left border border-gray-600 bg-gray-400 text-black dark:bg-gray-800 dark:text-gray-100 rounded-md p-6 shadow-2xl  h-full"
         >
           <span><i class="fa-solid fa-magnifying-glass"></i></span>
-          <h2 class="font-serif text-xl my-3">Discover New Books to Read</h2>
-          <p class="text-gray-800 dark:text-gray-400">
+          <h2 class="font-serif text-lg my-3">Discover New Books to Read</h2>
+          <p class="text-gray-800 dark:text-gray-300">
             Search for and find new, bestselling books to read.
           </p>
         </div>
@@ -115,18 +110,18 @@ export default {
           style="opacity: 1; transform: none"
         >
           <span><i class="fa-solid fa-list"></i></span>
-          <h2 class="font-serif text-xl my-3">
-            Create personalized reading lists.
+          <h2 class="font-serif text-lg my-3">
+            Create custom reading lists.
           </h2>
-          <p class="text-gray-800 dark:text-gray-400">
+          <p class="text-gray-800 dark:text-gray-300">
             Do you love fantasy? Sci-fi? Are you more of a Western fan? Keep all
             of your lists here.
           </p>
         </div>
       </div>
     </section>
-
-    <h2 class="text-2xl font-semibold font-serif mt-8">
+<h1 class="mt-2 text-3xl font-serif"> Discover New Books</h1>
+    <h2 class="text-xl font-semibold font-serif mt-4">
       NYT Bestselling Books This Week
     </h2>
 
@@ -141,18 +136,10 @@ export default {
           :src="result.book_image"
           :alt="result.title"
           class="rounded-lg inline-block-2 border border-gray-500 fade-in"
-          height="300"
-          width="200"
+    
         />
       </div>
     </div>
-    <a
-    href="https://www.care.org/"
-    target="_blank"
-    class="hidden fixed lg:block z-30 bottom-8 right-8 bg-gray-300 hover:bg-white dark:bg-gray-700 dark:hover:bg-gray-800 border border-stone-300 dark:border-gray-700 dark:text-gray-200 rounded-lg px-2 py-1"
-  >
-    Support Ukraine</a
-  >
   </div>
 </template>
 <style>
@@ -187,4 +174,11 @@ export default {
   0% {opacity:0;}
   100% {opacity:1;}
 }
+
+img {
+  width: 22vh;
+  object-fit: fill;
+  height: 32vh;
+}
+
 </style>
