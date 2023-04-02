@@ -44,22 +44,22 @@ export default {
 </script>
 
 <template>
-  <div class="pt-8 text-center container grid justify-center mx-auto max-w-6xl">
+  <div class="mt-8 text-center container grid justify-center mx-auto max-w-6xl">
     <div>
-      <h2 class="text-4xl font-semibold font-serif">
+      <h2 class="text-3xl font-semibold font-serif">
         Manage Your Home Library
       </h2>
-      <h3 class="my-1 text-xl font-serif">
+      <h3 class="m-0 text-lg font-serif">
         Keep track of your home library, the books you own, your favorites, and
         personal readings lists.
       </h3>
     </div>
     <br />
-    <div class="items-center justify-center text-center m-0">
+    <div>
       <RouterLink to="/register">
         <button
           v-if="!user.isLoggedIn"
-          class="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 text-sm mx-2 bg-blue-600 text-white font-bold py-4 px-4 rounded-md"
+          class="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 text-sm mx-2 bg-blue-600 text-white font-bold py-2 px-4 rounded-md"
         >
           Create Your Account
         </button>
@@ -67,7 +67,7 @@ export default {
 
       <p
         v-if="!user.isLoggedIn"
-        class="my-2 text-sm font-serif dark:text-gray-300 font-extralight"
+        class="mt-2 text-xs font-serif dark:text-gray-300 font-extralight"
       >
         Sign up to start managing your library today.
       </p>
@@ -102,7 +102,7 @@ export default {
           <span><i class="fa-solid fa-magnifying-glass"></i></span>
           <h2 class="font-serif text-lg my-3">Discover New Books to Read</h2>
           <p class="text-gray-800 dark:text-gray-300">
-            Search for and find new, bestselling books to read.
+            Search for and find new books to read.
           </p>
         </div>
         <div
@@ -120,7 +120,7 @@ export default {
         </div>
       </div>
     </section>
-<h1 class="mt-2 text-3xl font-serif"> Discover New Books</h1>
+<h1 class="mt-4 text-2xl font-serif"> Discover New Books With HomeLib</h1>
     <h2 class="text-xl font-semibold font-serif mt-4">
       NYT Bestselling Books This Week
     </h2>

@@ -11,21 +11,21 @@ export default {
     };
   },
   created() {
-    const getCuteCatPicture = async () => {
-      try {
-        const resp = await axios.get(
-          `https://api.thecatapi.com/v1/images/search`
-        );
-        console.log(resp.data);
-        this.cat = resp.data[0];
-        this.loaded = true;
-      } catch (err) {
-        // Handle Error Here
-        console.error(err);
-      }
-    };
+    // const getCuteCatPicture = async () => {
+    //   try {
+    //     const resp = await axios.get(
+    //       `https://api.thecatapi.com/v1/images/search`
+    //     );
+    //     console.log(resp.data);
+    //     this.cat = resp.data[0];
+    //     this.loaded = true;
+    //   } catch (err) {
+    //     // Handle Error Here
+    //     console.error(err);
+    //   }
+    // };
 
-    getCuteCatPicture();
+    // getCuteCatPicture();
   },
   components: {
     Sidebar,

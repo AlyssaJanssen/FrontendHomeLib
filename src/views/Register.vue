@@ -51,7 +51,7 @@ export default {
       <img src="/book.png" alt="logo" style="width: 62px; height: 62px" />
     </a>
     <div
-      class="w-full mt-4 mb-6 max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-900 dark:border-gray-700"
+      class="w-full mt-4 mb-6 max-w-sm p-4 bg-white border border-gray-400 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-900 dark:border-gray-700"
     >
       <form class="space-y-6" action="#" @submit.prevent="Register">
         <h5 class="text-xl font-medium text-gray-900 dark:text-white">
@@ -67,10 +67,10 @@ export default {
             type="email"
             name="email"
             id="email"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+            class="bg-gray-50 autofill:!bg-yellow-400 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
             placeholder="name@company.com"
             required
-            v-model="email"
+            v-model="email" 
           />
         </div>
         <div>
@@ -87,6 +87,7 @@ export default {
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
             required
             v-model="password"
+            autocomplete="off"
           />
         </div>
         <div>

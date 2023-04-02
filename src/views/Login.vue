@@ -47,11 +47,11 @@ export default {
       <img src="/book.png" alt="logo" style="width: 62px; height: 62px" />
     </a>
     <div
-      class="w-full mt-4 mb-6 max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-900 dark:border-gray-700"
+      class="w-full mt-4 mb-6 max-w-sm p-4 bg-white border border-gray-400 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-900 dark:border-gray-700"
     >
       <form class="space-y-6" action="#" @submit.prevent="Login">
         <h5 class="text-xl font-medium text-gray-900 dark:text-white">
-          Login to HomeLib
+          Sign in to HomeLib
         </h5>
         <div>
           <label

@@ -29,18 +29,22 @@ export default {
     return { user, signOut };
   },
   methods: {
-    getUserInitials() {
-      let name = this.user.data.displayName;
-      var parts = name.split(" ");
-      var initials = "";
-      for (var i = 0; i < parts.length; i++) {
-        if (parts[i].length > 0 && parts[i] !== "") {
-          initials += parts[i][0];
+    getUserInitials: function(displayName) {
+      if(displayName){
+        console.log(displayName)
+        var parts = displayName.split(" ");
+        var initials = "";
+        for (var i = 0; i < parts.length; i++) {
+          if (parts[i].length > 0 && parts[i] !== "") {
+            initials += parts[i][0];
+          }
         }
-      }
-      return initials;
-    },
+        return initials;
+    }
+  }
   },
+
+
 };
 </script>
 
@@ -137,7 +141,7 @@ export default {
         >
           <RouterLink to="/profile">
             <span class="font-medium text-gray-600 dark:text-gray-200">
-              {{ getUserInitials() }}
+              {{ getUserInitials(user.data.displayName) }}
             </span>
           </RouterLink>
         </div>

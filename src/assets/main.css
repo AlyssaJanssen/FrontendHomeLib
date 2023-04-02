@@ -1,6 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Change Autocomplete styles in Chrome*/
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px rgb(153, 171, 185) inset;
+}
+
 :root {
     --primary: rgb(49, 49, 49);
     --secondary: rgb(89, 89, 89);
