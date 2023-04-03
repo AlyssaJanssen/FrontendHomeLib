@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { auth } from "../firebase.config.js";
 import HomePage from "../views/Home.vue";
 import Book from "../views/Book.vue";
 import Login from "../views/Login.vue";
@@ -9,6 +10,7 @@ import Search from "../views/Search.vue";
 import ClientHome from "../views/ClientHome.vue";
 import MyLibrary from "../views/MyLibrary.vue";
 import NotFound from "../views/NotFound.vue";
+import ForgotPassword from "../views/forgotPassword.vue"
 
 const router = createRouter({
     history: createWebHistory(
@@ -70,6 +72,19 @@ const router = createRouter({
             path: "/:pathMatch(.*)",
             name: "not-found",
             component: NotFound
+        },
+        {
+            path: "/forgotpassword",
+            name: "forgotpassword",
+            component: ForgotPassword,
+            beforeEnter(to, from, next) {
+                const user = auth.currentUser;
+                if (user) {
+                    next({ name: "home" });
+                } else {
+                    next();
+                }
+            },
         },
     ],
     // when users click links to home or top of page, then it scrolls smoothly instead of suddenly. This looks nicer.

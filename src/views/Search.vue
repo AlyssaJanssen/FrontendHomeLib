@@ -5,7 +5,7 @@
       <!--Search Bar w/ results-->
       <div class="mb-16 mx-16">
 
-        <h1 class="text-4xl font-semibold font-serif my-6">Search for books to add to your shelves</h1>
+        <h1 class="text-4xl font-semibold font-serif my-6">Search for books to add to your library</h1>
         <form @submit.prevent="search" class="mx-auto container">
           <div>
             <input

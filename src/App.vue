@@ -56,7 +56,7 @@ export default {
 <template>
 <div>
   <div :class="isDark ? 'dark' : ''">
-    <div class="bg-gradient-to-b from-gray-200 to-gray-400 text-black dark:bg-gradient-to-b dark:from-gray-900 dark:to-gray-600 dark:text-gray-100 ">
+    <div class="bg-gradient-to-b from-gray-200 to-gray-400 text-black dark:bg-gradient-to-b dark:from-gray-900 dark:to-gray-700 dark:text-gray-100 ">
       <Navigation />
       <div class="min-h-screen container mx-auto">
         <RouterView />

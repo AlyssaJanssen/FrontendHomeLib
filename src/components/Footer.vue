@@ -33,7 +33,7 @@ div {
     aria-label="Site Footer"
     class="bg-white z-40 dark:bg-gray-900 dark:text-white shadow-2xl lg:grid lg:grid-cols-5 border-t-2 border-t-gray-600"
   >
-    <div class="relative block h-32 lg:col-span-2 lg:h-full">
+    <!-- <div class="relative block h-32 lg:col-span-2 lg:h-full">
      <p class="m-32"></p>
       <div
         class="text-gray-400 dark:text-gray-600 flex-shrink-0 flex justify-center items-center rounded-full sm:mt-4 sm:mx-auto"
@@ -44,11 +44,32 @@ div {
           />
         </svg>
       </div>
-    </div>
-    <!--Right side footer links w/ social media-->
-    <div class="px-8 py-16 sm:px-6 lg:col-span-3 lg:px-8">
-      <div class="grid grid-cols-1 gap-8 sm:grid-cols-2">
+    </div> -->
+ <!-- Website Logo and Title w/ home link -->
+ <div v-if="user.isLoggedIn" class="mx-auto flex flex-col justify-center items-center p-4">
+  <RouterLink to="/home" class="items-center">
+    <img
+      src="/book.png"
+      alt="logo"
+      style="width: 86px; height: 86px"
+      class="mx-2"
+    />
+  </RouterLink>
+</div>
+<div v-else class=" mx-auto flex flex-col justify-center items-center p-4">
+  <RouterLink to="/" class="items-center">
+    <img
+      src="/book.png"
+      alt="logo"
+      style="width: 86px; height: 86px"
+      class="mx-2"
+    />
+  </RouterLink>
+</div>
 
+    <!--Right side footer links w/ social media-->
+    <div class="px-8  py-12 sm:px-6 lg:col-span-3 lg:px-8">
+      <div class="grid grid-cols-1 gap-8 sm:grid-cols-2">
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div>
             <p class="font-medium text-lg text-gray-900 dark:text-white">HomeLib</p>
@@ -60,7 +81,7 @@ div {
                   <div v-if="user.isLoggedIn">
                     <RouterLink
                       to="/home"
-                      class="text-gray-700 dark:text-white transition hover:opacity-75"
+                      class="text-gray-900 dark:text-white transition hover:opacity-75"
                     >
                       Home
                     </RouterLink>
@@ -68,7 +89,7 @@ div {
                   <div v-else>
                     <RouterLink
                       to="/"
-                      class="text-gray-700 dark:text-white transition hover:opacity-75"
+                      class="text-gray-900 dark:text-white transition hover:opacity-75"
                     >
                       Home
                     </RouterLink>
@@ -76,10 +97,26 @@ div {
                 </li>
                 <li>
                   <a
-                    href="#"
-                    class="text-gray-700 dark:text-white transition hover:opacity-75"
+                    href="/"
+                    class="text-gray-900 dark:text-white transition hover:opacity-75"
                   >
                     About
+                  </a>
+                </li>
+                 <li>
+                  <a
+                    href="/search"
+                    class="text-gray-900 dark:text-white transition hover:opacity-75"
+                  >
+                    Discover
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/"
+                    class="text-gray-900 dark:text-white transition hover:opacity-75"
+                  >
+                    Bestsellers
                   </a>
                 </li>
                 <li>
@@ -116,36 +153,12 @@ div {
             </ul>
           </nav>
 
-          <p class="mt-6 text-xs text-gray-500 dark:text-white sm:mt-0">
-            &copy; 2023. Home Lib. All rights reserved.
+          <p class="mt-6 text-md text-gray-500 dark:text-white sm:mt-0">
+            &copy; 2023. Home Lib LLC. All rights reserved.
           </p>
         </div>
       </div>
     </div>
   </footer>
-  <div
-    class="bg-gray-300 z-40 hover:bg-gray-400 dark:bg-gray-800 dark:text-white shadow-2xl dark:hover:bg-gray-700  mx-auto flex flex-col justify-center items-center p-4"
-  >
-    <!-- Website Logo and Title w/ home link -->
-    <div v-if="user.isLoggedIn">
-      <RouterLink to="/home" class="flex items-center">
-        <img
-          src="/book.png"
-          alt="logo"
-          style="width: 46px; height: 46px"
-          class="mx-2"
-        />
-      </RouterLink>
-    </div>
-    <div v-else>
-      <RouterLink to="/" class="flex items-center">
-        <img
-          src="/book.png"
-          alt="logo"
-          style="width: 46px; height: 46px"
-          class="mx-2"
-        />
-      </RouterLink>
-    </div>
-  </div>
+
 </template>

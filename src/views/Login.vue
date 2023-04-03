@@ -27,18 +27,7 @@ export default {
     return { Login, email, password, error };
   },
 };
-// const signInWithGoogle = () => {
-//   const provider = new GoogleAuthProvider();
-//   signInWithPopup(getAuth(), provider)
-//     .then((result) => {
-//       console.log(result.user);
-//       router.push("/dashboard");
-//     })
-//     .catch((error) => {
-//       // handle error
-//       console.log(error);
-//     });
-// };
+
 </script>
 
 <template>
@@ -103,9 +92,9 @@ export default {
             >
           </div>
           <a
-            href="#"
+            href="/forgotpassword"
             class="ml-auto text-sm text-blue-700 hover:underline dark:text-blue-500"
-            >Lost Password?</a
+            >Forgot Password?</a
           >
         </div>
         <button
@@ -114,13 +103,6 @@ export default {
         >
           Sign In
         </button>
-
-        <!-- <button
-          @click="signInWithGoogle"
-          class="w-full text-white bg-indigo-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-indigo-500 dark:hover:bg-indigo-600 dark:focus:ring-blue-800"
-        >
-          Sign in With Google
-        </button> -->
 
         <div class="text-sm font-medium text-gray-500 dark:text-gray-300">
           Not a member?

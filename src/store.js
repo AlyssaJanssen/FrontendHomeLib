@@ -5,6 +5,8 @@ import {
     updateProfile,
     signInWithEmailAndPassword,
     signOut,
+    sendPasswordResetEmail,
+    updateEmail,
 } from "firebase/auth";
 
 const store = createStore({
@@ -39,16 +41,13 @@ const store = createStore({
                         displayName: name,
                     })
                     .then(() => {
-                        console.log("Registered successfully, updated displayName")
+                        console.log("Registered successfully, updated displayName");
                         context.commit("setUser", response.user);
                         console.log(`User ${response.user.uid} created`);
-
                     })
                     .catch((error) => {
                         console.log(error);
                     });
-                //dispatch.fetchUser(context, response) // gets the displayName on register to dashboard screen
-                //console.log(this.displayName); // says not defined right after user registers but is fine on login
             } else {
                 throw new Error("Error registering new user");
             }
@@ -58,7 +57,7 @@ const store = createStore({
             const response = await signInWithEmailAndPassword(auth, email, password);
             if (response) {
                 context.commit("setUser", response.user);
-                console.log("Logged in successfully")
+                console.log("Logged in successfully");
             } else {
                 throw new Error("Error logging in");
             }
@@ -80,6 +79,7 @@ const store = createStore({
                 context.commit("setUser", null);
             }
         },
+
     },
 });
 

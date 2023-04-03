@@ -137,7 +137,7 @@ export default {
 
         <div
           v-if="user.isLoggedIn"
-          class="relative inline-flex ml-1 items-center justify-center w-10 h-10 overflow-hidden bg-gray-300 rounded-full dark:bg-gray-600"
+          class="relative inline-flex ml-1 items-center justify-center w-10 h-10 overflow-hidden bg-gray-300 rounded-full border-2 border-gray-500 dark:bg-gray-600"
         >
           <RouterLink to="/profile">
             <span class="font-medium text-gray-600 dark:text-gray-200">

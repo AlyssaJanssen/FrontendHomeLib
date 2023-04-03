@@ -73,9 +73,9 @@ export default {
       </p>
     </div>
 
-    <section class="pt-2">
+    <section class="pt-2 ">
       <div
-        class="grid grid-cols-1 lg:grid-cols-4 gap-2 items-center justify-center mx-auto max-w-6xl"
+        class="grid grid-cols-1 lg:grid-cols-3 gap-2 mx-auto"
       >
         <div
           class="text-center sm:text-left border border-gray-600 bg-gray-400 text-black dark:bg-gray-800 dark:text-gray-100 rounded-md p-6 shadow-2xl h-full"
@@ -105,7 +105,7 @@ export default {
             Search for and find new books to read.
           </p>
         </div>
-        <div
+        <!-- <div
           class="text-center sm:text-left border border-gray-600 bg-gray-400 text-black dark:bg-gray-800 dark:text-gray-100 rounded-md p-6 shadow-2xl  h-full"
           style="opacity: 1; transform: none"
         >
@@ -117,7 +117,7 @@ export default {
             Do you love fantasy? Sci-fi? Are you more of a Western fan? Keep all
             of your lists here.
           </p>
-        </div>
+        </div> -->
       </div>
     </section>
 <h1 class="mt-4 text-2xl font-serif"> Discover New Books With HomeLib</h1>
