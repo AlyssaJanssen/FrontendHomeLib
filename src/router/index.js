@@ -11,6 +11,7 @@ import ClientHome from "../views/ClientHome.vue";
 import MyLibrary from "../views/MyLibrary.vue";
 import NotFound from "../views/NotFound.vue";
 import ForgotPassword from "../views/forgotPassword.vue"
+import EmailVerification from "../views/emailverification.vue"
 
 const router = createRouter({
     history: createWebHistory(
@@ -85,6 +86,11 @@ const router = createRouter({
                     next();
                 }
             },
+        },
+        {
+            path: "/emailverification",
+            name: "emailverification",
+            component: EmailVerification,
         },
     ],
     // when users click links to home or top of page, then it scrolls smoothly instead of suddenly. This looks nicer.

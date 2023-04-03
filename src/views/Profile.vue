@@ -25,7 +25,6 @@ export default {
   methods: {
     getUserInitials: function (displayName) {
       if (displayName) {
-        console.log(displayName);
         var parts = displayName.split(" ");
         var initials = "";
         for (var i = 0; i < parts.length; i++) {
@@ -58,7 +57,7 @@ export default {
         >
         
         <RouterLink to="/profile">
-            <span class="font-bold text-gray-500 text-2xl dark:text-gray-100">
+            <span class="font-bold text-gray-700 text-2xl dark:text-gray-100">
               {{ getUserInitials(user.data.displayName) }}
             </span>
           </RouterLink>

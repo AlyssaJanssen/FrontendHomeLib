@@ -20,7 +20,7 @@ export default {
           password: password.value,
           name: name.value,
         });
-        router.push("/home");
+        router.push("/emailverification");
       } catch (err) {
         error.value = err.message;
         console.log(error);

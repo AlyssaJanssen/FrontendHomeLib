@@ -31,7 +31,6 @@ export default {
   methods: {
     getUserInitials: function(displayName) {
       if(displayName){
-        console.log(displayName)
         var parts = displayName.split(" ");
         var initials = "";
         for (var i = 0; i < parts.length; i++) {

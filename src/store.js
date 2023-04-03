@@ -5,8 +5,7 @@ import {
     updateProfile,
     signInWithEmailAndPassword,
     signOut,
-    sendPasswordResetEmail,
-    updateEmail,
+    sendEmailVerification
 } from "firebase/auth";
 
 const store = createStore({
@@ -41,9 +40,24 @@ const store = createStore({
                         displayName: name,
                     })
                     .then(() => {
-                        console.log("Registered successfully, updated displayName");
                         context.commit("setUser", response.user);
                         console.log(`User ${response.user.uid} created`);
+                        // Now I have access to the signed in user
+                        const user = auth.currentUser;
+                        user.languageCode = 'it';
+                        // const actionCodeSettings = {
+                        //     url: `${import.meta.env.VITE_APP_HOST_NAME}/register/?email=${user.email}`,
+                        // };
+                        // send the signed in user a verification email
+                        sendEmailVerification(user)
+                            .then(function() {
+                                // Verification email sent.
+                                console.log("Verification Email sent!")
+                            })
+                            .catch(function(error) {
+                                // Error occurred. Inspect error.code.
+                                console.log(error)
+                            });
                     })
                     .catch((error) => {
                         console.log(error);
@@ -79,7 +93,6 @@ const store = createStore({
                 context.commit("setUser", null);
             }
         },
-
     },
 });
 
