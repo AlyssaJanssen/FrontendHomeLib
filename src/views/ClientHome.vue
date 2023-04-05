@@ -55,15 +55,7 @@ export default {
         </form>
       </div>
 
-      <h1 class="my-2 text-xl font-semibold font-serif">
-        Create a Reading List
-      </h1>
-      <button
-        class="w-1/12 shadow-xl text-sm bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 px-2 rounded"
-      >
-        <i class="fa-solid fa-plus"></i>
-        New List
-      </button>
+ 
       <div v-if="loaded">
         <img
           :src="cat.url"

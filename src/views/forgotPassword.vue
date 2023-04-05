@@ -15,11 +15,10 @@ export default {
         return;
       }
       this.error = null;
-      this.emailSent = true;
       const auth = getAuth();
       sendPasswordResetEmail(auth, this.email)
         .then(() => {
-          this.emailSent = false;
+          this.emailSent = true;
           console.log("Password Reset Email sent!")
         })
         .catch((error) => {
@@ -45,7 +44,7 @@ export default {
           name="email"
           id="email"
           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-72 p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-          placeholder="name@company.com"
+          placeholder="Enter Your HomeLib email"
           required
           v-model="email"
         />
@@ -55,9 +54,9 @@ export default {
         >
           Send Password Reset Email
         </button>
-        <!-- <div v-if="this.emailSent">
-          <p>Email Sent! Check your email for further instructions!</p>
-        </div> -->
+        <div v-if="this.emailSent" class=" text-sm text-yellow-400 block w-72 p-2.5">
+          <p>Check your email for reset instructions!</p>
+        </div>
       </div>
     </form>
   </div>

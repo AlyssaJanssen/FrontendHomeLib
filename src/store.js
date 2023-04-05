@@ -44,6 +44,7 @@ const store = createStore({
                         console.log(`User ${response.user.uid} created`);
                         // Now I have access to the signed in user
                         const user = auth.currentUser;
+                        // language code from users settings
                         user.languageCode = 'it';
                         // const actionCodeSettings = {
                         //     url: `${import.meta.env.VITE_APP_HOST_NAME}/register/?email=${user.email}`,
