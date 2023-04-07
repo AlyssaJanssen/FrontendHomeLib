@@ -50,8 +50,7 @@ export default {
         Manage Your Home Library
       </h2>
       <h3 class="m-0 text-lg font-serif">
-        Keep track of your home library, the books you own, your favorites, and
-        personal readings lists.
+        Keep track of your home library, the books you own, your favorites and discover new books.
       </h3>
     </div>
     <br />
@@ -176,9 +175,9 @@ export default {
 }
 
 img {
-  width: 22vh;
+  width: 28vh;
   object-fit: fill;
-  height: 32vh;
+  height: 40vh;
 }
 
 </style>
