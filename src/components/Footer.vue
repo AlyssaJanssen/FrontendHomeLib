@@ -20,12 +20,13 @@ div {
 }
 </style>
 <template>
-  <div class="text-end m-2 mb-4">
+  <div class="text-end m-8 mb-16 ">
     <RouterLink
       to="#"
-      class="text-md transition px-3 py-2 bg-gray-400 dark:bg-gray-800 hover:opacity-50 hover:bg-gray-200"
+      title="Scroll to top"
+      class="text-md transition px-3 py-2 bg-gray-400 dark:bg-gray-800 hover:opacity-50 hover:bg-gray-200 rounded-full"
     >
-      <i class="fa-solid fa-arrow-up"></i>
+      <i class="fa-solid fa-chevron-up"></i>
     </RouterLink>
   </div>
 

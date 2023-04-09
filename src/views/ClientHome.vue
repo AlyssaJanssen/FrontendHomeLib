@@ -54,8 +54,6 @@ export default {
           </button>
         </form>
       </div>
-
- 
       <div v-if="loaded">
         <img
           :src="cat.url"

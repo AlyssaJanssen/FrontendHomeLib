@@ -36,23 +36,25 @@ export default {
     async postBook() {
       try {
         let date = new Date().toLocaleString("en-US");
-        const resp = await axios.post("http://localhost:3000/api/v1/book/create", {
-          title: this.volumeInfo.title,
-          authors: this.volumeInfo.authors,
-          book_id: this.book.id,
-          description: this.volumeInfo.description,
-          image: this.volumeInfo.imageLinks.thumbnail,
-          publisher: this.volumeInfo.publisher,
-          publishedDate: this.volumeInfo.publishedDate,
-          dateAdded: date,
-        });
+        const resp = await axios.post(
+          "http://localhost:3000/api/v1/book/create",
+          {
+            title: this.volumeInfo.title,
+            authors: this.volumeInfo.authors,
+            book_id: this.book.id,
+            description: this.volumeInfo.description,
+            image: this.volumeInfo.imageLinks.thumbnail,
+            publisher: this.volumeInfo.publisher,
+            publishedDate: this.volumeInfo.publishedDate,
+            dateAdded: date,
+          }
+        );
         console.log("POST success", resp.data);
         this.success = true;
       } catch (error) {
         console.log(error);
         this.errorMsg = error;
       }
-      // alert("Succesfully added book to the database!")
     },
   },
   components: {
@@ -66,7 +68,7 @@ export default {
     <div v-if="book" class="grid col-span-3 mt-8">
       <template v-if="book">
         <div class="grid mx-auto">
-          <div class="">
+          <div>
             <a :href="volumeInfo.previewLink" target="_blank">
               <img
                 :src="volumeInfo.imageLinks.thumbnail"
@@ -80,13 +82,28 @@ export default {
             <p class="text-gray-900 dark:text-gray-400 mt-2 text-xs font-light">
               Data from Google Books
             </p>
+
             <button
               @click="postBook"
-              class="shadow-xl mt-10 text-sm bg-gray-600 hover:bg-gray-500 border-2 border-gray-500 text-white font-bold py-2 px-2 rounded-lg"
+              class="justify-center w-full shadow-xl mt-4 text-sm bg-gray-500 dark:bg-gray-700 hover:bg-gray-500 border-2 border-gray-500 text-white font-bold py-1 px-2 rounded-lg"
               v-if="!success"
             >
               Add Book To Library
             </button>
+
+            <a
+              href="https://bookshop.org/pages/bookstores"
+              target="_blank"
+              class="flex justify-center w-full shadow-xl mt-1 text-sm bg-gray-500 dark:bg-gray-700 hover:bg-gray-500 border-2 border-gray-500 text-white font-bold py-1 px-2 rounded-lg"
+              >Support Local Bookshop</a
+            >
+            <!-- <a
+              href="https://audible.com/"
+              target="_blank"
+              class="flex justify-center w-full shadow-xl mt-1 text-sm bg-gray-500 dark:bg-gray-700 hover:bg-gray-500 border-2 border-gray-500 text-white font-bold py-1 px-2 rounded-lg"
+              >Listen to on Audible</a
+            > -->
+
             <!--TOAST CONFIRMATION-->
             <div v-if="success" class="inline-flex mt-4">
               <div
@@ -161,7 +178,9 @@ export default {
             <p class="v-cloak">{{ volumeInfo.publisher }}</p>
             <p class="v-cloak">{{ volumeInfo.publishedDate }}</p>
             <!--Book Title and Author here-->
-            <h4 class="text-3xl font-semibold font-serif v-cloak">{{ volumeInfo.title }}</h4>
+            <h4 class="text-3xl font-semibold font-serif v-cloak">
+              {{ volumeInfo.title }}
+            </h4>
             <em class="font-light text-lg mb-4 v-cloak">{{
               volumeInfo.subtitle
             }}</em>
