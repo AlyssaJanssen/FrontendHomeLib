@@ -126,7 +126,7 @@ export default {
 
     <div
       v-if="responseAvailable == true"
-      class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5 mb-48"
+      class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5 gap-4 mb-48"
     >
       <div v-for="(result, index) in results" v-bind:key="index" class="py-2">
         <p class="text-2xl font-semibold  dark:text-gray-300 items-start justify-start text-left v-cloak">#{{ result.rank }}</p>
@@ -177,7 +177,7 @@ export default {
 img {
   width: 28vh;
   object-fit: fill;
-  height: 40vh;
+  height: 38vh;
 }
 
 </style>

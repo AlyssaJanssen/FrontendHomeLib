@@ -1,17 +1,28 @@
 <script>
 import axios from "axios";
+import * as firebase from "firebase/app";
+import "firebase/auth";
+import {auth} from "../firebase.config"
 import Sidebar from "../components/Sidebar.vue";
 export default {
   data() {
     return {
       books: [],
+      count: "",
     };
   },
-  created() {
+  async created() {
+    const idToken = await auth.currentUser.getIdToken(/* forceRefresh */ true);
+    console.log(idToken);
     const getBooks = async () => {
       try {
-        const resp = await axios.get(`http://localhost:3000/api/v1/books`);
+        const resp = await axios.get(`http://localhost:3000/api/v1/books`, {
+          headers: {
+            Authorization: `Bearer ${idToken}`,
+          },
+        });
         this.books = resp.data;
+        this.count = this.books.length;
         console.log("GET books success", this.books);
       } catch (error) {
         console.log(error);
@@ -28,8 +39,9 @@ export default {
       // delete it from the books object
       let i = this.books.map((book) => book.book_id).indexOf(book_id); // delete book at that index so vue updates page
       this.books.splice(i, 1);
+      this.count--;
       let x = window.confirm("You want to delete the book?");
-      console.log(book_id); // its getting the correct id to delete by
+      //console.log(book_id); // its getting the correct id to delete by
       if (x) {
         try {
           const resp = await axios
@@ -51,19 +63,24 @@ export default {
 <template>
   <Sidebar />
   <div>
-    <div class="h-full max-w-4xl mx-auto container pl-6 mt-2 mb-16 pt-4 text-center">
+    <div
+      class="h-full max-w-4xl mx-auto container pl-6 mt-2 mb-16 pt-4 text-center"
+    >
       <h1 class="text-xl font-semibold font-serif">
         <span class="inline-flex justify-center items-center ml-4">
           <i class="fa-solid fa-book"></i>
         </span>
         My Library
       </h1>
+      <h1 class="flex text-lg font-medium text-sky-600 dark:text-sky-500">
+        Total Books In Library: {{ this.count }}
+      </h1>
       <div class="grid grid-col-10">
         <ul id="books" data-cy="books">
           <li
             v-for="book in this.books"
             :key="book.book_id"
-            class="py-2 w-full border border-gray-500 rounded-lg p-2 my-1 hover:translate-y-0.5 transition duration-100 ease-in-out"
+            class="py-2 w-full border border-gray-500 rounded-md p-2 my-1 hover:translate-y-0.5 transition duration-100 ease-in-out"
           >
             <div class="grid grid-cols-8">
               <RouterLink
@@ -84,7 +101,7 @@ export default {
               <div class="grid grid-cols-8 col-span-6">
                 <div class="col-span-8 v-cloak">
                   <h4
-                    class="text-xl text-sky-800 dark:text-sky-500 ml-2 mt-4 font-semibold font-serif overflow-hidden justify-start text-left"
+                    class="text-xl text-sky-600 dark:text-sky-500 ml-2 mt-4 font-semibold font-serif overflow-hidden justify-start text-left"
                   >
                     {{ book.title }}
                   </h4>
@@ -117,7 +134,7 @@ export default {
               </div>
               <div class="flex justify-end items-end">
                 <button
-                  class="inline-flex justify-center items-center bg-sky-800 rounded-lg text-sm py-2 px-2"
+                  class="inline-flex justify-center items-center bg-sky-600 rounded-lg text-sm py-2 px-2"
                   @click="deleteBook(book.book_id)"
                 >
                   <i class="fa-solid fa-trash-can"> </i> Delete
@@ -132,8 +149,8 @@ export default {
 </template>
 <style scoped>
 img {
-  width: 10vh;
+  width: 13vh;
   object-fit: fill;
-  height: 15vh;
+  height: 17vh;
 }
 </style>

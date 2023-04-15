@@ -1,6 +1,8 @@
 <script>
 import Sidebar from "../components/Sidebar.vue";
 import axios from "axios";
+// import * as firebase from "firebase/app";
+// import "firebase/auth";
 export default {
   data() {
     return {
@@ -21,7 +23,6 @@ export default {
         console.log(resp.data);
         this.book = resp.data;
       } catch (err) {
-        // Handle Error Here
         console.error(err);
       }
     };

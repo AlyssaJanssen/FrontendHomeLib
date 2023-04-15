@@ -5,8 +5,9 @@ import {
     updateProfile,
     signInWithEmailAndPassword,
     signOut,
-    sendEmailVerification
+    sendEmailVerification,
 } from "firebase/auth";
+import axios from "axios";
 
 const store = createStore({
     state: {
@@ -45,7 +46,7 @@ const store = createStore({
                         // Now I have access to the signed in user
                         const user = auth.currentUser;
                         // language code from users settings
-                        user.languageCode = 'it';
+                        user.languageCode = "it";
                         // const actionCodeSettings = {
                         //     url: `${import.meta.env.VITE_APP_HOST_NAME}/register/?email=${user.email}`,
                         // };
@@ -53,12 +54,28 @@ const store = createStore({
                         sendEmailVerification(user)
                             .then(function() {
                                 // Verification email sent.
-                                console.log("Verification Email sent!")
+                                console.log("Verification Email sent!");
                             })
                             .catch(function(error) {
                                 // Error occurred. Inspect error.code.
-                                console.log(error)
+                                console.log(error);
                             });
+                        // grab created users access token to send to server side for back end authentication
+                        // let accessToken = user.getIdToken()
+                        //     .then(function(token) {
+                        //         accessToken = token;
+                        //         console.log(accessToken);
+                        //         // send to back end w/ axios
+                        //         const res = axios.get(`http://localhost:3000/api/v1/books`, {
+                        //             headers: {
+                        //                 Authorization: `Bearer ${accessToken}`,
+                        //             },
+                        //         });
+                        //         console.log(res.data)
+
+
+
+                        //     });
                     })
                     .catch((error) => {
                         console.log(error);
