@@ -12,8 +12,8 @@ export default {
     };
   },
   async created() {
+    // sending ID token to the server for authentication, to test before getting users books
     const idToken = await auth.currentUser.getIdToken(/* forceRefresh */ true);
-    console.log(idToken);
     const getBooks = async () => {
       try {
         const resp = await axios.get(`http://localhost:3000/api/v1/books`, {
