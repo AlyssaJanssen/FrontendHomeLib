@@ -1,6 +1,5 @@
 <script>
 import axios from "axios";
-import * as firebase from "firebase/app";
 import "firebase/auth";
 import {auth} from "../firebase.config"
 import Sidebar from "../components/Sidebar.vue";
@@ -13,14 +12,10 @@ export default {
   },
   async created() {
     // sending ID token to the server for authentication, to test before getting users books
-    const idToken = await auth.currentUser.getIdToken(/* forceRefresh */ true);
+    //const idToken = await auth.currentUser.getIdToken(/* forceRefresh */ true);
     const getBooks = async () => {
       try {
-        const resp = await axios.get(`http://localhost:3000/api/v1/books`, {
-          headers: {
-            Authorization: `Bearer ${idToken}`,
-          },
-        });
+        const resp = await axios.get(`http://localhost:3000/api/v1/books`);
         this.books = resp.data;
         this.count = this.books.length;
         console.log("GET books success", this.books);

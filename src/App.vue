@@ -6,6 +6,7 @@ import Footer from "./components/Footer.vue";
 import { useStore } from "vuex";
 import { computed } from "vue";
 import { auth } from "./firebase.config";
+import axios from "axios"
 
 export default {
   data() {
@@ -35,7 +36,15 @@ export default {
     const store = useStore();
     
     auth.onAuthStateChanged((user) => {
+      if(user) {
       store.dispatch("fetchUser", user);
+      // on every back end request, send the users authToken, gets checked server side
+      return auth.currentUser.getIdToken()
+      .then(idToken => {
+      axios.defaults.headers.common['Authorization'] = `Bearer ${idToken}`;
+      }).catch();
+  }
+      
     });
 
     const user = computed(() => {

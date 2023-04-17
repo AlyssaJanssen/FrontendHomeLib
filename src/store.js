@@ -60,7 +60,7 @@ const store = createStore({
                                 // Error occurred. Inspect error.code.
                                 console.log(error);
                             });
-                        // grab created users access token to send to server side for back end authentication
+                       // grab created users access token to send to server side for back end authentication
                         // let accessToken = user.getIdToken()
                         //     .then(function(token) {
                         //         accessToken = token;
@@ -107,6 +107,7 @@ const store = createStore({
                     displayName: user.displayName,
                     email: user.email,
                 });
+                
             } else {
                 context.commit("setUser", null);
             }
