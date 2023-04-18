@@ -8,7 +8,7 @@
       </template>
       <template v-else>
         <img
-          src="https://islandpress.org/sites/default/files/400px%20x%20600px-r01BookNotPictured.jpg"
+          src="https://books.google.co.kr/googlebooks/images/no_cover_thumb.gif"
           :alt="volumeInfo.title"
         />
       </template>

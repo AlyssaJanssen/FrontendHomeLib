@@ -46,11 +46,11 @@ export default {
 <template>
   <div class="mt-8 text-center container grid justify-center mx-auto max-w-6xl">
     <div>
-      <h2 class="text-3xl font-semibold font-serif">
+      <h2 class="text-4xl font-semibold font-serif">
         Manage Your Home Library
       </h2>
       <h3 class="m-0 text-lg font-serif">
-        Keep track of your home library, the books you own, your favorites and discover new books.
+        Keep track of your home library, catalog the books you own, and track the ones you are currently borrowing and lending.
       </h3>
     </div>
     <br />
@@ -58,7 +58,7 @@ export default {
       <RouterLink to="/register">
         <button
           v-if="!user.isLoggedIn"
-          class="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 text-sm mx-2 bg-blue-600 text-white font-bold py-2 px-4 rounded-md"
+          class="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 text-sm mx-2 bg-sky-600 text-white font-bold py-2 px-4 rounded-md"
         >
           Create Your Account
         </button>
@@ -82,7 +82,7 @@ export default {
           <span><i class="fa-regular fa-credit-card"></i></span>
           <h2 class="font-serif text-lg my-3">HomeLib is Completely Free</h2>
           <p class="text-gray-800 dark:text-gray-300">
-            Keep track of everything in one place, for free.
+            Keep track of everything in one place for free.
           </p>
         </div>
         <div
@@ -91,8 +91,7 @@ export default {
           <span><i class="fa-solid fa-book"></i></span>
           <h2 class="font-serif text-lg my-3">Catalog your Entire Library</h2>
           <p class="text-gray-800 dark:text-gray-300">
-            Track every book you own, which ones you're currently reading, want
-            to read, and did not finish.
+            Track every book you own in one place, including ones are currently being borrowed or lent.
           </p>
         </div>
         <div

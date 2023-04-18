@@ -116,18 +116,18 @@ export default {
         <RouterLink
           to="/register"
           v-if="!user.isLoggedIn"
-          class="shadow-xl text-sm ml-2 py-2 px-2 bg-blue-500 hover:bg-blue-400 text-white font-bold rounded"
+          class="shadow-xl text-sm ml-2 py-2 px-2 bg-sky-600 hover:bg-sky-500 text-white font-bold rounded"
           >Join</RouterLink
         >
         <RouterLink
           to="/login"
-          class="ml-2 shadow-xl text-sm py-2 px-2 font-bold rounded bg-indigo-500 hover:bg-indigo-400 text-white transition duration-300"
+          class="ml-2 shadow-xl text-sm py-2 px-2 font-bold rounded bg-indigo-500 hover:bg-indigo-400 border border-indigo-500 text-white transition duration-300"
           v-if="!user.isLoggedIn"
           >Login</RouterLink
         >
 
         <button
-          class="link ml-1 shadow-xl text-sm py-2 px-2 font-bold rounded bg-indigo-500 hover:bg-indigo-400 text-white transition duration-300"
+          class="link ml-1 shadow-xl text-sm py-2 px-2 font-bold rounded bg-indigo-500 hover:bg-indigo-400 border border-indigo-400 text-white transition duration-300"
           @click="signOut"
           v-if="user.isLoggedIn"
         >

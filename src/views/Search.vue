@@ -17,7 +17,7 @@
             />
             <button
               type="submit"
-              class="link shadow-xl text-sm bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-2 rounded"
+              class="link shadow-xl text-sm bg-sky-600 hover:bg-sky-700 text-white font-bold py-2 px-2 rounded"
             >
               Search
             </button>

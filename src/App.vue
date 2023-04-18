@@ -6,8 +6,7 @@ import Footer from "./components/Footer.vue";
 import { useStore } from "vuex";
 import { computed } from "vue";
 import { auth } from "./firebase.config";
-import axios from "axios"
-
+import axios from "axios";
 export default {
   data() {
     return {
@@ -32,46 +31,48 @@ export default {
     localStorage.theme = "dark";
     // Whenever the user explicitly chooses to respect the OS preference
     localStorage.removeItem("theme");
-
     const store = useStore();
-    
-    auth.onAuthStateChanged((user) => {
-      if(user) {
-      store.dispatch("fetchUser", user);
-      // on every back end request, send the users authToken, gets checked server side
-      return auth.currentUser.getIdToken()
-      .then(idToken => {
-      axios.defaults.headers.common['Authorization'] = `Bearer ${idToken}`;
-      }).catch();
-  }
-      
-    });
 
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        store.dispatch("fetchUser", user);
+        // on every back end request, send the users authToken, gets checked server side
+        // this did not work because it messed with my Google Books API axios call, setting the header made the request get denied.
+        // return auth.currentUser
+        //   .getIdToken()
+        //   .then((idToken) => {
+        //     axios.defaults.headers.common[
+        //       "Authorization"
+        //     ] = `Bearer ${idToken}`;
+        //   })
+        //   .catch();
+      }
+    });
     const user = computed(() => {
       return store.getters.user;
     });
-
     return { user };
   },
-
   components: {
     Navigation,
     Footer,
-    Sidebar
+    Sidebar,
   },
 };
 </script>
 
 <template>
-<div>
-  <div :class="isDark ? 'dark' : ''">
-    <div class="bg-gradient-to-b from-gray-200 to-gray-400 text-black dark:bg-gradient-to-b dark:from-gray-900 dark:to-gray-700 dark:text-gray-100 ">
-      <Navigation />
-      <div class="min-h-screen container mx-auto">
-        <RouterView />
+  <div>
+    <div :class="isDark ? 'dark' : ''">
+      <div
+        class="bg-gradient-to-b from-gray-200 to-gray-400 text-black dark:bg-gradient-to-b dark:from-gray-900 dark:to-gray-700 dark:text-gray-100"
+      >
+        <Navigation />
+        <div class="min-h-screen container mx-auto">
+          <RouterView />
+        </div>
+        <Footer />
       </div>
-      <Footer />
     </div>
   </div>
-</div>
 </template>

@@ -33,7 +33,7 @@ export default {
 <template>
   <div class="container mx-auto flex flex-col justify-center items-center mt-4">
     <a href="/">
-      <img src="/book.png" alt="logo" style="width: 62px; height: 62px" />
+      <img src="/book.png" alt="logo" style="width: 78px; height: 78px" />
     </a>
     <div
       class="w-full mt-2 mb-6 max-w-sm p-4 bg-white border border-gray-400 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-900 dark:border-gray-700"
@@ -82,7 +82,7 @@ export default {
                 id="remember"
                 type="checkbox"
                 value=""
-                class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"
+                class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring focus:ring-sky-500 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-sky-600 dark:ring-offset-gray-800 dark:focus:ring-offset-sky-800"
               />
             </div>
             <label
@@ -93,13 +93,13 @@ export default {
           </div>
           <a
             href="/forgotpassword"
-            class="ml-auto text-sm text-blue-700 hover:underline dark:text-blue-500"
+            class="ml-auto text-sm text-sky-700 hover:underline dark:text-sky-500"
             >Forgot Password?</a
           >
         </div>
         <button
           type="submit"
-          class="w-full text-white bg-indigo-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-indigo-500 dark:hover:bg-indigo-600 dark:focus:ring-blue-800"
+          class="w-full shadow-xl text-sm py-2 px-2 font-bold rounded-lg bg-indigo-500 hover:bg-indigo-400 border border-indigo-500 text-white transition duration-300"
         >
           Sign In
         </button>
@@ -108,7 +108,7 @@ export default {
           Not a member?
           <RouterLink
             to="/register"
-            class="text-blue-700 hover:underline dark:text-blue-500"
+            class="text-sky-700 hover:underline dark:text-sky-500"
             >Create an account</RouterLink
           >
         </div>

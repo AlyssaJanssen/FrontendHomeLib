@@ -1,7 +1,7 @@
 <script>
 import axios from "axios";
 import "firebase/auth";
-import {auth} from "../firebase.config"
+import { auth } from "../firebase.config";
 import Sidebar from "../components/Sidebar.vue";
 export default {
   data() {
@@ -12,10 +12,14 @@ export default {
   },
   async created() {
     // sending ID token to the server for authentication, to test before getting users books
-    //const idToken = await auth.currentUser.getIdToken(/* forceRefresh */ true);
+    const idToken = await auth.currentUser.getIdToken(/* forceRefresh */ true);
     const getBooks = async () => {
       try {
-        const resp = await axios.get(`http://localhost:3000/api/v1/books`);
+        const resp = await axios.get(`http://localhost:3000/api/v1/books`, {
+          headers: {
+            Authorization: `Bearer ${idToken}`,
+          },
+        });
         this.books = resp.data;
         this.count = this.books.length;
         console.log("GET books success", this.books);
@@ -39,8 +43,15 @@ export default {
       //console.log(book_id); // its getting the correct id to delete by
       if (x) {
         try {
+          const idToken = await auth.currentUser.getIdToken(
+            /* forceRefresh */ true
+          );
           const resp = await axios
-            .delete(`http://localhost:3000/api/v1/books/${book_id}`)
+            .delete(`http://localhost:3000/api/v1/books/${book_id}`, {
+              headers: {
+                Authorization: `Bearer ${idToken}`,
+              },
+            })
             .then((resp) => {
               console.log(resp);
               this.getBooks();
@@ -68,7 +79,7 @@ export default {
         My Library
       </h1>
       <h1 class="flex text-lg font-medium text-sky-600 dark:text-sky-500">
-        Total Books In Library: {{ this.count }}
+        Total Books: {{ this.count }}
       </h1>
       <div class="grid grid-col-10">
         <ul id="books" data-cy="books">

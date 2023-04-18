@@ -1,8 +1,7 @@
 <script>
 import Sidebar from "../components/Sidebar.vue";
 import axios from "axios";
-// import * as firebase from "firebase/app";
-// import "firebase/auth";
+import {auth} from "../firebase.config"
 export default {
   data() {
     return {
@@ -37,6 +36,7 @@ export default {
     async postBook() {
       try {
         let date = new Date().toLocaleString("en-US");
+        const idToken = await auth.currentUser.getIdToken(/* forceRefresh */ true);
         const resp = await axios.post(
           "http://localhost:3000/api/v1/book/create",
           {
@@ -48,7 +48,11 @@ export default {
             publisher: this.volumeInfo.publisher,
             publishedDate: this.volumeInfo.publishedDate,
             dateAdded: date,
-          }
+          }, {
+        headers: {
+          Authorization: `Bearer ${idToken}`,
+        },
+      }
         );
         console.log("POST success", resp.data);
         this.success = true;
@@ -86,7 +90,7 @@ export default {
 
             <button
               @click="postBook"
-              class="justify-center w-full shadow-xl mt-4 text-sm bg-gray-500 dark:bg-gray-700 hover:bg-gray-500 border-2 border-gray-500 text-white font-bold py-1 px-2 rounded-lg"
+              class="justify-center w-full shadow-xl mt-4 text-sm bg-sky-500 hover:bg-sky-600 dark:bg-sky-600 dark:hover:bg-sky-500 border border-indigo-500 text-white font-bold py-1 px-2 rounded-md"
               v-if="!success"
             >
               Add Book To Library
@@ -95,18 +99,12 @@ export default {
             <a
               href="https://bookshop.org/pages/bookstores"
               target="_blank"
-              class="flex justify-center w-full shadow-xl mt-1 text-sm bg-gray-500 dark:bg-gray-700 hover:bg-gray-500 border-2 border-gray-500 text-white font-bold py-1 px-2 rounded-lg"
+              class="flex justify-center w-full shadow-xl mt-1 text-sm bg-sky-500 hover:bg-sky-600 dark:bg-sky-600 dark:hover:bg-sky-500 border border-indigo-500 text-white font-bold py-1 px-2 rounded-md"
               >Support Local Bookshop</a
             >
-            <!-- <a
-              href="https://audible.com/"
-              target="_blank"
-              class="flex justify-center w-full shadow-xl mt-1 text-sm bg-gray-500 dark:bg-gray-700 hover:bg-gray-500 border-2 border-gray-500 text-white font-bold py-1 px-2 rounded-lg"
-              >Listen to on Audible</a
-            > -->
 
             <!--TOAST CONFIRMATION-->
-            <div v-if="success" class="inline-flex mt-4">
+            <div v-if="success" class="grid mt-4">
               <div
                 id="toast-interactive"
                 class="w-full max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow dark:bg-gray-700 dark:text-gray-400"
@@ -114,7 +112,7 @@ export default {
               >
                 <div class="inline-flex">
                   <div
-                    class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-400 bg-green-200 rounded-lg dark:bg-green-700 dark:text-green-200"
+                    class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-400 bg-green-200 rounded-lg dark:bg-green-600 dark:text-green-200"
                   >
                     <svg
                       aria-hidden="true"
@@ -139,9 +137,10 @@ export default {
                     >
                   </div>
 
+                  <div class="inline-block">
                   <button
                     type="button"
-                    class="inline justify-end items-end ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
+                    class="inline-flex justify-end items-end ml-5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
                     data-dismiss-target="#toast-interactive"
                     aria-label="Close"
                   >
@@ -161,11 +160,12 @@ export default {
                     </svg>
                   </button>
                 </div>
+                </div>
 
                 <div class="mt-2">
                   <RouterLink
                     to="/mylibrary"
-                    class="flex justify-center px-2 py-1.5 text-sm text-center text-white bg-indigo-500 rounded-lg hover:bg-indigo-600 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-indigo-600 dark:hover:bg-indigo-500 dark:focus:ring-blue-700"
+                    class="flex justify-center w-full shadow-xl mt-1 text-sm bg-sky-500 hover:bg-sky-600 dark:bg-sky-600 dark:hover:bg-sky-500 border border-indigo-500 text-white font-bold py-1 px-2 rounded-md"
                     >Go To Library</RouterLink
                   >
                 </div>
