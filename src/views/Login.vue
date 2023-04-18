@@ -99,7 +99,7 @@ export default {
         </div>
         <button
           type="submit"
-          class="w-full shadow-xl text-sm py-2 px-2 font-bold rounded-lg bg-indigo-500 hover:bg-indigo-400 border border-indigo-500 text-white transition duration-300"
+          class="w-full shadow-xl text-sm py-2 px-2 font-bold rounded-lg bg-indigo-500 hover:bg-indigo-400 border border-indigo-400 text-white transition duration-300"
         >
           Sign In
         </button>

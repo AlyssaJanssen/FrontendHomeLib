@@ -43,38 +43,35 @@ const store = createStore({
                     .then(() => {
                         context.commit("setUser", response.user);
                         console.log(`User ${response.user.uid} created`);
-                        // Now I have access to the signed in user
-                        const user = auth.currentUser;
-                        // language code from users settings
-                        user.languageCode = "it";
-                        // const actionCodeSettings = {
-                        //     url: `${import.meta.env.VITE_APP_HOST_NAME}/register/?email=${user.email}`,
-                        // };
-                        // send the signed in user a verification email
-                        sendEmailVerification(user)
-                            .then(function() {
-                                // Verification email sent.
-                                console.log("Verification Email sent!");
+                        // now send that newly registered user to be stored in the db
+                        axios.post("http://localhost:3000/register", {
+                                _id: response.user.uid,
+                                displayName: response.user.displayName,
+                                books: [{}],
+                            })
+                            .then(function(response) {
+                                console.log(response);
                             })
                             .catch(function(error) {
-                                // Error occurred. Inspect error.code.
                                 console.log(error);
                             });
-                       // grab created users access token to send to server side for back end authentication
-                        // let accessToken = user.getIdToken()
-                        //     .then(function(token) {
-                        //         accessToken = token;
-                        //         console.log(accessToken);
-                        //         // send to back end w/ axios
-                        //         const res = axios.get(`http://localhost:3000/api/v1/books`, {
-                        //             headers: {
-                        //                 Authorization: `Bearer ${accessToken}`,
-                        //             },
-                        //         });
-                        //         console.log(res.data)
 
-
-
+                        // // Now I have access to the signed in user
+                        // const user = auth.currentUser;
+                        // // language code from users settings
+                        // user.languageCode = "it";
+                        // // const actionCodeSettings = {
+                        // //     url: `${import.meta.env.VITE_APP_HOST_NAME}/register/?email=${user.email}`,
+                        // // };
+                        // // send the signed in user a verification email
+                        // sendEmailVerification(user)
+                        //     .then(function() {
+                        //         // Verification email sent.
+                        //         console.log("Verification Email sent!");
+                        //     })
+                        //     .catch(function(error) {
+                        //         // Error occurred. Inspect error.code.
+                        //         console.log(error);
                         //     });
                     })
                     .catch((error) => {
@@ -107,7 +104,6 @@ const store = createStore({
                     displayName: user.displayName,
                     email: user.email,
                 });
-                
             } else {
                 context.commit("setUser", null);
             }

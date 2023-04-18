@@ -15,7 +15,10 @@ export default {
     const idToken = await auth.currentUser.getIdToken(/* forceRefresh */ true);
     const getBooks = async () => {
       try {
-        const resp = await axios.get(`http://localhost:3000/api/v1/books`, {
+        let currentUserId = auth.currentUser.uid;
+        console.log("current users uid:" + currentUserId);
+        // getting all books associated with the current user
+        const resp = await axios.get(`http://localhost:3000/api/v1/books?currentUserId=${this.currentUserId}`, {
           headers: {
             Authorization: `Bearer ${idToken}`,
           },

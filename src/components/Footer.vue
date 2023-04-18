@@ -124,7 +124,7 @@ div {
                   <RouterLink to="/register">
                     <button
                       v-if="!user.isLoggedIn"
-                      class="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 text-sm bg-sky-600 text-white font-bold py-2 px-4 rounded-md"
+                      class="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 text-sm bg-sky-600 border border-sky-500 text-white font-bold py-2 px-4 rounded-lg"
                     >
                       Sign Up
                     </button>

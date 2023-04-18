@@ -20,7 +20,7 @@ export default {
           password: password.value,
           name: name.value,
         });
-        router.push("/emailverification");
+        router.push("/home");
       } catch (err) {
         error.value = err.message;
         console.log(error);
@@ -118,7 +118,7 @@ export default {
         </div>
         <button
           type="submit"
-          class="w-full shadow-xl text-sm py-2 px-2 font-bold rounded-lg bg-indigo-500 hover:bg-indigo-400 border border-indigo-500 text-white transition duration-300"
+          class="w-full shadow-xl text-sm py-2 px-2 font-bold rounded-lg bg-sky-600 hover:bg-sky-500 border border-sky-400 text-white transition duration-300"
         >
           Join HomeLib
         </button>

@@ -43,7 +43,7 @@ export default {
   <div>
     <div
       v-if="user.isLoggedIn"
-      class="text-center container grid justify-center mt-20"
+      class="text-center container grid justify-center mt-12"
     >
       <div
         class=" text-white rounded-full border-4 border-gray-500 sm:mt-4 sm:mx-auto"

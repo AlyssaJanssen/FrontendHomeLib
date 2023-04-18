@@ -36,16 +36,8 @@ export default {
     auth.onAuthStateChanged((user) => {
       if (user) {
         store.dispatch("fetchUser", user);
-        // on every back end request, send the users authToken, gets checked server side
-        // this did not work because it messed with my Google Books API axios call, setting the header made the request get denied.
-        // return auth.currentUser
-        //   .getIdToken()
-        //   .then((idToken) => {
-        //     axios.defaults.headers.common[
-        //       "Authorization"
-        //     ] = `Bearer ${idToken}`;
-        //   })
-        //   .catch();
+        //console.log(user.uid);
+        //axios.post
       }
     });
     const user = computed(() => {

@@ -1,11 +1,11 @@
 <template>
   <Sidebar />
   <div class="mb-20  container">
-    <div class="mb-16 mx-auto pb-4 text-center">
+    <div class="mb-16 mx-auto pb-4 text-center my-12">
       <!--Search Bar w/ results-->
       <div class="mb-16 mx-16">
 
-        <h1 class="text-4xl font-semibold font-serif my-6">Search for books to add to your library</h1>
+        <h1 class="text-4xl font-semibold font-serif my-2">Search for books to add to your library</h1>
         <form @submit.prevent="search" class="mx-auto container">
           <div>
             <input
