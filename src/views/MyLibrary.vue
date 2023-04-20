@@ -7,6 +7,7 @@ export default {
   data() {
     return {
       books: [],
+      book: null,
       count: "",
     };
   },
@@ -18,7 +19,7 @@ export default {
         let currentUserId = auth.currentUser.uid;
         console.log("current users uid:" + currentUserId);
         // getting all books associated with the current user
-        const resp = await axios.get(`http://localhost:3000/api/v1/books?currentUserId=${this.currentUserId}`, {
+        const resp = await axios.get(`http://localhost:3000/api/v1/books/${currentUserId}`, {
           headers: {
             Authorization: `Bearer ${idToken}`,
           },
@@ -39,6 +40,7 @@ export default {
   methods: {
     async deleteBook(book_id) {
       // delete it from the books object
+      let currentUserId = auth.currentUser.uid;
       let i = this.books.map((book) => book.book_id).indexOf(book_id); // delete book at that index so vue updates page
       this.books.splice(i, 1);
       this.count--;
@@ -50,7 +52,7 @@ export default {
             /* forceRefresh */ true
           );
           const resp = await axios
-            .delete(`http://localhost:3000/api/v1/books/${book_id}`, {
+            .delete(`http://localhost:3000/api/v1/books/${currentUserId}/${book_id}`, {
               headers: {
                 Authorization: `Bearer ${idToken}`,
               },
@@ -59,8 +61,9 @@ export default {
               console.log(resp);
               this.getBooks();
               console.log("deleted book by id:", book_id);
-              alert("Book deleted!");
             });
+            
+            alert("Book deleted!");
         } catch (error) {
           console.log(error);
         }

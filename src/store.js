@@ -31,26 +31,26 @@ const store = createStore({
     },
     actions: {
         async register(context, { email, password, name }) {
-            const response = await createUserWithEmailAndPassword(
+            const resp = await createUserWithEmailAndPassword(
                 auth,
                 email,
                 password
             );
-            if (response) {
+            if (resp) {
                 updateProfile(auth.currentUser, {
                         displayName: name,
                     })
                     .then(() => {
-                        context.commit("setUser", response.user);
-                        console.log(`User ${response.user.uid} created`);
+                        context.commit("setUser", resp.user);
+                        console.log(`User ${resp.user.uid} created`);
                         // now send that newly registered user to be stored in the db
                         axios.post("http://localhost:3000/register", {
-                                _id: response.user.uid,
-                                displayName: response.user.displayName,
-                                books: [{}],
+                                userId: resp.user.uid,
+                                displayName: resp.user.displayName,
+                                books: [],
                             })
-                            .then(function(response) {
-                                console.log(response);
+                            .then(function(resp) {
+                                console.log("user creation POST success", resp);
                             })
                             .catch(function(error) {
                                 console.log(error);
@@ -83,9 +83,9 @@ const store = createStore({
         },
 
         async login(context, { email, password }) {
-            const response = await signInWithEmailAndPassword(auth, email, password);
-            if (response) {
-                context.commit("setUser", response.user);
+            const resp = await signInWithEmailAndPassword(auth, email, password);
+            if (resp) {
+                context.commit("setUser", resp.user);
                 console.log("Logged in successfully");
             } else {
                 throw new Error("Error logging in");

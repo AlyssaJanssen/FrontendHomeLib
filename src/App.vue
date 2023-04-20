@@ -14,8 +14,7 @@ export default {
     };
   },
   setup() {
-    // Dark Mode: Detect in local storage
-    // On page load or when changing themes
+    // Dark Mode: Detect in local storage on page load or when changing themes
     if (
       localStorage.theme === "dark" ||
       (!("theme" in localStorage) &&
@@ -36,8 +35,6 @@ export default {
     auth.onAuthStateChanged((user) => {
       if (user) {
         store.dispatch("fetchUser", user);
-        //console.log(user.uid);
-        //axios.post
       }
     });
     const user = computed(() => {

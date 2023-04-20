@@ -10,6 +10,7 @@ export default {
       success: false,
       errorMsg: null,
       key: "",
+      existsInDb: false,
     };
   },
   created() {
@@ -26,6 +27,10 @@ export default {
       }
     };
     getBookById();
+    // make a func to check if this book is in db, if it is, change button so user cant add it again
+    // async function checkAlreadyAdded(){
+
+    // }
   },
   computed: {
     volumeInfo() {
@@ -37,8 +42,10 @@ export default {
       try {
         let date = new Date().toLocaleString("en-US");
         const idToken = await auth.currentUser.getIdToken(/* forceRefresh */ true);
+        let currentUserId = auth.currentUser.uid;
+        console.log("currentUserId: " + currentUserId)
         const resp = await axios.post(
-          "http://localhost:3000/api/v1/book/create",
+          `http://localhost:3000/api/v1/create/${currentUserId}`,
           {
             title: this.volumeInfo.title,
             authors: this.volumeInfo.authors,
@@ -47,14 +54,14 @@ export default {
             image: this.volumeInfo.imageLinks.thumbnail,
             publisher: this.volumeInfo.publisher,
             publishedDate: this.volumeInfo.publishedDate,
-            dateAdded: date,
+            dateAdded: date
           }, {
         headers: {
           Authorization: `Bearer ${idToken}`,
         },
       }
         );
-        console.log("POST success", resp.data);
+        console.log("POST book success", resp);
         this.success = true;
       } catch (error) {
         console.log(error);
