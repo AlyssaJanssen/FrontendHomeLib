@@ -1,13 +1,14 @@
 <template>
   <Sidebar />
-  <div class="mb-20  container">
+  <div class="mb-20 container">
     <div class="mb-16 mx-auto pb-4 text-center my-12">
       <!--Search Bar w/ results-->
-      <div class="mb-16 mx-16">
-
-        <h1 class="text-4xl font-semibold font-serif my-2">Search for books to add to your library</h1>
+      <div class="mb-16 mx-16 mr-auto">
+        <h1 class="text-3xl font-semibold font-serif my-2">
+          Search for Books to Add to your Library
+        </h1>
         <form @submit.prevent="search" class="mx-auto container">
-          <div>
+          <div class="justify-start items-start content-start w-full">
             <input
               type="text"
               v-model="keyword"
@@ -17,11 +18,13 @@
             />
             <button
               type="submit"
-              class="link shadow-xl text-sm bg-sky-600 hover:bg-sky-700 text-white font-bold py-2 px-2 rounded"
+              class="link align-top shadow-xl text-xs bg-sky-600 hover:bg-sky-700 text-white font-bold py-2 px-2 rounded"
             >
               Search
             </button>
-            <p class="text-sm font-extralight dark:text-gray-400">Search Results from Google Books</p>
+            <p class="text-sm font-extralight dark:text-gray-400">
+              Search Results from Google Books
+            </p>
           </div>
           <div>
             <select
@@ -36,7 +39,6 @@
             </select>
           </div>
         </form>
-        
       </div>
       <div
         class="text-center pl-14 container mx-auto flex flex-col justify-center items-center"
@@ -67,7 +69,6 @@
         />
       </div>
     </div>
-
   </div>
 </template>
 <script>
@@ -122,7 +123,7 @@ export default {
   },
   components: {
     BookList,
-    Sidebar
+    Sidebar,
   },
 };
 </script>

@@ -19,7 +19,7 @@ export default {
           email: email.value,
           password: password.value,
         });
-        router.push("/home");
+        router.push("/mylibrary");
       } catch (err) {
         error.value = err.message;
       }
@@ -73,7 +73,7 @@ export default {
             required
             v-model="password"
           />
-          <div v-if="error" class="text-yellow-400">{{ error }}</div>
+          <div v-if="error" class="text-red-600 dark:text-yellow-400 font-medium">{{ error }}</div>
         </div>
         <div class="flex items-start">
           <div class="flex items-start">

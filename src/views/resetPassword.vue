@@ -9,7 +9,7 @@ export default {
     };
   },
   methods: {
-    forgotPw() {
+    sendResetEmail() {
       if (!this.email) {
         this.error = "Please type in a valid email address.";
         return;
@@ -32,7 +32,7 @@ export default {
 <template>
   <div class="text-center container grid justify-center mt-20">
     <h1 class="text-2xl flex font-bold">Reset Your Password</h1>
-    <form class="space-y-6" action="#" @submit.prevent="forgotPw">
+    <form class="space-y-6" action="#" @submit.prevent="sendResetEmail">
       <div>
         <label
           for="email"
@@ -43,7 +43,7 @@ export default {
           type="email"
           name="email"
           id="email"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-72 p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+          class="bg-gray-50 border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-2 focus:outline-none focus:ring-sky-700 focus:border-sky-300 dark:focus:ring-sky-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-500 dark:text-white"
           placeholder="Enter Your HomeLib email"
           required
           v-model="email"

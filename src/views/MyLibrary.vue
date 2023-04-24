@@ -9,6 +9,9 @@ export default {
       books: [],
       book: null,
       count: "",
+      searchTerm: "",
+      currSearching: false,
+      searchedBook: "",
     };
   },
   async created() {
@@ -17,16 +20,18 @@ export default {
     const getBooks = async () => {
       try {
         let currentUserId = auth.currentUser.uid;
-        console.log("current users uid:" + currentUserId);
+        //console.log("current users uid:" + currentUserId);
         // getting all books associated with the current user
-        const resp = await axios.get(`http://localhost:3000/api/v1/books/${currentUserId}`, {
-          headers: {
-            Authorization: `Bearer ${idToken}`,
-          },
-        });
+        const resp = await axios.get(
+          `http://localhost:3000/api/v1/books/${currentUserId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${idToken}`,
+            },
+          }
+        );
         this.books = resp.data;
         this.count = this.books.length;
-        console.log("GET books success", this.books);
       } catch (error) {
         console.log(error);
       }
@@ -37,9 +42,33 @@ export default {
   components: {
     Sidebar,
   },
+
   methods: {
+    async searchBooks() {
+      try {
+        let currentUserId = auth.currentUser.uid;
+        const idToken = await auth.currentUser.getIdToken(
+          /* forceRefresh */ true
+        );
+        const resp = await axios.get(
+          `http://localhost:3000/api/v1/book/search/${currentUserId}/${this.searchTerm}`,
+          {
+            headers: {
+              Authorization: `Bearer ${idToken}`,
+            },
+          }
+        );
+        this.books = resp.data; // set all books = the one book so the array below displays the one book in books
+        this.currSearching = true;
+        console.log("Search books success", this.books);
+      } catch (error) {
+        console.log(error);
+      }
+      return this.books;
+    },
+
     async deleteBook(book_id) {
-      // delete it from the books object
+      // delete it from the books
       let currentUserId = auth.currentUser.uid;
       let i = this.books.map((book) => book.book_id).indexOf(book_id); // delete book at that index so vue updates page
       this.books.splice(i, 1);
@@ -51,23 +80,19 @@ export default {
           const idToken = await auth.currentUser.getIdToken(
             /* forceRefresh */ true
           );
-          const resp = await axios
-            .delete(`http://localhost:3000/api/v1/books/${currentUserId}/${book_id}`, {
+          await axios.delete(
+            `http://localhost:3000/api/v1/books/${currentUserId}/${book_id}`,
+            {
               headers: {
                 Authorization: `Bearer ${idToken}`,
               },
-            })
-            .then((resp) => {
-              console.log(resp);
-              this.getBooks();
-              console.log("deleted book by id:", book_id);
-            });
-            
-            alert("Book deleted!");
+            }
+          );
         } catch (error) {
           console.log(error);
         }
       }
+      return this.books;
     },
   },
 };
@@ -84,11 +109,40 @@ export default {
         </span>
         My Library
       </h1>
-      <h1 class="flex text-lg font-medium text-sky-600 dark:text-sky-500">
-        Total Books: {{ this.count }}
+
+      <!--Search Bar, searches books in database, reads one-->
+      <div class="mr-auto mb-2 pb-2 my-2 items-start justify-start">
+        <form @submit.prevent="searchBooks()" class="justify-start items-start">
+          <div class="flex justify-start items-start content-start w-full">
+            <input
+              type="text"
+              v-model="searchTerm"
+              placeholder="Search for a book in your library..."
+              class="bg-white dark:text-white dark:bg-transparent text-black border w-full border-sky-600 py-2 px-2 rounded h-8 hover:border-sky-400"
+            />
+            <button
+              type="submit"
+              class="inline-flex justify-center items-center bg-sky-600 hover:bg-sky-500 rounded-lg text-xs text-white py-2 px-2"
+            >
+              <i class="fas fa-search mr-1"></i> Search
+            </button>
+          </div>
+        </form>
+      </div>
+      <h1
+        v-if="!currSearching"
+        class="flex text-lg font-medium text-sky-600 dark:text-sky-500"
+      >
+        Total Owned Books: {{ this.count }}
+      </h1>
+      <h1
+        v-if="currSearching"
+        class="flex text-lg font-medium text-sky-600 dark:text-sky-500"
+      >
+        Search Result:
       </h1>
       <div class="grid grid-col-10">
-        <ul id="books" data-cy="books">
+        <ul>
           <li
             v-for="book in this.books"
             :key="book.book_id"
@@ -104,7 +158,7 @@ export default {
                     :src="book.image"
                     :alt="book.title"
                     title="Click to view details"
-                    class="flex border border-gray-900 rounded-md hover:opacity-75"
+                    class="flex object-fill border border-gray-900 dark:border-gray-500 rounded-md hover:opacity-75"
                     width="100"
                     height="150"
                   />
@@ -146,10 +200,10 @@ export default {
               </div>
               <div class="flex justify-end items-end">
                 <button
-                  class="inline-flex justify-center items-center bg-sky-600 rounded-lg text-sm py-2 px-2"
+                  class="inline-flex justify-center items-center bg-sky-600 hover:bg-sky-500 rounded-lg text-sm text-white py-2 px-2"
                   @click="deleteBook(book.book_id)"
                 >
-                  <i class="fa-solid fa-trash-can"> </i> Delete
+                  <i class="fa-solid fa-trash-can mr-1"> </i> Delete
                 </button>
               </div>
             </div>

@@ -20,7 +20,7 @@ export default {
           password: password.value,
           name: name.value,
         });
-        router.push("/home");
+        router.push("/search");
       } catch (err) {
         error.value = err.message;
         console.log(error);
@@ -40,7 +40,7 @@ export default {
     <div
       class="w-full mt-2 mb-6 max-w-sm p-4 bg-white border border-gray-400 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-900 dark:border-gray-700"
     >
-      <form class="space-y-6" action="#" @submit.prevent="Register">
+      <form class="space-y-6" action="#" autocomplete="off" @submit.prevent="Register">
         <h5 class="text-xl font-medium text-gray-900 dark:text-white">
           Join HomeLib
         </h5>
@@ -51,10 +51,12 @@ export default {
             >Your email</label
           >
           <input
+          autocomplete="off"
+          readonly onfocus="this.removeAttribute('readonly');"
             type="email"
             name="email"
             id="email"
-            class="bg-gray-50 autofill:!bg-yellow-400 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
             placeholder="name@company.com"
             required
             v-model="email" 

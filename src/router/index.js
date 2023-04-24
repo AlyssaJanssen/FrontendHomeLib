@@ -7,11 +7,11 @@ import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
 import Profile from "../views/Profile.vue";
 import Search from "../views/Search.vue";
-import ClientHome from "../views/ClientHome.vue";
 import MyLibrary from "../views/MyLibrary.vue";
 import NotFound from "../views/NotFound.vue";
-import ForgotPassword from "../views/forgotPassword.vue"
+import ResetPassword from "../views/resetpassword.vue"
 import EmailVerification from "../views/emailverification.vue"
+import EditProfile from "../views/editProfile.vue"
 
 const router = createRouter({
     history: createWebHistory(
@@ -31,6 +31,14 @@ const router = createRouter({
             },
         },
         {
+            path: "/editprofile",
+            name: "EditProfile",
+            component: EditProfile,
+            meta: {
+                requiresAuth: true,
+            },
+        },
+        {
             path: "/book/:id",
             name: "Book",
             component: Book,
@@ -39,14 +47,6 @@ const router = createRouter({
             path: "/login",
             name: "login",
             component: Login,
-        },
-        {
-            path: "/home",
-            name: "ClientHome",
-            component: ClientHome,
-            meta: {
-                requiresAuth: true,
-            },
         },
         {
             path: "/mylibrary",
@@ -75,9 +75,9 @@ const router = createRouter({
             component: NotFound
         },
         {
-            path: "/forgotpassword",
-            name: "forgotpassword",
-            component: ForgotPassword,
+            path: "/resetpassword",
+            name: "ResetPassword",
+            component: ResetPassword,
             beforeEnter(to, from, next) {
                 const user = auth.currentUser;
                 if (user) {

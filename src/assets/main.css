@@ -7,17 +7,18 @@
 
 /* cmd to build styles: npx tailwindcss -i ./src/assets/main.css -o ./dist/output.css --watch   */
 
-input:-webkit-autofill {
+
+/* input:-webkit-autofill {
     -webkit-box-shadow: 0 0 0px 1000px rgb(153, 171, 185) inset;
-}
+} */
+
+
+/* Scrollbar styles */
 
 :root {
     --primary: rgb(49, 49, 49);
     --secondary: rgb(89, 89, 89);
 }
-
-
-/* Scrollbar styles */
 
 
 /* Firefox */

@@ -48,7 +48,7 @@ div {
     </div> -->
  <!-- Website Logo and Title w/ home link -->
  <div v-if="user.isLoggedIn" class="mx-auto flex flex-col justify-center items-center p-4">
-  <RouterLink to="/home" class="items-center">
+  <RouterLink to="/mylibrary" class="items-center">
     <img
       src="/book.png"
       alt="logo"
@@ -81,7 +81,7 @@ div {
                 <li>
                   <div v-if="user.isLoggedIn">
                     <RouterLink
-                      to="/home"
+                      to="/mylibrary"
                       class="text-gray-900 dark:text-white transition hover:opacity-75"
                     >
                       Home
@@ -155,7 +155,7 @@ div {
           </nav>
 
           <p class="mt-6 text-md text-gray-500 dark:text-white sm:mt-0">
-            &copy; 2023. Home Lib LLC. All rights reserved.
+            &copy; 2023. HomeLib LLC. All rights reserved.
           </p>
         </div>
       </div>

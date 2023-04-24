@@ -4,8 +4,7 @@ import {
     createUserWithEmailAndPassword,
     updateProfile,
     signInWithEmailAndPassword,
-    signOut,
-    sendEmailVerification,
+    signOut
 } from "firebase/auth";
 import axios from "axios";
 
@@ -30,12 +29,9 @@ const store = createStore({
         },
     },
     actions: {
+
         async register(context, { email, password, name }) {
-            const resp = await createUserWithEmailAndPassword(
-                auth,
-                email,
-                password
-            );
+            const resp = await createUserWithEmailAndPassword(auth, email, password);
             if (resp) {
                 updateProfile(auth.currentUser, {
                         displayName: name,
@@ -44,7 +40,8 @@ const store = createStore({
                         context.commit("setUser", resp.user);
                         console.log(`User ${resp.user.uid} created`);
                         // now send that newly registered user to be stored in the db
-                        axios.post("http://localhost:3000/register", {
+                        axios
+                            .post("http://localhost:3000/register", {
                                 userId: resp.user.uid,
                                 displayName: resp.user.displayName,
                                 books: [],
@@ -55,24 +52,6 @@ const store = createStore({
                             .catch(function(error) {
                                 console.log(error);
                             });
-
-                        // // Now I have access to the signed in user
-                        // const user = auth.currentUser;
-                        // // language code from users settings
-                        // user.languageCode = "it";
-                        // // const actionCodeSettings = {
-                        // //     url: `${import.meta.env.VITE_APP_HOST_NAME}/register/?email=${user.email}`,
-                        // // };
-                        // // send the signed in user a verification email
-                        // sendEmailVerification(user)
-                        //     .then(function() {
-                        //         // Verification email sent.
-                        //         console.log("Verification Email sent!");
-                        //     })
-                        //     .catch(function(error) {
-                        //         // Error occurred. Inspect error.code.
-                        //         console.log(error);
-                        //     });
                     })
                     .catch((error) => {
                         console.log(error);

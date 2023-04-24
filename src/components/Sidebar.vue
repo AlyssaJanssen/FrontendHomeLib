@@ -19,17 +19,6 @@ aside{
         <ul class="space-y-2">
           <li>
             <RouterLink
-              to="/home"
-              class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700"
-            >
-              <span class="inline-flex justify-center items-center ml-4">
-                <i class="fa-solid fa-house"></i>
-              </span>
-              <span class="ml-3">Home</span>
-            </RouterLink>
-          </li>
-          <li>
-            <RouterLink
               to="/mylibrary"
               class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700"
             >

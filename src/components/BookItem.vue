@@ -7,8 +7,7 @@
          />
       </template>
       <template v-else>
-        <img
-          src="https://books.google.co.kr/googlebooks/images/no_cover_thumb.gif"
+        <img src="https://books.google.co.kr/googlebooks/images/no_cover_thumb.gif" class="rounded inline-block m-2 object-fill shadow-2xl"
           :alt="volumeInfo.title"
         />
       </template>

@@ -56,7 +56,7 @@ export default {
     >
       <!-- Website Logo and Title w/ home link -->
       <div v-if="user.isLoggedIn">
-        <RouterLink to="/home" class="flex items-center">
+        <RouterLink to="/mylibrary" class="flex items-center">
           <img
             src="/book.png"
             alt="logo"

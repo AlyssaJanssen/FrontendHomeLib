@@ -61,7 +61,6 @@ export default {
         },
       }
         );
-        console.log("POST book success", resp);
         this.success = true;
       } catch (error) {
         console.log(error);
