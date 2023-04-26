@@ -4,20 +4,20 @@ import {
     createUserWithEmailAndPassword,
     updateProfile,
     signInWithEmailAndPassword,
-    signOut
+    signOut,
 } from "firebase/auth";
 import axios from "axios";
 
 const store = createStore({
+    getters: {
+        user(state) {
+            return state.user;
+        },
+    },
     state: {
         user: {
             isLoggedIn: false,
             data: null,
-        },
-    },
-    getters: {
-        user(state) {
-            return state.user;
         },
     },
     mutations: {
@@ -29,7 +29,6 @@ const store = createStore({
         },
     },
     actions: {
-
         async register(context, { email, password, name }) {
             const resp = await createUserWithEmailAndPassword(auth, email, password);
             if (resp) {

@@ -1,12 +1,24 @@
+<template>
+  <div>
+    <div :class="isDark ? 'dark' : ''">
+      <div
+        class="bg-gradient-to-b from-gray-200 to-gray-400 text-black dark:bg-gradient-to-b dark:from-gray-900 dark:to-gray-700 dark:text-gray-100">
+        <Navigation />
+        <div class="min-h-screen container mx-auto">
+          <RouterView />
+        </div>
+        <Footer />
+      </div>
+    </div>
+  </div>
+</template>
 <script>
-import { RouterLink, RouterView } from "vue-router";
 import Navigation from "./components/Navigation.vue";
 import Sidebar from "./components/Sidebar.vue";
 import Footer from "./components/Footer.vue";
 import { useStore } from "vuex";
 import { computed } from "vue";
 import { auth } from "./firebase.config";
-import axios from "axios";
 export default {
   data() {
     return {
@@ -49,19 +61,3 @@ export default {
   },
 };
 </script>
-
-<template>
-  <div>
-    <div :class="isDark ? 'dark' : ''">
-      <div
-        class="bg-gradient-to-b from-gray-200 to-gray-400 text-black dark:bg-gradient-to-b dark:from-gray-900 dark:to-gray-700 dark:text-gray-100"
-      >
-        <Navigation />
-        <div class="min-h-screen container mx-auto">
-          <RouterView />
-        </div>
-        <Footer />
-      </div>
-    </div>
-  </div>
-</template>

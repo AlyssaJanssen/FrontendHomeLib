@@ -1,3 +1,39 @@
+<template>
+  <Sidebar />
+  <div>
+    <div v-if="user.isLoggedIn" class="text-center container grid justify-center mt-12">
+      <div class=" text-white rounded-full border-4 border-gray-500 sm:mt-4 sm:mx-auto">
+
+        <div
+          class="relative inline-flex items-center justify-center w-20 h-20 w-overflow-hidden bg-gray-300 rounded-full dark:bg-gray-700">
+
+          <RouterLink to="/profile">
+            <span class="font-bold text-gray-700 text-2xl dark:text-gray-100">
+              {{ getUserInitials(user.data.displayName) }}
+            </span>
+          </RouterLink>
+        </div>
+      </div>
+
+      <h5 class="mt-2 text-xl font-medium leading-tight v-cloak">
+        {{ user.data.displayName }}
+      </h5>
+      <p class="mt-2 text-xl font-medium leading-tight v-cloak">
+        {{ user.data.email }}
+      </p>
+      <div class="m-2 items-end mx-auto justify-end">
+
+        <RouterLink to="/editprofile"
+          class="flex items-center px-2 py-1 text-base bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 text-gray-900 rounded-lg dark:text-white dark:hover:bg-gray-700 border border-gray-500">
+          <span class="inline-flex justify-center items-center">
+            <i class="fa-solid fa-edit mr-1"></i>
+            Edit
+          </span>
+        </RouterLink>
+      </div>
+    </div>
+  </div>
+</template>
 <script>
 import Sidebar from "../components/Sidebar.vue";
 import { useStore } from "vuex";
@@ -38,47 +74,3 @@ export default {
   },
 };
 </script>
-<template>
-  <Sidebar />
-  <div>
-    <div
-      v-if="user.isLoggedIn"
-      class="text-center container grid justify-center mt-12"
-    >
-      <div
-        class=" text-white rounded-full border-4 border-gray-500 sm:mt-4 sm:mx-auto"
-      >
-        
-        <div
-          class="relative inline-flex items-center justify-center w-20 h-20 w-overflow-hidden bg-gray-300 rounded-full dark:bg-gray-700"
-        >
-        
-        <RouterLink to="/profile">
-            <span class="font-bold text-gray-700 text-2xl dark:text-gray-100">
-              {{ getUserInitials(user.data.displayName) }}
-            </span>
-          </RouterLink>
-        </div>
-      </div>
-
-      <h5 class="mt-2 text-xl font-medium leading-tight v-cloak">
-         {{ user.data.displayName }}
-      </h5>
-      <p class="mt-2 text-xl font-medium leading-tight v-cloak">
-        {{ user.data.email }}
-     </p>
-      <div class="m-2 items-end mx-auto justify-end">
-
-        <RouterLink
-        to="/editprofile"
-        class="flex items-center px-2 py-1 text-base bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 text-gray-900 rounded-lg dark:text-white dark:hover:bg-gray-700 border border-gray-500"
-      >
-        <span class="inline-flex justify-center items-center">
-          <i class="fa-solid fa-edit mr-1"></i>
-          Edit
-        </span>
-      </RouterLink>
-      </div> 
-    </div>
-  </div>
-</template>

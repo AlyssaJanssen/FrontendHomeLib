@@ -1,3 +1,57 @@
+<template>
+    <Sidebar />
+    <div
+        class="text-start flex justify-start mt-16 border border-gray-600 h-full shadow-2xl max-w-3xl mx-auto mb-16 pt-6 pb-6">
+        <div class="mt-4 w-9/12 mx-auto mb-4">
+            <h1 class="text-2xl flex font-bold text-gray-800 dark:text-gray-300">
+                Account Details
+            </h1>
+            <hr class="mt-2 mb-4 border-1 border-gray-700 dark:border-gray-400" />
+            <!-- Form only holds inputs for email and displayName, to send them to be updated -->
+            <form class="space-y-6 w-full" @submit.prevent="editUserAccount">
+                <div>
+                    <label for="email"
+                        class="flex mt-8 text-md font-medium text-gray-900 dark:text-white items-start justify-start">Email</label>
+                    <input type="email" name="email" id="email" autocomplete="email"
+                        class="bg-gray-50 border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-2 focus:outline-none focus:ring-sky-700 focus:border-sky-300 dark:focus:ring-sky-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-500 dark:text-white"
+                        required v-model="email" />
+                    <label for="username"
+                        class="flex mt-4 text-md font-medium text-gray-900 dark:text-white items-start justify-start">Username</label>
+                    <input type="username" name="username" id="username" autocomplete="displayName"
+                        class="bg-gray-50 border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-2 focus:outline-none focus:ring-sky-700 focus:border-sky-300 dark:focus:ring-sky-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-500 dark:text-white"
+                        required v-model="displayName" />
+                    <button type="submit"
+                        class="w-full mt-12 text-white bg-indigo-500 hover:bg-blue-800 focus:ring-1 focus:outline-none focus:ring-sky-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-indigo-500 dark:hover:bg-indigo-600 dark:focus:ring-sky-500">
+                        Save Changes
+                    </button>
+                    <div v-if="this.err" class="text-sm text-yellow-400 block w-72 p-2.5">
+                        <p>Error saving account details</p>
+                    </div>
+                </div>
+            </form>
+            <h1 class="text-xl mt-12 flex font-bold text-gray-800 dark:text-gray-300">
+                Change Password
+            </h1>
+            <hr class="mt-2 mb-12 border-1 border-gray-700 dark:border-gray-400" />
+
+            <a class="text-white bg-indigo-500 hover:bg-blue-800 focus:ring-1 focus:outline-none focus:ring-sky-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-indigo-500 dark:hover:bg-indigo-600 dark:focus:ring-sky-500"
+                href="/resetpassword">
+                Change Password
+            </a>
+
+            <h1 class="text-xl mt-8 flex font-bold text-gray-800 dark:text-gray-300">
+                Delete Account
+            </h1>
+            <hr class="mt-2 mb-4 border-1 border-gray-700 dark:border-gray-400" />
+            <h1 class="text-lg mt-8 mb-2 text-gray-800 dark:text-gray-300">
+                Deleting your account is <em><b>irreversible</b></em>.
+            </h1>
+            <button @click="deleteAccount"
+                class="text hover:text-red-600 dark:hover:text-yellow-500 mt-4 font-semibold">Delete account</button>
+
+        </div>
+    </div>
+</template>
 <script>
 import Sidebar from "../components/Sidebar.vue";
 import { useStore } from "vuex";
@@ -7,189 +61,109 @@ import { updateProfile, updateEmail, deleteUser } from "firebase/auth";
 import axios from "axios";
 
 export default {
-  data() {
-    return {
-      email: this.user.data.email,
-      displayName: this.user.data.displayName,
-      err: null,
-    };
-  },
-  setup() {
-    const store = useStore();
+    data() {
+        return {
+            email: this.user.data.email,
+            displayName: this.user.data.displayName,
+            err: null,
+        };
+    },
+    setup() {
+        const store = useStore();
 
-    auth.onAuthStateChanged((user) => {
-      store.dispatch("fetchUser", user);
-    });
+        auth.onAuthStateChanged((user) => {
+            store.dispatch("fetchUser", user);
+        });
 
-    const user = computed(() => {
-      return store.getters.user;
-    });
+        const user = computed(() => {
+            return store.getters.user;
+        });
 
-    return { user };
-  },
-  components: {
-    Sidebar,
-  },
-  methods: {
-    async deleteAccount() {
-      // alert user to confirm
-      let currentUserId = auth.currentUser.uid;
-      let x = window.confirm("Are you sure you wish to delete your account and remove all of your data from HomeLib? This can't be reversed.");
-      if (x) {
-        console.log("deleting the account has begun")
-        // axios.delete to their User account and then delete their Firebase account
-        try {
-        const idToken = await auth.currentUser.getIdToken(
+        return { user };
+    },
+    components: {
+        Sidebar,
+    },
+    methods: {
+        async deleteAccount() {
+            // alert user to confirm
+            let currentUserId = auth.currentUser.uid;
+            let x = window.confirm("Are you sure you wish to delete your account and remove all of your data from HomeLib? This can't be reversed.");
+            if (x) {
+                console.log("deleting the account has begun")
+                // axios.delete to their User account and then delete their Firebase account
+                try {
+                    const idToken = await auth.currentUser.getIdToken(
           /* forceRefresh */ true
-        );
-        await axios.delete(
-          `http://localhost:3000/deleteuser/${currentUserId}`,
-          {
-            headers: {
-              Authorization: `Bearer ${idToken}`,
-            },
-          }
-        );
-      } catch (error) {
-        console.log(error);
-      }
-        // const user = auth.currentUser;
-        // deleteUser(user)
-        //   .then(() => {
-        //     console.log("User successfully deleted in Firebase");
-        //   })
-        //   .catch((error) => {
-        //     console.log(error)
-        //   });
-          // now delete the User in the db
+                    );
+                    await axios.delete(
+                        `http://localhost:3000/deleteuser/${currentUserId}`,
+                        {
+                            headers: {
+                                Authorization: `Bearer ${idToken}`,
+                            },
+                        }
+                    );
+                } catch (error) {
+                    console.log(error);
+                }
+                // const user = auth.currentUser;
+                // deleteUser(user)
+                //   .then(() => {
+                //     console.log("User successfully deleted in Firebase");
+                //   })
+                //   .catch((error) => {
+                //     console.log(error)
+                //   });
+                // now delete the User in the db
 
-      }
-    },
-    async editUserAccount() {
-      console.log(this.email, this.displayName); // check that its getting user input
-      let currentUserId = auth.currentUser.uid;
-      const idToken = await auth.currentUser.getIdToken(
+            }
+        },
+        async editUserAccount() {
+            console.log(this.email, this.displayName); // check that its getting user input
+            let currentUserId = auth.currentUser.uid;
+            const idToken = await auth.currentUser.getIdToken(
         /* forceRefresh */ true
-      );
-      // update the displayname with the users input
-      updateProfile(auth.currentUser, {
-        // it is updating displayName correctly
-        displayName: this.displayName,
-      })
-        .then(() => {
-          // now send that users updates to be stored in the db
-          axios
-            .put(
-              `http://localhost:3000/update/${currentUserId}/${this.displayName}`,
-              {
+            );
+            // update the displayname with the users input
+            updateProfile(auth.currentUser, {
+                // it is updating displayName correctly
                 displayName: this.displayName,
-              },
-              {
-                headers: {
-                  Authorization: `Bearer ${idToken}`,
-                },
-              }
-            )
-            .then(function (resp) {
-              console.log("user UPDATE success", resp);
             })
-            .catch(function (error) {
-              console.log(error);
-            });
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-      // then  their email in Firebase
-      updateEmail(auth.currentUser, this.email)
-        .then(() => {
-          console.log("Successfully updated users email address in Firebase");
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-      alert("Your account has been successfully updated!");
+                .then(() => {
+                    // now send that users updates to be stored in the db
+                    axios
+                        .put(
+                            `http://localhost:3000/update/${currentUserId}/${this.displayName}`,
+                            {
+                                displayName: this.displayName,
+                            },
+                            {
+                                headers: {
+                                    Authorization: `Bearer ${idToken}`,
+                                },
+                            }
+                        )
+                        .then(function (resp) {
+                            console.log("user UPDATE success", resp);
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+            // then  their email in Firebase
+            updateEmail(auth.currentUser, this.email)
+                .then(() => {
+                    console.log("Successfully updated users email address in Firebase");
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+            alert("Your account has been successfully updated!");
+        },
     },
-  },
 };
 </script>
-<template>
-  <Sidebar />
-  <div
-    class="text-start flex justify-start mt-16 border border-gray-600 h-full shadow-2xl max-w-3xl mx-auto mb-16 pt-6 pb-6"
-  >
-    <div class="mt-4 w-9/12 mx-auto mb-4">
-      <h1 class="text-2xl flex font-bold text-gray-800 dark:text-gray-300">
-        Account Details
-      </h1>
-      <hr class="mt-2 mb-4 border-1 border-gray-700 dark:border-gray-400" />
-      <!-- Form only holds inputs for email and displayName, to send them to be updated -->
-      <form class="space-y-6 w-full" @submit.prevent="editUserAccount">
-        <div>
-          <label
-            for="email"
-            class="flex mt-8 text-md font-medium text-gray-900 dark:text-white items-start justify-start"
-            >Email</label
-          >
-          <input
-            type="email"
-            name="email"
-            id="email"
-            autocomplete="email"
-            class="bg-gray-50 border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-2 focus:outline-none focus:ring-sky-700 focus:border-sky-300 dark:focus:ring-sky-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-500 dark:text-white"
-            required
-            v-model="email"
-          />
-          <label
-            for="username"
-            class="flex mt-4 text-md font-medium text-gray-900 dark:text-white items-start justify-start"
-            >Username</label
-          >
-          <input
-            type="username"
-            name="username"
-            id="username"
-            autocomplete="displayName"
-            class="bg-gray-50 border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-2 focus:outline-none focus:ring-sky-700 focus:border-sky-300 dark:focus:ring-sky-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-500 dark:text-white"
-            required
-            v-model="displayName"
-          />
-          <button
-            type="submit"
-            class="w-full mt-12 text-white bg-indigo-500 hover:bg-blue-800 focus:ring-1 focus:outline-none focus:ring-sky-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-indigo-500 dark:hover:bg-indigo-600 dark:focus:ring-sky-500"
-          >
-            Save Changes
-          </button>
-          <div v-if="this.err" class="text-sm text-yellow-400 block w-72 p-2.5">
-            <p>Error saving account details</p>
-          </div>
-        </div>
-      </form>
-      <h1 class="text-xl mt-12 flex font-bold text-gray-800 dark:text-gray-300">
-        Change Password
-      </h1>
-      <hr class="mt-2 mb-12 border-1 border-gray-700 dark:border-gray-400" />
-
-      <a
-        class="text-white bg-indigo-500 hover:bg-blue-800 focus:ring-1 focus:outline-none focus:ring-sky-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-indigo-500 dark:hover:bg-indigo-600 dark:focus:ring-sky-500"
-        href="/resetpassword"
-      >
-        Change Password
-      </a>
-
-      <h1 class="text-xl mt-8 flex font-bold text-gray-800 dark:text-gray-300">
-        Delete Account
-      </h1>
-      <hr class="mt-2 mb-4 border-1 border-gray-700 dark:border-gray-400" />
-      <h1 class="text-lg mt-8 mb-2 text-gray-800 dark:text-gray-300">
-        Deleting your account is <em><b>irreversible</b></em
-        >.
-      </h1>
-      <button
-        @click="deleteAccount"
-        class="text hover:text-red-600 dark:hover:text-yellow-500 mt-4 font-semibold"
-        >Delete account</button>
-
-    </div>
-  </div>
-</template>

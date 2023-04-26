@@ -1,20 +1,20 @@
+<template>
+  <div class=" w-full">
+    <h2>404: Page Not Found</h2>
+  </div>
+</template>
 <script>
 </script>
-<template>
-    <div class=" w-full">
-        <h2>404: Page Not Found</h2>
-    </div>
-</template>
 <style scoped>
 @import url('https://fonts.googleapis.com/css?family=Audiowide&display=swap');
 
 html,
-body{
+body {
   margin: 0px;
   overflow: hidden;
 }
 
-div{
+div {
   position: absolute;
   top: 0%;
   left: 0%;
@@ -24,7 +24,7 @@ div{
   overflow: hidden;
 }
 
-h2{
+h2 {
   position: absolute;
   top: 40%;
   left: 50%;
@@ -40,21 +40,33 @@ h2{
   animation: fadeInText 3s ease-in 3.5s forwards, flicker4 5s linear 7.5s infinite, hueRotate 6s ease-in-out 3s infinite;
 }
 
-@keyframes fadeInText{
-  1%  {color: #990155;text-shadow:0px 0px 4px #12000a;}
-  70% {color: #ff005d;text-shadow:0px 0px 14px #ff005d;}
-  100%{color: #ff005d;text-shadow:0px 0px 4px #ff005d;}
+@keyframes fadeInText {
+  1% {
+    color: #990155;
+    text-shadow: 0px 0px 4px #12000a;
+  }
+
+  70% {
+    color: #ff005d;
+    text-shadow: 0px 0px 14px #ff005d;
+  }
+
+  100% {
+    color: #ff005d;
+    text-shadow: 0px 0px 4px #ff005d;
+  }
 }
 
-@keyframes hueRotate{
-  0%  {
+@keyframes hueRotate {
+  0% {
     filter: hue-rotate(0deg);
   }
-  50%  {
+
+  50% {
     filter: hue-rotate(-120deg);
   }
-  100%  {
+
+  100% {
     filter: hue-rotate(0deg);
   }
-}
-</style>
+}</style>
