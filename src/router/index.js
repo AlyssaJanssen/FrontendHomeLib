@@ -9,7 +9,7 @@ import Profile from "../views/Profile.vue";
 import Search from "../views/Search.vue";
 import MyLibrary from "../views/MyLibrary.vue";
 import NotFound from "../views/NotFound.vue";
-import ResetPassword from "../views/resetpassword.vue";
+import ResetPassword from "../views/resetPassword.vue";
 import EditProfile from "../views/editProfile.vue";
 
 const router = createRouter({
