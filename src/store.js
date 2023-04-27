@@ -39,7 +39,7 @@ const store = createStore({
                         context.commit("setUser", resp.user);
                         // now send that newly registered user to be stored in the db
                         axios
-                            .post("http://localhost:3000/register", {
+                            .post("backendhomelib-production.up.railway.app/register", {
                                 userId: resp.user.uid,
                                 displayName: resp.user.displayName,
                                 books: [],
