@@ -37,7 +37,6 @@ const store = createStore({
                     })
                     .then(() => {
                         context.commit("setUser", resp.user);
-                        console.log(`User ${resp.user.uid} created`);
                         // now send that newly registered user to be stored in the db
                         axios
                             .post("http://localhost:3000/register", {
@@ -45,9 +44,7 @@ const store = createStore({
                                 displayName: resp.user.displayName,
                                 books: [],
                             })
-                            .then(function(resp) {
-                                console.log("user creation POST success", resp);
-                            })
+                            .then(function(resp) {})
                             .catch(function(error) {
                                 console.log(error);
                             });

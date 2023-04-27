@@ -12,7 +12,7 @@
       <div class="mr-auto mb-2 pb-2 my-2 items-start justify-start">
         <form @submit.prevent="searchBooks()" class="justify-start items-start">
           <div class="flex justify-start items-start content-start w-full">
-            <input type="text" v-model="searchTerm" placeholder="Search for a book in your library..."
+            <input type="text" required v-model="searchTerm" placeholder="Search for a book in your library..."
               class="bg-white dark:text-white dark:bg-transparent text-black border w-full border-sky-600 py-2 px-2 rounded h-8 hover:border-sky-400" />
             <button type="submit"
               class="inline-flex justify-center items-center bg-sky-600 hover:bg-sky-500 rounded-lg text-xs text-white py-2 px-2">
@@ -21,8 +21,8 @@
           </div>
         </form>
       </div>
-      <h1 v-if="!currSearching" class="flex text-lg font-medium text-sky-600 dark:text-sky-500">
-        Total Owned Books: {{ this.count }}
+      <h1 v-if="!currSearching" class="flex text-lg font-serif font-semibold text-sky-600 dark:text-sky-500">
+        Owned Books: {{ this.count }}
       </h1>
       <h1 v-if="currSearching" class="flex text-lg font-medium text-sky-600 dark:text-sky-500">
         Search Result:
@@ -31,11 +31,11 @@
         <ul>
           <li v-for="book in this.books" :key="book.book_id"
             class="py-2 w-full border border-gray-500 rounded-md p-2 my-1 hover:translate-y-0.5 transition duration-100 ease-in-out">
-            <div class="grid grid-cols-8">
+            <div class="grid sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-8 xl:grid-cols-8 2xl:grid-cols-8">
               <RouterLink :to="{ name: 'Book', params: { id: book.book_id } }" class="link">
                 <div class="col-span-2">
                   <img :src="book.image" :alt="book.title" title="Click to view details"
-                    class="flex object-fill border border-gray-900 dark:border-gray-500 rounded-md hover:opacity-75"
+                    class="object-fill border border-gray-900 dark:border-gray-500 rounded-md hover:opacity-75"
                     width="100" height="150" />
                 </div>
               </RouterLink>
@@ -67,9 +67,9 @@
                   </p>
                 </div>
               </div>
-              <div class="flex justify-end items-end">
+              <div class="flex items-end">
                 <button
-                  class="inline-flex justify-center items-center bg-sky-600 hover:bg-sky-500 rounded-lg text-sm text-white py-2 px-2"
+                  class="flex justify-center items-center bg-sky-600 hover:bg-sky-500 rounded-lg text-sm text-white py-2 px-2 mt-2"
                   @click="deleteBook(book.book_id)">
                   <i class="fa-solid fa-trash-can mr-1"> </i> Delete
                 </button>
@@ -77,6 +77,15 @@
             </div>
           </li>
         </ul>
+      </div>
+      <div class="mt-12 xl:hidden">
+        <RouterLink to="/search"
+          class="flex items-center p-2 text-lg font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">
+          <span class="inline-flex justify-center items-center ml-4">
+            <i class="fa-solid fa-plus text-lg"></i>
+          </span>
+          <span class="ml-3">Add More Books</span>
+        </RouterLink>
       </div>
     </div>
   </div>
@@ -142,7 +151,6 @@ export default {
         );
         this.books = resp.data; // set all books = the one book so the array below displays the one book in books
         this.currSearching = true;
-        console.log("Search books success", this.books);
       } catch (error) {
         console.log(error);
       }
@@ -150,11 +158,8 @@ export default {
     },
 
     async deleteBook(book_id) {
-      // delete it from the books
       let currentUserId = auth.currentUser.uid;
-      let i = this.books.map((book) => book.book_id).indexOf(book_id); // delete book at that index so vue updates page
-      this.books.splice(i, 1);
-      this.count--;
+
       let x = window.confirm("You want to delete the book?");
       if (x) {
         try {
@@ -169,6 +174,12 @@ export default {
               },
             }
           );
+          let i = this.books.map((book) => book.book_id).indexOf(book_id); // delete book at that index so vue updates page
+          this.books.splice(i, 1);
+          this.count--;
+          setTimeout(function () {
+                            alert("Successfully deleted book from your library.");
+                        }, 1);
         } catch (error) {
           console.log(error);
         }

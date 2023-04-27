@@ -129,7 +129,6 @@ export default {
         const resp = await axios.get(
           `https://www.googleapis.com/books/v1/volumes/${book_id}`
         );
-        console.log(resp.data);
         this.book = resp.data;
       } catch (err) {
         console.error(err);
@@ -154,7 +153,6 @@ export default {
           /* forceRefresh */ true
         );
         let currentUserId = auth.currentUser.uid;
-        console.log("currentUserId: " + currentUserId);
         const resp = await axios.post(
           `http://localhost:3000/api/v1/create/${currentUserId}`,
           {

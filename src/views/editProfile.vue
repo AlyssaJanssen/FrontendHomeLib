@@ -46,9 +46,9 @@
             <h1 class="text-lg mt-8 mb-2 text-gray-800 dark:text-gray-300">
                 Deleting your account is <em><b>irreversible</b></em>.
             </h1>
-            <button @click="deleteAccount"
-                class="text hover:text-red-600 dark:hover:text-yellow-500 mt-4 font-semibold">Delete account</button>
-
+            <button @click="deleteAccount" class="text hover:text-red-600 dark:hover:text-yellow-500 mt-4 font-semibold">
+                Delete account
+            </button>
         </div>
     </div>
 </template>
@@ -57,7 +57,13 @@ import Sidebar from "../components/Sidebar.vue";
 import { useStore } from "vuex";
 import { computed } from "vue";
 import { auth } from "../firebase.config";
-import { updateProfile, updateEmail, deleteUser } from "firebase/auth";
+
+import {
+    updateProfile,
+    updateEmail,
+    deleteUser
+} from "firebase/auth";
+import { useRouter } from "vue-router";
 import axios from "axios";
 
 export default {
@@ -66,10 +72,20 @@ export default {
             email: this.user.data.email,
             displayName: this.user.data.displayName,
             err: null,
+            confirmDeletion: false,
         };
     },
     setup() {
         const store = useStore();
+        const router = useRouter();
+
+        const pushToHomePage = async () => {
+            await router.push("/");
+        };
+
+        const pushToLogin = async () => {
+            await router.push("/login");
+        };
 
         auth.onAuthStateChanged((user) => {
             store.dispatch("fetchUser", user);
@@ -79,22 +95,22 @@ export default {
             return store.getters.user;
         });
 
-        return { user };
+        return { user, pushToHomePage, pushToLogin };
     },
     components: {
         Sidebar,
     },
     methods: {
         async deleteAccount() {
-            // alert user to confirm
             let currentUserId = auth.currentUser.uid;
-            let x = window.confirm("Are you sure you wish to delete your account and remove all of your data from HomeLib? This can't be reversed.");
+            let x = window.confirm(
+                "Are you sure you wish to delete your account and remove all of your data from HomeLib? This can't be reversed."
+            );
             if (x) {
-                console.log("deleting the account has begun")
-                // axios.delete to their User account and then delete their Firebase account
+                // delete User account and then delete their Firebase account
                 try {
                     const idToken = await auth.currentUser.getIdToken(
-          /* forceRefresh */ true
+            /* forceRefresh */ true
                     );
                     await axios.delete(
                         `http://localhost:3000/deleteuser/${currentUserId}`,
@@ -104,65 +120,67 @@ export default {
                             },
                         }
                     );
+                    await this.pushToHomePage();
+                    this.confirmDeletion = true;
+                    if (this.confirmDeletion) {
+                        setTimeout(function () {
+                            alert("Account Successfully Deleted. Thank you for using HomeLib!");
+                        }, 1);
+                    }
                 } catch (error) {
                     console.log(error);
                 }
-                // const user = auth.currentUser;
-                // deleteUser(user)
-                //   .then(() => {
-                //     console.log("User successfully deleted in Firebase");
-                //   })
-                //   .catch((error) => {
-                //     console.log(error)
-                //   });
-                // now delete the User in the db
-
+                const user = auth.currentUser;
+                deleteUser(user)
+                    .then(() => { })
+                    .catch((error) => { // this will catch the reauthentication requirement for Firebase
+                        console.log(error);
+                        alert("This action requires recent login. Please login to update your Account Details.");
+                        this.pushToLogin();
+                    });
             }
         },
+
         async editUserAccount() {
-            console.log(this.email, this.displayName); // check that its getting user input
             let currentUserId = auth.currentUser.uid;
-            const idToken = await auth.currentUser.getIdToken(
-        /* forceRefresh */ true
-            );
+            const idToken = await auth.currentUser.getIdToken( /* forceRefresh */ true);
             // update the displayname with the users input
             updateProfile(auth.currentUser, {
                 // it is updating displayName correctly
                 displayName: this.displayName,
-            })
-                .then(() => {
-                    // now send that users updates to be stored in the db
-                    axios
-                        .put(
-                            `http://localhost:3000/update/${currentUserId}/${this.displayName}`,
-                            {
-                                displayName: this.displayName,
+            }).then(() => {
+                // now send that users updates to be stored in the db
+                axios
+                    .put(
+                        `http://localhost:3000/update/${currentUserId}/${this.displayName}`,
+                        {
+                            displayName: this.displayName,
+                        },
+                        {
+                            headers: {
+                                Authorization: `Bearer ${idToken}`,
                             },
-                            {
-                                headers: {
-                                    Authorization: `Bearer ${idToken}`,
-                                },
-                            }
-                        )
-                        .then(function (resp) {
-                            console.log("user UPDATE success", resp);
-                        })
-                        .catch(function (error) {
-                            console.log(error);
-                        });
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
+                        }
+                    )
+                    .then(function (resp) { })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            }).catch((error) => {
+                console.log(error);
+            });
             // then  their email in Firebase
-            updateEmail(auth.currentUser, this.email)
+            const user = auth.currentUser;
+            updateEmail(user, this.email)
                 .then(() => {
-                    console.log("Successfully updated users email address in Firebase");
+                    window.alert("Your account has been successfully updated!");
                 })
-                .catch((error) => {
+                .catch((error) => {// this will catch the reauthentication requirement for Firebase
                     console.log(error);
+                    alert("This action requires recent login. Please login to update your Account Details.");
+                    this.pushToLogin();
                 });
-            alert("Your account has been successfully updated!");
+           
         },
     },
 };

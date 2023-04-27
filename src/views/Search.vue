@@ -1,16 +1,16 @@
 <template>
   <Sidebar />
-  <div class="mb-20 container">
+  <div class="container grid mt-2 mb-16 pt-4 text-center">
     <div class="mb-16 mx-auto pb-4 text-center my-12">
       <!--Search Bar w/ results-->
-      <div class="mb-16 mx-16 mr-auto">
+      <div class="mb-16 mx-auto mr-auto pb-2 my-2 container max-w-4xl">
         <h1 class="text-3xl font-semibold font-serif my-2">
           Search for Books to Add to your Library
         </h1>
-        <form @submit.prevent="search" class="mx-auto container">
-          <div class="justify-start items-start content-start w-full">
+        <form @submit.prevent="search" class="mx-auto container grid">
+          <div class="justify-start items-start content-start">
             <input type="text" v-model="keyword" placeholder="Search for a book..."
-              class="bg-white container dark:text-white dark:bg-transparent text-black w-4/12 border border-sky-600 py-2 px-2 rounded h-8 hover:border-sky-400"
+              class="bg-white container dark:text-white dark:bg-transparent text-black w-9/12 border border-sky-600 py-2 px-2 rounded h-8 hover:border-sky-400"
               required />
             <button type="submit"
               class="link align-top shadow-xl text-xs bg-sky-600 hover:bg-sky-700 text-white font-bold py-2 px-2 rounded">
@@ -30,7 +30,7 @@
           </div>
         </form>
       </div>
-      <div class="text-center pl-14 container mx-auto flex flex-col justify-center items-center">
+      <div class="text-center pl-8 container mx-auto flex flex-col justify-center items-center">
         <div role="status" v-if="loadState == 'loading'">
           <svg aria-hidden="true"
             class="inline w-14 h-14 text-gray-600 dark:fill-sky-600 animate-spin dark:text-gray-200 fill-sky-500"
@@ -88,7 +88,6 @@ export default {
           }&country=${this.countryName}`
         )
         .then((response) => {
-          console.log(response.data.items);
           this.books = response.data.items;
           this.loadState = "success";
         });
