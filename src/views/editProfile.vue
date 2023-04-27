@@ -135,7 +135,7 @@ export default {
                     .then(() => { })
                     .catch((error) => { // this will catch the reauthentication requirement for Firebase
                         console.log(error);
-                        alert("This action requires recent login. Please login to update your Account Details.");
+                        alert("This action requires recent login. Please login and then try again.");
                         this.pushToLogin();
                     });
             }
@@ -177,7 +177,7 @@ export default {
                 })
                 .catch((error) => {// this will catch the reauthentication requirement for Firebase
                     console.log(error);
-                    alert("This action requires recent login. Please login to update your Account Details.");
+                    alert("This action requires recent login. Please login and then try again.");
                     this.pushToLogin();
                 });
            
