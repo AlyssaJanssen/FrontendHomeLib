@@ -5,14 +5,14 @@
       <!-- Website Logo and Title w/ home link -->
       <div v-if="user.isLoggedIn">
         <RouterLink to="/mylibrary" class="flex items-center">
-          <img src="/book.png" alt="logo" style="width: 46px; height: 46px" class="mx-2" />
+          <img src="/book.png" alt="logo" style="width: 46px; height: 46px" class="ml-2" />
           <span
             class="font-bold text-xl font-sans hover:text-gray-600 text-black dark:hover:text-white dark:text-gray-200">HomeLib</span>
         </RouterLink>
       </div>
       <div v-else>
         <RouterLink to="/" class="flex items-center">
-          <img src="/book.png" alt="logo" style="width: 46px; height: 46px" class="mx-2" />
+          <img src="/book.png" alt="logo" style="width: 46px; height: 46px" class="ml-2" />
           <span
             class="font-bold text-xl font-sans hover:text-gray-600 text-black dark:hover:text-white dark:text-gray-200">HomeLib</span>
         </RouterLink>

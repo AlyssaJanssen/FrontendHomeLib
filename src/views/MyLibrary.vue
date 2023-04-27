@@ -24,6 +24,15 @@
       <h1 v-if="!currSearching" class="flex text-lg font-serif font-semibold text-sky-600 dark:text-sky-500">
         Owned Books: {{ this.count }}
       </h1>
+      <div class="mt-6 xl:hidden">
+        <RouterLink to="/search"
+          class="flex items-center p-2 text-lg font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">
+          <span class="inline-flex justify-center items-center ml-4">
+            <i class="fa-solid fa-plus text-lg"></i>
+          </span>
+          <span class="ml-3">Add More Books</span>
+        </RouterLink>
+      </div>
       <h1 v-if="currSearching" class="flex text-lg font-medium text-sky-600 dark:text-sky-500">
         Search Result:
       </h1>
@@ -77,15 +86,6 @@
             </div>
           </li>
         </ul>
-      </div>
-      <div class="mt-12 xl:hidden">
-        <RouterLink to="/search"
-          class="flex items-center p-2 text-lg font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">
-          <span class="inline-flex justify-center items-center ml-4">
-            <i class="fa-solid fa-plus text-lg"></i>
-          </span>
-          <span class="ml-3">Add More Books</span>
-        </RouterLink>
       </div>
     </div>
   </div>

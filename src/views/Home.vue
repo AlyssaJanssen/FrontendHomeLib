@@ -29,7 +29,7 @@
           <span><i class="fa-regular fa-credit-card"></i></span>
           <h2 class="font-serif text-lg my-3">HomeLib is Completely Free</h2>
           <p class="text-gray-800 dark:text-gray-300">
-            Keep track of everything in one place for free.
+            Keep track of your entire catalog for free.
           </p>
         </div>
         <div
@@ -37,7 +37,7 @@
           <span><i class="fa-solid fa-book"></i></span>
           <h2 class="font-serif text-lg my-3">Catalog your Entire Library</h2>
           <p class="text-gray-800 dark:text-gray-300">
-            Track every book you own in one place. Never forget which books you own.
+            Track every book you own in one place.
           </p>
         </div>
         <div

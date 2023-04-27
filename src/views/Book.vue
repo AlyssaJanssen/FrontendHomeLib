@@ -1,6 +1,6 @@
 <template>
   <Sidebar />
-  <div class="max-w-4xl mx-auto px-4 lg:px-0 py-4">
+  <div class="max-w-4xl mx-auto px-4 lg:px-0 py-4 h-full container pl-6 mt-2 mb-16 pt-10">
     <div v-if="book" class="grid col-span-3 mt-8">
       <template v-if="book">
         <div class="grid mx-auto">
@@ -8,7 +8,7 @@
             <a :href="volumeInfo.previewLink" target="_blank">
               <img :src="volumeInfo.imageLinks.thumbnail" :alt="volumeInfo.title"
                 title="Click to view preview on Google Books"
-                class="border inline-block border-gray-900 rounded-md hover:opacity-75" width="300" height="200" />
+                class="border border-gray-900 rounded-md hover:opacity-75 grid sm:grid-cols-1 md:grid-cols-8 lg:grid-cols-8 xl:grid-cols-8 2xl:grid-cols-8" width="300" height="200" />
             </a>
             <p class="text-gray-900 dark:text-gray-400 mt-2 text-xs font-light">
               Data from Google Books
@@ -135,10 +135,6 @@ export default {
       }
     };
     getBookById();
-    // make a func to check if this book is in db, if it is, change button so user cant add it again
-    // async function checkAlreadyAdded(){
-
-    // }
   },
   computed: {
     volumeInfo() {
