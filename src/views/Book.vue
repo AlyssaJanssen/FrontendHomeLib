@@ -150,7 +150,7 @@ export default {
         );
         let currentUserId = auth.currentUser.uid;
         const resp = await axios.post(
-          `https://backendhomelib-production.up.railway.app//api/v1/create/${currentUserId}`,
+          `https://backendhomelib-production.up.railway.app/api/v1/create/${currentUserId}`,
           {
             title: this.volumeInfo.title,
             authors: this.volumeInfo.authors,

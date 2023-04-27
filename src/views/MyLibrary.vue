@@ -114,7 +114,7 @@ export default {
         let currentUserId = auth.currentUser.uid;
         // getting all books associated with the current user
         const resp = await axios.get(
-          `https://backendhomelib-production.up.railway.app//api/v1/books/${currentUserId}`,
+          `https://backendhomelib-production.up.railway.app/api/v1/books/${currentUserId}`,
           {
             headers: {
               Authorization: `Bearer ${idToken}`,
@@ -142,7 +142,7 @@ export default {
           /* forceRefresh */ true
         );
         const resp = await axios.get(
-          `https://backendhomelib-production.up.railway.app//api/v1/book/search/${currentUserId}/${this.searchTerm}`,
+          `https://backendhomelib-production.up.railway.app/api/v1/book/search/${currentUserId}/${this.searchTerm}`,
           {
             headers: {
               Authorization: `Bearer ${idToken}`,
@@ -167,7 +167,7 @@ export default {
             /* forceRefresh */ true
           );
           await axios.delete(
-            `https://backendhomelib-production.up.railway.app//api/v1/books/${currentUserId}/${book_id}`,
+            `https://backendhomelib-production.up.railway.app/api/v1/books/${currentUserId}/${book_id}`,
             {
               headers: {
                 Authorization: `Bearer ${idToken}`,

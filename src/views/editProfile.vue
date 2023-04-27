@@ -113,7 +113,7 @@ export default {
             /* forceRefresh */ true
                     );
                     await axios.delete(
-                        `https://backendhomelib-production.up.railway.app//deleteuser/${currentUserId}`,
+                        `https://backendhomelib-production.up.railway.app/deleteuser/${currentUserId}`,
                         {
                             headers: {
                                 Authorization: `Bearer ${idToken}`,
@@ -152,7 +152,7 @@ export default {
                 // now send that users updates to be stored in the db
                 axios
                     .put(
-                        `https://backendhomelib-production.up.railway.app//update/${currentUserId}/${this.displayName}`,
+                        `https://backendhomelib-production.up.railway.app/update/${currentUserId}/${this.displayName}`,
                         {
                             displayName: this.displayName,
                         },
