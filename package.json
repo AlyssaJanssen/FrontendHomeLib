@@ -1,9 +1,6 @@
 {
     "name": "frontendhomelib",
     "version": "0.0.0",
-    "engines": {
-        "node": ">=17.4.0"
-    },
     "private": true,
     "scripts": {
         "dev": "vite",
