@@ -77,14 +77,6 @@ const router = createRouter({
             path: "/resetpassword",
             name: "ResetPassword",
             component: ResetPassword,
-            beforeEnter(to, from, next) {
-                const user = auth.currentUser;
-                if (user) {
-                    next({ name: "home" });
-                } else {
-                    next();
-                }
-            },
         },
     ],
     // when users click links to home or top of page, then it scrolls smoothly instead of suddenly. This looks nicer.
