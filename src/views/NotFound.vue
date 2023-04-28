@@ -1,6 +1,6 @@
 <template>
   <div class="w-full">
-    <h2 class="text-4xl">404: Page Not Found</h2>
+    <h2>404: Page Not Found</h2>
   </div>
 </template>
 <script>
@@ -20,7 +20,7 @@ div {
   left: 0%;
   height: 100%;
   width: 100%;
-  background: radial-gradient(circle, #052947 0%, #12000b 100%);
+  background: radial-gradient(circle, #000000 0%, #252525 100%);
   overflow: hidden;
 }
 
@@ -29,20 +29,20 @@ h2 {
   top: 40%;
   left: 50%;
   margin-top: 0px;
-  font-size: 52px;
+  font-size: 62px;
   text-transform: uppercase;
   transform: translate(-50%, -50%);
   display: block;
-  color: #027491;
-  font-weight: 300;
+  color: #ffffff;
+  font-weight: 100;
   font-family: Audiowide;
   text-shadow: 0px 0px 4px #eeeaec;
-  animation: fadeInText 3s ease-in 3.5s forwards, flicker4 5s linear 7.5s infinite, hueRotate 6s ease-in-out 3s infinite;
+  animation: fadeInText 3s ease-in 1s forwards, flicker4 5s linear 7s infinite, hueRotate 6s ease-in-out 3s infinite;
 }
 
 @keyframes fadeInText {
   1% {
-    color: #990155;
+    color: #01a39b;
     text-shadow: 0px 0px 4px #12000a;
   }
 
