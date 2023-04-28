@@ -1,5 +1,5 @@
 <template>
-  <div class=" w-full">
+  <div class="w-full">
     <h2>404: Page Not Found</h2>
   </div>
 </template>

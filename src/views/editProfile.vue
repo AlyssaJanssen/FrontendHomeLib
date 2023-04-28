@@ -104,7 +104,7 @@ export default {
         async deleteAccount() {
             let currentUserId = auth.currentUser.uid;
             let x = window.confirm(
-                "Are you sure you wish to delete your account and remove all of your data from HomeLib? This can't be reversed."
+                "Are you sure you wish to delete your account and remove all of your data from HomeLib? This can't be reversed!"
             );
             if (x) {
                 // delete User account and then delete their Firebase account
@@ -135,7 +135,7 @@ export default {
                     .then(() => { })
                     .catch((error) => { // this will catch the reauthentication requirement for Firebase
                         console.log(error);
-                        alert("This action requires recent login. Please login and then try again.");
+                        alert("This action requires a recent login. Please enter credentials to continue.");
                         this.pushToLogin();
                     });
             }
@@ -177,7 +177,7 @@ export default {
                 })
                 .catch((error) => {// this will catch the reauthentication requirement for Firebase
                     console.log(error);
-                    alert("This action requires recent login. Please login and then try again.");
+                    alert("This action requires recent login. Please enter credentials to continue.");
                     this.pushToLogin();
                 });
            

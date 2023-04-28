@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { auth } from "../firebase.config.js";
 import HomePage from "../views/Home.vue";
 import Book from "../views/Book.vue";
 import Login from "../views/Login.vue";
@@ -105,7 +104,7 @@ router.beforeEach(async(to, from, next) => {
             // proceed to next route
             next();
         } else {
-            alert("you dont have access!");
+            alert("You dont have access to that page. Please login.");
             next("/");
         }
     } else {

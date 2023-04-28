@@ -160,7 +160,7 @@ export default {
     async deleteBook(book_id) {
       let currentUserId = auth.currentUser.uid;
 
-      let x = window.confirm("You want to delete the book?");
+      let x = window.confirm("Are you sure you want to delete this book?");
       if (x) {
         try {
           const idToken = await auth.currentUser.getIdToken(
@@ -178,7 +178,7 @@ export default {
           this.books.splice(i, 1);
           this.count--;
           setTimeout(function () {
-                            alert("Successfully deleted book from your library.");
+                            alert("Successfully deleted the book.");
                         }, 1);
         } catch (error) {
           console.log(error);
