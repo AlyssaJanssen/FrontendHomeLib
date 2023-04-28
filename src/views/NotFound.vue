@@ -1,6 +1,6 @@
 <template>
   <div class="w-full">
-    <h2>404: Page Not Found</h2>
+    <h2 class="text-4xl">404: Page Not Found</h2>
   </div>
 </template>
 <script>
