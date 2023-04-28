@@ -34,10 +34,10 @@
             </h1>
             <hr class="mt-2 mb-12 border-1 border-gray-700 dark:border-gray-400" />
 
-            <a class="text-white bg-indigo-500 hover:bg-blue-800 focus:ring-1 focus:outline-none focus:ring-sky-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-indigo-500 dark:hover:bg-indigo-600 dark:focus:ring-sky-500"
-                href="/resetpassword">
+            <RouterLink class="text-white bg-indigo-500 hover:bg-blue-800 focus:ring-1 focus:outline-none focus:ring-sky-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-indigo-500 dark:hover:bg-indigo-600 dark:focus:ring-sky-500"
+                to="/resetpassword">
                 Change Password
-            </a>
+            </RouterLink>
 
             <h1 class="text-xl mt-8 flex font-bold text-gray-800 dark:text-gray-300">
                 Delete Account

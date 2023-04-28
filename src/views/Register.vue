@@ -37,8 +37,8 @@
             </div>
             <label for="remember" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Remember me</label>
           </div>
-          <a href="/resetpassword" class="ml-auto text-sm text-sky-700 hover:underline dark:text-sky-500">Forgot
-            Password?</a>
+          <RouterLink to="/resetpassword" class="ml-auto text-sm text-sky-700 hover:underline dark:text-sky-500">Forgot
+            Password?</RouterLink>
         </div>
         <button type="submit"
           class="w-full shadow-xl text-sm py-2 px-2 font-bold rounded-lg bg-sky-600 hover:bg-sky-500 border border-sky-400 text-white transition duration-300">
