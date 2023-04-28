@@ -28,7 +28,7 @@
             </p>
             <i class="fa-solid fa-book mr-1 text-xl"> </i>
             <i class="fa-solid fa-mug-hot m-1 text-xl"> </i>
-            <i class="fa-solid fa-cat m-1 text-xl"> </i>
+            <i class="fa-solid fa-cat m-1 text-xl"></i>
             <nav aria-label="Footer Navigation - Company" class="mt-6">
               <ul class="space-y-4 text-sm">
                 <li>
@@ -88,7 +88,7 @@
             </ul>
           </nav>
           <p class="mt-6 text-md text-gray-500 dark:text-white sm:mt-0">
-            &copy; 2023. HomeLib LLC. All rights reserved.
+            &copy; 2023 HomeLib LLC. All rights reserved.
           </p>
         </div>
       </div>
