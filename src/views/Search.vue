@@ -32,8 +32,8 @@
       </div>
       <div class="mx-auto container items-center text-center xl:hidden max-w-4xl pl-6 mt-2 mb-2">
         <RouterLink to="/mylibrary"
-          class="flex items-center p-2 text-lg font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">
-          <span class="inline-flex justify-center items-center md:ml-16">
+          class="flex items-center p-2 mx-16 text-lg font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">
+          <span class="inline-flex justify-center items-center ">
             <i class="fa-solid fa-book text-lg"></i>
           </span>
           <span class="ml-3">Go to My Library</span>

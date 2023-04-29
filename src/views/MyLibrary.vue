@@ -24,7 +24,7 @@
       <div id="sort-bar">
         <label for="sortBy">Sort: </label>
         <select name="sortBy" id="select" v-model="this.sortBy"
-          class="bg-sky-400 dark:bg-sky-600 dark:text-white rounded-sm border border-gray-500">
+          class="bg-sky-300 dark:bg-sky-600 dark:text-white rounded-sm border border-gray-500">
           <option value="alphabetically">Alphabetically</option>
           <option value="pageCount">Page Count</option>
           <option value="publishedDate">Published Date</option>
@@ -37,7 +37,7 @@
 
       <div class="mt-6 xl:hidden">
         <RouterLink to="/search"
-          class="flex items-center p-2 text-lg font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">
+          class="flex items-center p-2 mr-6 text-lg font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">
           <span class="inline-flex justify-center items-center ml-4">
             <i class="fa-solid fa-plus text-lg"></i>
           </span>
@@ -64,7 +64,7 @@
               <div class="grid grid-cols-8 col-span-6">
                 <div class="col-span-8 v-cloak">
                   <h4
-                    class="text-xl flex flex-col flex-wrap justify-around h-14 text-ellipsis text-sky-600 dark:text-sky-500 ml-2 font-bold font-serif overflow-hidden text-left">
+                    class="text-xl flex flex-col flex-wrap justify-around h-10 text-ellipsis text-sky-600 dark:text-sky-500 ml-2 font-bold font-serif overflow-hidden text-left">
                     {{ book.title }}
                   </h4>
                   <p class="text-sm ml-2 justify-start text-left text-ellipsis overflow-hidden">
@@ -85,6 +85,8 @@
                       </span>
                     </span>
                   </p>
+                  <p class="text-sm ml-2 mt-1 justify-start text-left text-ellipsis overflow-hidden"> {{ book.pageCount }} pages </p>
+                  <p class="text-sm ml-2 mt-1 justify-start text-left text-ellipsis overflow-hidden"> Year Published: {{ formatDate(book.publishedDate) }}  </p>
                 </div>
               </div>
               <div class="flex items-end">
@@ -132,6 +134,7 @@ export default {
             },
           }
         );
+
         this.books = resp.data;
         this.count = this.books.length;
       } catch (error) {
@@ -169,16 +172,9 @@ export default {
           return a.pageCount - b.pageCount;
         } 
         else if (this.sortBy == 'publishedDate') {
-          return a.publishedDate - b.publishedDate;
+          return this.formatDate(a.publishedDate) - this.formatDate(b.publishedDate);
         }
-
-
-
-
       })
-
-
-
 
       // Show sorted array in descending or ascending order
       if (!this.ascending) {
@@ -189,8 +185,6 @@ export default {
   },
   methods: {
     async deleteBook(book_id) {
-      let booksArray = this.books;
-      console.log(booksArray);
       let currentUserId = auth.currentUser.uid;
       let x = window.confirm("Are you sure you want to delete this book?");
       if (x) {
@@ -206,8 +200,10 @@ export default {
               },
             }
           );
-          let j = booksArray.map((book) => book.book_id).iOf(book_id); // delete book at that i so vue updates page
-          booksArray.splice(j, 1);
+          // let j = booksArray.map((book) => book.book_id).iOf(book_id); // delete book at that i so vue updates page
+          // booksArray.splice(j, 1);
+          const id = this.books.indexOf(book_id);
+          this.books.splice(id, 1)
           this.count--;
           setTimeout(function () {
             alert("Successfully deleted the book.");
@@ -216,7 +212,11 @@ export default {
           console.log(error);
         }
       }
-      return booksArray;
+      return this.books;
+    },
+    formatDate(date) {
+      let formattedDate = new Date(date);
+      return formattedDate.getFullYear();
     },
   },
 };
