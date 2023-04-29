@@ -3,7 +3,7 @@
   <div class="container grid mt-2 mb-16 pt-4 text-center">
     <div class="mb-16 mx-auto pb-4 text-center my-12">
       <!--Search Bar w/ results-->
-      <div class="mb-16 mx-auto mr-auto pb-2 my-2 container max-w-4xl">
+      <div class="mb-8 mx-auto mr-auto pb-2 my-2 container max-w-4xl">
         <h1 class="text-3xl font-semibold font-serif my-2">
           Search for Books to Add to your Library
         </h1>
@@ -29,6 +29,15 @@
             </select>
           </div>
         </form>
+      </div>
+      <div class="mx-auto container items-center text-center xl:hidden max-w-4xl pl-6 mt-2 mb-2">
+        <RouterLink to="/mylibrary"
+          class="flex items-center p-2 text-lg font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">
+          <span class="inline-flex justify-center items-center md:ml-16">
+            <i class="fa-solid fa-book text-lg"></i>
+          </span>
+          <span class="ml-3">Go to My Library</span>
+        </RouterLink>
       </div>
       <div class="text-center pl-8 container mx-auto flex flex-col justify-center items-center">
         <div role="status" v-if="loadState == 'loading'">

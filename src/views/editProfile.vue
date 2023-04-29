@@ -122,17 +122,18 @@ export default {
                     );
                     await this.pushToHomePage();
                     this.confirmDeletion = true;
-                    if (this.confirmDeletion) {
-                        setTimeout(function () {
-                            alert("Account Successfully Deleted. Thank you for using HomeLib!");
-                        }, 1);
-                    }
                 } catch (error) {
                     console.log(error);
                 }
                 const user = auth.currentUser;
                 deleteUser(user)
-                    .then(() => { })
+                    .then(() => { 
+                        if (this.confirmDeletion) {
+                        setTimeout(function () {
+                            alert("Account Successfully Deleted. Thank you for using HomeLib!");
+                        }, 1);
+                    }
+                    })
                     .catch((error) => { // this will catch the reauthentication requirement for Firebase
                         console.log(error);
                         alert("This action requires a recent login. Please enter credentials to continue.");

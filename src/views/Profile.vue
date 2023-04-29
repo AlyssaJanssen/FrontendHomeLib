@@ -2,13 +2,11 @@
   <Sidebar />
   <div>
     <div v-if="user.isLoggedIn" class="text-center container grid justify-center mt-12">
-      <div class=" text-white rounded-full border-4 border-gray-500 sm:mt-4 sm:mx-auto">
-        <div class="relative inline-flex items-center justify-center w-20 h-20 w-overflow-hidden bg-gray-300 rounded-full dark:bg-gray-700">
-          <RouterLink to="/profile">
+      <div class="mt-12">
+        <div class="relative inline-flex border-4 border-gray-500 items-center justify-center w-20 h-20 w-overflow-hidden bg-gray-300 rounded-full dark:bg-gray-700">
             <span class="font-bold text-gray-700 text-2xl dark:text-gray-100">
               {{ getUserInitials(user.data.displayName) }}
             </span>
-          </RouterLink>
         </div>
       </div>
 

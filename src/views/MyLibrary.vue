@@ -9,21 +9,32 @@
         My Library
       </h1>
       <!--Search Bar, searches books in database, reads one-->
-      <div class="mr-auto mb-2 pb-2 my-2 items-start justify-start">
-        <form @submit.prevent="searchBooks()" class="justify-start items-start">
-          <div class="flex justify-start items-start content-start w-full">
-            <input type="text" required v-model="searchTerm" placeholder="Search for a book in your library..."
-              class="bg-white dark:text-white dark:bg-transparent text-black border w-full border-sky-600 py-2 px-2 rounded h-8 hover:border-sky-400" />
-            <button type="submit"
-              class="inline-flex justify-center items-center bg-sky-600 hover:bg-sky-500 rounded-lg text-xs text-white py-2 px-2">
-              <i class="fas fa-search mr-1"></i> Search
-            </button>
-          </div>
-        </form>
+      <div class="mr-auto mb-1 pb-2 my-2 items-start justify-start">
+
+        <div class="flex justify-start items-start content-start w-full pr-6">
+          <input type="text" v-model="searchTerm" placeholder="Search for a book in your library..."
+            class="bg-white dark:text-white dark:bg-transparent text-black border w-full border-sky-600 rounded h-9 hover:border-sky-400" />
+          <button type="submit"
+            class="inline-flex align-bottom bg-sky-600 hover:bg-sky-500 rounded-lg text-xs text-white py-3 px-2">
+            <i class="fas fa-search mx-1"></i>
+          </button>
+        </div>
+
       </div>
-      <h1 v-if="!currSearching" class="flex text-lg font-serif font-semibold text-sky-600 dark:text-sky-500">
-        Owned Books: {{ this.count }}
-      </h1>
+      <div id="sort-bar">
+        <label for="sortBy">Sort: </label>
+        <select name="sortBy" id="select" v-model="this.sortBy"
+          class="bg-sky-400 dark:bg-sky-600 dark:text-white rounded-sm border border-gray-500">
+          <option value="alphabetically">Alphabetically</option>
+          <option value="pageCount">Page Count</option>
+          <option value="publishedDate">Published Date</option>
+        </select>
+        <button v-on:click="ascending = !ascending" class="ml-4">
+          <i v-if="ascending" class="fa fa-sort-up"></i>
+          <i v-else class="fa fa-sort-down"></i>
+        </button>
+      </div>
+
       <div class="mt-6 xl:hidden">
         <RouterLink to="/search"
           class="flex items-center p-2 text-lg font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">
@@ -33,40 +44,40 @@
           <span class="ml-3">Add More Books</span>
         </RouterLink>
       </div>
-      <h1 v-if="currSearching" class="flex text-lg font-medium text-sky-600 dark:text-sky-500">
-        Search Result:
+      <h1 class="flex text-lg font-serif font-semibold text-sky-600 dark:text-sky-500">
+        Owned Books: {{ this.count }}
       </h1>
-      <div class="grid grid-col-10">
+      <h1 v-if="filteredBooks === ''" class="flex text-lg font-serif font-semibold text-sky-600 dark:text-sky-500">
+        No Results Matching that search.
+      </h1>
+      <div class="grid grid-col-10 mr-6">
         <ul>
-          <li v-for="book in this.books" :key="book.book_id"
-            class="py-2 w-full border border-gray-500 rounded-md p-2 my-1 hover:translate-y-0.5 transition duration-100 ease-in-out">
+          <li v-for="book in filteredBooks" :key="book.book_id"
+            class="py-2 px-2 w-full border border-gray-500 rounded-md p-2 my-1 hover:translate-y-0.5 transition duration-100 ease-in-out">
             <div class="grid sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-8 xl:grid-cols-8 2xl:grid-cols-8">
               <RouterLink :to="{ name: 'Book', params: { id: book.book_id } }" class="link">
                 <div class="col-span-2">
                   <img :src="book.image" :alt="book.title" title="Click to view details"
-                    class="object-fill border border-gray-900 dark:border-gray-500 rounded-md hover:opacity-75"
-                    width="100" height="150" />
+                    class="object-fill border border-gray-900 dark:border-gray-500 rounded-md hover:opacity-75" />
                 </div>
               </RouterLink>
               <div class="grid grid-cols-8 col-span-6">
                 <div class="col-span-8 v-cloak">
                   <h4
-                    class="text-xl text-sky-600 dark:text-sky-500 ml-2 mt-4 font-semibold font-serif overflow-hidden justify-start text-left">
+                    class="text-xl flex flex-col flex-wrap justify-around h-14 text-ellipsis text-sky-600 dark:text-sky-500 ml-2 font-bold font-serif overflow-hidden text-left">
                     {{ book.title }}
                   </h4>
-
                   <p class="text-sm ml-2 justify-start text-left text-ellipsis overflow-hidden">
                     <span v-if="!book.authors">No authors to display</span>
                     <span class="ml-0 justify-start text-left" v-else>
                       By
-                      <span v-for="(author, index) in book.authors" :key="index">
+                      <span v-for="(author, i) in book.authors" :key="i">
                         <em>
                           {{
-                            index + 1 !== book.authors.length &&
-                            index + 1 !== book.authors.length - 1
+                            i + 1 !== book.authors.length &&
+                            i + 1 !== book.authors.length - 1
                             ? author + ", "
-                            : index + 1 == book.authors.length &&
-                              index + 1 !== 1
+                            : i + 1 == book.authors.length && i + 1 !== 1
                               ? " and " + author
                               : author
                           }}
@@ -87,6 +98,7 @@
           </li>
         </ul>
       </div>
+
     </div>
   </div>
 </template>
@@ -99,11 +111,10 @@ export default {
   data() {
     return {
       books: [],
-      book: null,
       count: "",
       searchTerm: "",
-      currSearching: false,
-      searchedBook: "",
+      sortBy: "alphabetically",
+      ascending: true,
     };
   },
   async created() {
@@ -133,33 +144,54 @@ export default {
   components: {
     Sidebar,
   },
-
-  methods: {
-    async searchBooks() {
-      try {
-        let currentUserId = auth.currentUser.uid;
-        const idToken = await auth.currentUser.getIdToken(
-          /* forceRefresh */ true
-        );
-        const resp = await axios.get(
-          `https://backendhomelib-production.up.railway.app/api/v1/book/search/${currentUserId}/${this.searchTerm}`,
-          {
-            headers: {
-              Authorization: `Bearer ${idToken}`,
-            },
-          }
-        );
-        this.books = resp.data; // set all books = the one book so the array below displays the one book in books
-        this.currSearching = true;
-      } catch (error) {
-        console.log(error);
+  computed: {
+    filteredBooks() {
+      let tempBooks = this.books;
+      // search 
+      if (this.searchTerm != "" && this.searchTerm) {
+        tempBooks = tempBooks.filter((book) => {
+          return book.title.toUpperCase().includes(this.searchTerm.toUpperCase());
+        });
       }
-      return this.books;
+      // Sort alphabetically by title
+      tempBooks = tempBooks.sort((a, b) => {
+        if (this.sortBy == 'alphabetically') {
+          let fa = a.title.toLowerCase(), fb = b.title.toLowerCase()
+          if (fa < fb) {
+            return -1
+          }
+          if (fa > fb) {
+            return 1
+          }
+          return 0
+          // else sort by pageCount
+        } else if (this.sortBy == 'pageCount') {
+          return a.pageCount - b.pageCount;
+        } 
+        else if (this.sortBy == 'publishedDate') {
+          return a.publishedDate - b.publishedDate;
+        }
+
+
+
+
+      })
+
+
+
+
+      // Show sorted array in descending or ascending order
+      if (!this.ascending) {
+        tempBooks.reverse();
+      }
+      return tempBooks;
     },
-
+  },
+  methods: {
     async deleteBook(book_id) {
+      let booksArray = this.books;
+      console.log(booksArray);
       let currentUserId = auth.currentUser.uid;
-
       let x = window.confirm("Are you sure you want to delete this book?");
       if (x) {
         try {
@@ -174,17 +206,17 @@ export default {
               },
             }
           );
-          let i = this.books.map((book) => book.book_id).indexOf(book_id); // delete book at that index so vue updates page
-          this.books.splice(i, 1);
+          let j = booksArray.map((book) => book.book_id).iOf(book_id); // delete book at that i so vue updates page
+          booksArray.splice(j, 1);
           this.count--;
           setTimeout(function () {
-                            alert("Successfully deleted the book.");
-                        }, 1);
+            alert("Successfully deleted the book.");
+          }, 1);
         } catch (error) {
           console.log(error);
         }
       }
-      return this.books;
+      return booksArray;
     },
   },
 };

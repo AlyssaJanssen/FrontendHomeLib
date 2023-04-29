@@ -3,8 +3,8 @@
   <div class="max-w-4xl mx-auto px-4 lg:px-0 py-4 h-full container pl-6 mt-2 mb-16 pt-10">
     <div v-if="book" class="grid col-span-3 mt-8">
       <template v-if="book">
-        <div class="grid mx-auto">
-          <div>
+        <div class="block sm:grid mx-auto ">
+          <div class="ml-2">
             <a :href="volumeInfo.previewLink" target="_blank">
               <img :src="volumeInfo.imageLinks.thumbnail" :alt="volumeInfo.title"
                 title="Click to view preview on Google Books"
@@ -64,7 +64,7 @@
             </div>
           </div>
           <!-- Book description-->
-          <div v-if="book" class="grid col-span-3 ml-4 p-4">
+          <div v-if="book" class="grid col-span-3 ml-4">
             <!-- <p class="v-cloak">{{ volumeInfo.categories[0].toString() }}</p> -->
             <p class="v-cloak">{{ volumeInfo.publisher }}</p>
             <p class="v-cloak">{{ volumeInfo.publishedDate }}</p>
@@ -159,6 +159,7 @@ export default {
             image: this.volumeInfo.imageLinks.thumbnail,
             publisher: this.volumeInfo.publisher,
             publishedDate: this.volumeInfo.publishedDate,
+            pageCount: this.volumeInfo.pageCount,
             dateAdded: date,
           },
           {
