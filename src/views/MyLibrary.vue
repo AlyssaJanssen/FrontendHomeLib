@@ -26,6 +26,7 @@
           <option value="alphabetically">Alphabetically</option>
           <option value="pageCount">Page Count</option>
           <option value="publishedDate">Published Date</option>
+          <option value="dateAdded">Date Added</option>
         </select>
         <button v-on:click="ascending = !ascending" class="ml-4">
           <i v-if="ascending" class="fa fa-sort-up"></i>
@@ -80,7 +81,9 @@
                   <p class="text-sm ml-2 justify-start text-left text-ellipsis overflow-hidden"> {{ book.pageCount }}
                     pages </p>
                   <p class="text-sm ml-2 justify-start text-left text-ellipsis overflow-hidden"> Year Published: {{
-                    formatDate(book.publishedDate) }} </p>
+                    formatByYear(book.publishedDate) }} </p>
+                    <p class="text-sm ml-2 justify-start text-left text-ellipsis overflow-hidden"> Date added: {{
+                      displayDateAdded(book.dateAdded) }} </p>
                 </div>
               </div>
               <div class="flex items-end">
@@ -166,7 +169,10 @@ export default {
           return a.pageCount - b.pageCount;
         }
         else if (this.sortBy == 'publishedDate') {
-          return this.formatDate(a.publishedDate) - this.formatDate(b.publishedDate);
+          return this.formatByYear(a.publishedDate) - this.formatByYear(b.publishedDate);
+        }
+        else if (this.sortBy == 'dateAdded') {
+          return this.formatDateSortable(a.dateAdded) - this.formatDateSortable(b.dateAdded);
         }
       })
 
@@ -225,10 +231,22 @@ export default {
       }
       return this.books;
     },
-    formatDate(date) {
+    formatByYear(date) {
       let formattedDate = new Date(date);
       return formattedDate.getFullYear();
     },
+    formatDateSortable(date) {
+      let formattedDate = new Date(date);
+      return formattedDate;
+    },
+    displayDateAdded(date){
+      let formattedDate = new Date(date);
+      let year = formattedDate.getFullYear();
+      let month = formattedDate.getMonth();
+      let day = formattedDate.getDate();
+      let fullDate = `${month}/${day}/${year}`;
+      return fullDate;
+    }
   },
 };
 </script>
