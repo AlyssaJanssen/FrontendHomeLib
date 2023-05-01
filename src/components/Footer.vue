@@ -49,7 +49,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="/search" class="text-gray-900 dark:text-white transition hover:opacity-75">
+                  <a href="/" class="text-gray-900 dark:text-white transition hover:opacity-75">
                     Discover
                   </a>
                 </li>
