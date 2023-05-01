@@ -9,7 +9,7 @@
               <div v-if="volumeInfo.imageLinks">
               <img v-if="volumeInfo.imageLinks.thumbnail" :src="volumeInfo.imageLinks.thumbnail" :alt="volumeInfo.title"
                 title="Click to view preview on Google Books"
-                class="border border-gray-900 rounded-md hover:opacity-75 grid sm:grid-cols-1 md:grid-cols-8 lg:grid-cols-8 xl:grid-cols-8 2xl:grid-cols-8"
+                class="border mx-auto container justify-center border-gray-900 rounded-md hover:opacity-75 grid sm:grid-cols-1 md:grid-cols-8 lg:grid-cols-8 xl:grid-cols-8 2xl:grid-cols-8"
                 width="300" height="200" />
               </div>
               <div v-else>
@@ -19,7 +19,7 @@
                 width="300" height="200" />
               </div>
             </a>
-            <p class="text-gray-900 dark:text-gray-400 mt-2 text-xs font-light">
+            <p class="text-gray-900 dark:text-gray-400 mt-2 text-xs font-light mx-auto container text-center justify-center">
               Data from Google Books
             </p>
             <button @click="postBook"
@@ -27,13 +27,10 @@
               v-if="!success">
               Add Book To Library
             </button>
-            <a href="https://bookshop.org/pages/bookstores" target="_blank"
-              class="flex justify-center w-full shadow-xl mt-1 text-sm bg-sky-500 hover:bg-sky-600 dark:bg-sky-600 dark:hover:bg-sky-500 border border-indigo-500 text-white font-bold py-1 px-2 rounded-md">Support
-              Local Bookshop</a>
+          
             <!--TOAST CONFIRMATION-->
             <div v-if="success" class="grid mt-4">
-              <div id="toast-interactive"
-                class="w-full max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow dark:bg-gray-700 dark:text-gray-400"
+              <div class="w-full grid mx-auto max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow dark:bg-gray-700 dark:text-gray-400"
                 role="alert">
                 <div class="inline-flex">
                   <div
@@ -79,6 +76,9 @@
                 </div>
               </div>
             </div>
+            <a href="https://bookshop.org/pages/bookstores" target="_blank"
+            class="flex justify-center mx-auto w-full container shadow-xl mt-1 text-sm bg-sky-500 hover:bg-sky-600 dark:bg-sky-600 dark:hover:bg-sky-500 border border-indigo-500 text-white font-bold py-1 px-2 rounded-md">Support
+            Local Bookshop</a>
           </div>
           <!-- Book description-->
           <div v-if="book" class="grid col-span-3 ml-4 mr-2">
