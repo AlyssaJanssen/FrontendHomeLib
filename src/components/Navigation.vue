@@ -23,15 +23,14 @@
       </div>
       <!-- Right Side Navbar items, login, join -->
       <div class="flex items-center relative text-white">
-        <!--Dark mode toggle switch-->
-        <div class="w-12 h-5">
+      <!--  Dark Mode Toggle Switch -->
+        <div class="w-12 h-4">
           <input type="checkbox" id="dark-mode-toggle" class="hidden"
             onchange="document.documentElement.classList.toggle('dark')" />
-
           <label for="dark-mode-toggle"
-            class="w-11 h-6 bg-gray-400 dark:bg-gray-600 rounded-full p-1 flex justify-between cursor-pointer">
+            class="w-9 h-5 bg-gray-400 dark:bg-gray-600 rounded-full p-1 flex justify-between cursor-pointer">
             <span class="inline dark:hidden"></span>
-            <span class="w-4 h-4 rounded-full bg-white text-gray-700 block float-right dark:float-left"></span>
+            <span class="w-3 h-3 rounded-full bg-white text-gray-700 block float-right dark:float-left"></span>
             <span class="hidden dark:inline transition ease-in-out duration-200"></span>
           </label>
         </div>
@@ -42,7 +41,7 @@
           class="ml-1 shadow-xl text-sm py-2 px-2 font-bold rounded-lg bg-indigo-500 hover:bg-indigo-400 border border-indigo-400 text-white transition duration-300"
           v-if="!user.isLoggedIn">Login</RouterLink>
         <button
-          class="link ml-1 shadow-xl text-sm py-2 px-2 font-bold rounded-lg bg-indigo-500 hover:bg-indigo-400 border border-indigo-400 text-white transition duration-300"
+          class="link shadow-xl text-sm py-2 px-2 font-bold rounded-lg bg-indigo-500 hover:bg-indigo-400 border border-indigo-400 text-white transition duration-300"
           @click="signOut" v-if="user.isLoggedIn">
           Logout
         </button>

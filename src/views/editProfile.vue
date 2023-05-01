@@ -6,22 +6,28 @@
             <h1 class="text-2xl flex font-bold text-gray-800 dark:text-gray-300">
                 Account Details
             </h1>
-            <hr class="mt-2 mb-4 border-1 border-gray-700 dark:border-gray-400" />
+            <hr class="mt-2 mb-2 border-1 border-gray-700 dark:border-gray-400" />
             <!-- Form only holds inputs for email and displayName, to send them to be updated -->
             <form class="space-y-6 w-full" @submit.prevent="editUserAccount">
                 <div>
                     <label for="email"
-                        class="flex mt-8 text-md font-medium text-gray-900 dark:text-white items-start justify-start">Email</label>
+                        class="flex mt-6 text-md font-medium text-gray-900 dark:text-white items-start justify-start">Email</label>
                     <input type="email" name="email" id="email" autocomplete="email"
                         class="bg-gray-50 border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-2 focus:outline-none focus:ring-sky-700 focus:border-sky-300 dark:focus:ring-sky-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-500 dark:text-white"
                         required v-model="email" />
+                    <label for="password"
+                        class="flex mt-4 text-md font-medium text-gray-900 dark:text-white items-start justify-start">Current
+                        Password</label>
+                    <input type="password" name="password" id="password"
+                        class="bg-gray-50 border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-2 focus:outline-none focus:ring-sky-700 focus:border-sky-300 dark:focus:ring-sky-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-500 dark:text-white"
+                        required v-model="password" />
                     <label for="username"
                         class="flex mt-4 text-md font-medium text-gray-900 dark:text-white items-start justify-start">Username</label>
                     <input type="username" name="username" id="username" autocomplete="displayName"
                         class="bg-gray-50 border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-2 focus:outline-none focus:ring-sky-700 focus:border-sky-300 dark:focus:ring-sky-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-500 dark:text-white"
                         required v-model="displayName" />
                     <button type="submit"
-                        class="w-full mt-12 text-white bg-indigo-500 hover:bg-blue-800 focus:ring-1 focus:outline-none focus:ring-sky-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-indigo-500 dark:hover:bg-indigo-600 dark:focus:ring-sky-500">
+                        class="w-full mt-10 text-white bg-indigo-600 hover:bg-indigo-500 focus:ring-1 focus:outline-none focus:ring-sky-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-indigo-500 dark:hover:bg-indigo-400 dark:focus:ring-sky-500">
                         Save Changes
                     </button>
                     <div v-if="this.err" class="text-sm text-yellow-400 block w-72 p-2.5">
@@ -29,16 +35,15 @@
                     </div>
                 </div>
             </form>
-            <h1 class="text-xl mt-12 flex font-bold text-gray-800 dark:text-gray-300">
+            <h1 class="text-xl mt-8 flex font-bold text-gray-800 dark:text-gray-300">
                 Change Password
             </h1>
-            <hr class="mt-2 mb-12 border-1 border-gray-700 dark:border-gray-400" />
-
-            <RouterLink class="text-white bg-indigo-500 hover:bg-blue-800 focus:ring-1 focus:outline-none focus:ring-sky-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-indigo-500 dark:hover:bg-indigo-600 dark:focus:ring-sky-500"
+            <hr class="mt-2 mb-10 border-1 border-gray-700 dark:border-gray-400" />
+            <RouterLink
+                class="text-white bg-indigo-600 hover:bg-indigo-500 focus:ring-1 focus:outline-none focus:ring-sky-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-indigo-500 dark:hover:bg-indigo-400 dark:focus:ring-sky-500"
                 to="/resetpassword">
                 Change Password
             </RouterLink>
-
             <h1 class="text-xl mt-8 flex font-bold text-gray-800 dark:text-gray-300">
                 Delete Account
             </h1>
@@ -61,7 +66,9 @@ import { auth } from "../firebase.config";
 import {
     updateProfile,
     updateEmail,
-    deleteUser
+    deleteUser,
+    reauthenticateWithCredential,
+    EmailAuthProvider,
 } from "firebase/auth";
 import { useRouter } from "vue-router";
 import axios from "axios";
@@ -70,9 +77,9 @@ export default {
     data() {
         return {
             email: this.user.data.email,
+            password: "",
             displayName: this.user.data.displayName,
             err: null,
-            confirmDeletion: false,
         };
     },
     setup() {
@@ -107,11 +114,8 @@ export default {
                 "Are you sure you wish to delete your account and remove all of your data from HomeLib? This can't be reversed!"
             );
             if (x) {
-                // delete User account and then delete their Firebase account
                 try {
-                    const idToken = await auth.currentUser.getIdToken(
-            /* forceRefresh */ true
-                    );
+                    const idToken = await auth.currentUser.getIdToken(/* forceRefresh */ true);
                     await axios.delete(
                         `https://backendhomelib-production.up.railway.app/deleteuser/${currentUserId}`,
                         {
@@ -121,23 +125,17 @@ export default {
                         }
                     );
                     await this.pushToHomePage();
-                    this.confirmDeletion = true;
                 } catch (error) {
                     console.log(error);
                 }
                 const user = auth.currentUser;
-                deleteUser(user)
-                    .then(() => { 
-                        if (this.confirmDeletion) {
-                        setTimeout(function () {
-                            alert("Account Successfully Deleted. Thank you for using HomeLib!");
-                        }, 1);
-                    }
-                    })
-                    .catch((error) => { // this will catch the reauthentication requirement for Firebase
+                deleteUser(user).then(() => {
+                    setTimeout(function () {
+                        alert("Account Successfully Deleted. Thank you for using HomeLib!");
+                    }, 1);
+                })
+                    .catch((error) => {
                         console.log(error);
-                        alert("This action requires a recent login. Please enter credentials to continue.");
-                        this.pushToLogin();
                     });
             }
         },
@@ -147,7 +145,6 @@ export default {
             const idToken = await auth.currentUser.getIdToken( /* forceRefresh */ true);
             // update the displayname with the users input
             updateProfile(auth.currentUser, {
-                // it is updating displayName correctly
                 displayName: this.displayName,
             }).then(() => {
                 // now send that users updates to be stored in the db
@@ -162,26 +159,27 @@ export default {
                                 Authorization: `Bearer ${idToken}`,
                             },
                         }
-                    )
-                    .then(function (resp) { })
-                    .catch(function (error) {
+                    ).catch(function (error) {
                         console.log(error);
                     });
             }).catch((error) => {
                 console.log(error);
             });
-            // then  their email in Firebase
             const user = auth.currentUser;
-            updateEmail(user, this.email)
-                .then(() => {
-                    window.alert("Your account has been successfully updated!");
-                })
-                .catch((error) => {// this will catch the reauthentication requirement for Firebase
-                    console.log(error);
-                    alert("This action requires recent login. Please enter credentials to continue.");
-                    this.pushToLogin();
-                });
-           
+            // need to reauthenticate user before updating email in Firebase
+            const credential = EmailAuthProvider.credential(user.email, this.password)
+            reauthenticateWithCredential(user, credential).then(() => {
+                // User re-authenticated, now update email
+                updateEmail(user, this.email)
+                    .then(() => {
+                        window.alert("Your account has been successfully updated!");
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            }).catch((error) => {
+                console.log(error);
+            });
         },
     },
 };

@@ -55,16 +55,24 @@
                     </button>
                   </div>
                 </div>
-                <div class="mt-2">
+                <div class="mt-2 mx-2">
                   <RouterLink to="/mylibrary"
                     class="flex justify-center w-full shadow-xl mt-1 text-sm bg-sky-500 hover:bg-sky-600 dark:bg-sky-600 dark:hover:bg-sky-500 border border-indigo-500 text-white font-bold py-1 px-2 rounded-md">
-                    Go To Library</RouterLink>
+                    Go To Library
+                  </RouterLink>
+                  <RouterLink to="/search"
+                    class="flex justify-center w-full shadow-xl mt-1 text-sm bg-sky-500 hover:bg-sky-600 dark:bg-sky-600 dark:hover:bg-sky-500 border border-indigo-500 text-white font-bold py-1 px-2 rounded-md">
+                    <span>
+                      <i class="fa-solid fa-plus mr-1"></i>
+                    </span>
+                    <span>Add Books</span>
+                  </RouterLink>
                 </div>
               </div>
             </div>
           </div>
           <!-- Book description-->
-          <div v-if="book" class="grid col-span-3 ml-4">
+          <div v-if="book" class="grid col-span-3 ml-4 mr-2">
             <!-- <p class="v-cloak">{{ volumeInfo.categories[0].toString() }}</p> -->
             <p class="v-cloak">{{ volumeInfo.publisher }}</p>
             <p class="v-cloak">{{ volumeInfo.publishedDate }}</p>

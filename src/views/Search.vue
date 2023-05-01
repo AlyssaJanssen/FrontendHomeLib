@@ -9,7 +9,7 @@
         </h1>
         <form @submit.prevent="search" class="mx-auto container grid">
           <div class="justify-start items-start content-start">
-            <input type="text" v-model="keyword" placeholder="Search for a book..."
+            <input type="text" v-model="keyword" placeholder="Search for a book to add to your library"
               class="bg-white container dark:text-white dark:bg-transparent text-black w-9/12 border border-sky-600 py-2 px-2 rounded h-8 hover:border-sky-400"
               required />
             <button type="submit"
@@ -32,11 +32,11 @@
       </div>
       <div class="mx-auto container items-center text-center xl:hidden max-w-4xl pl-6 mt-2 mb-2">
         <RouterLink to="/mylibrary"
-          class="flex items-center p-2 mx-16 text-lg font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">
+          class="flex items-center p-2 mx-16 text-lg font-normal justify-center text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">
           <span class="inline-flex justify-center items-center ">
             <i class="fa-solid fa-book text-lg"></i>
           </span>
-          <span class="ml-3">Go to My Library</span>
+          <span class="ml-2">Go To Library</span>
         </RouterLink>
       </div>
       <div class="text-center pl-8 container mx-auto flex flex-col justify-center items-center">
@@ -89,6 +89,12 @@ export default {
   },
   methods: {
     search() {
+      // set URL to search/searchTerm=${this.keyword}
+      //let newUrl = 
+      //document.location.href = newUrl;
+      let form = this;
+      form.action = `${window.location.href}/searchTerm=${this.keyword}`;
+      
       this.loadState = "loading";
       axios
         .get(

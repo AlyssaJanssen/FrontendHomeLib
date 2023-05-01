@@ -2,7 +2,7 @@
   <div>
     <div :class="isDark ? 'dark' : ''">
       <div
-        class="bg-gradient-to-b from-gray-200 to-gray-400 text-black dark:bg-gradient-to-b dark:from-gray-900 dark:to-slate-700 dark:text-gray-100">
+        class="bg-gradient-to-b from-gray-200 to-gray-500 text-black dark:bg-gradient-to-b dark:from-gray-900 dark:to-slate-700 dark:text-gray-100">
         <Navigation />
         <div class="min-h-screen container mx-auto">
           <RouterView />

@@ -23,7 +23,7 @@
       <div class="grid grid-cols-1 gap-8 sm:grid-cols-2">
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div>
-            <p class="font-medium text-lg text-gray-900 dark:text-white">
+            <p class="font-medium text-lg text-gray-800 dark:text-white">
               HomeLib
             </p>
             <i class="fa-solid fa-book mr-1 text-xl"> </i>
@@ -33,18 +33,18 @@
               <ul class="space-y-4 text-sm">
                 <li>
                   <div v-if="user.isLoggedIn">
-                    <RouterLink to="/mylibrary" class="text-gray-900 dark:text-white transition hover:opacity-75">
+                    <RouterLink to="/mylibrary" class=" dark:text-white transition hover:opacity-75">
                       Home
                     </RouterLink>
                   </div>
                   <div v-else>
-                    <RouterLink to="/" class="text-gray-900 dark:text-white transition hover:opacity-75">
+                    <RouterLink to="/" class=" dark:text-white transition hover:opacity-75">
                       Home
                     </RouterLink>
                   </div>
                 </li>
                 <li>
-                  <a href="/" class="text-gray-900 dark:text-white transition hover:opacity-75">
+                  <a href="/" class=" dark:text-white transition hover:opacity-75">
                     About
                   </a>
                 </li>
