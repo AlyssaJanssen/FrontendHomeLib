@@ -30,11 +30,11 @@
           
             <!--TOAST CONFIRMATION-->
             <div v-if="success" class="grid mt-4">
-              <div class="w-full grid mx-auto max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow dark:bg-gray-700 dark:text-gray-400"
+              <div class="w-full grid mx-auto max-w-xs p-2 text-gray-500 bg-white rounded-lg shadow dark:bg-gray-700 dark:text-gray-400"
                 role="alert">
                 <div class="inline-flex">
                   <div
-                    class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-400 bg-green-200 rounded-lg dark:bg-green-600 dark:text-green-200">
+                    class="inline-flex items-center mt-0.5 justify-center flex-shrink-0 w-8 h-8 text-green-400 bg-green-200 rounded-lg dark:bg-green-600 dark:text-green-200">
                     <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                       xmlns="http://www.w3.org/2000/svg">
                       <path fill-rule="evenodd"
@@ -43,11 +43,11 @@
                     </svg>
                     <span class="sr-only">Check icon</span>
                   </div>
-                  <div class="inline-flex text-sm">
+                  <div class="w-full inline-flex text-sm">
                     <span class="p-2 text-sm justify-start items-start font-semibold text-gray-900 dark:text-white">Book
                       Added!</span>
                   </div>
-                  <div class="inline-block">
+                  <div class="inline-flex">
                     <button type="button"
                       class="inline-flex justify-end items-end ml-5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
                       data-dismiss-target="#toast-interactive" aria-label="Close">
