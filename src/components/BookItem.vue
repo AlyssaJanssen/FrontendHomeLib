@@ -1,5 +1,5 @@
 <template>
-  <div class="border border-gray-700 rounded dark:hover:bg-gray-700 hover:bg-slate-300 flex justify-center items-end ">
+  <div class="border border-gray-600 rounded dark:hover:bg-gray-700 hover:bg-slate-300 flex justify-center items-end ">
     <RouterLink :to="{ name: 'Book', params: { id: book.id } }" class="link">
       <div class="items-baseline align-bottom mx-6">
         <template v-if="volumeInfo.imageLinks">
@@ -55,8 +55,8 @@ export default {
 
 <style scoped>
 img {
-  width: 18vh;
+  width: 16vh;
   object-fit: fill;
-  height: 26vh;
+  height: 24vh;
 }
 </style>

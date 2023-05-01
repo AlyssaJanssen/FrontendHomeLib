@@ -178,6 +178,29 @@ export default {
     },
   },
   methods: {
+
+    async getCurrBooks() {
+      try {
+        const idToken = await auth.currentUser.getIdToken(/* forceRefresh */ true);
+        let currentUserId = auth.currentUser.uid;
+        // getting all books associated with the current user
+        const resp = await axios.get(
+          `https://backendhomelib-production.up.railway.app/api/v1/books/${currentUserId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${idToken}`,
+            },
+          }
+        );
+
+        this.books = resp.data;
+        this.count = this.books.length;
+      } catch (error) {
+        console.log(error);
+      }
+      return this.books;
+    },
+
     async deleteBook(book_id) {
       let currentUserId = auth.currentUser.uid;
       let x = window.confirm("Are you sure you want to delete this book?");
@@ -194,14 +217,8 @@ export default {
               },
             }
           );
-          // let j = booksArray.map((book) => book.book_id).iOf(book_id); // delete book at that i so vue updates page
-          // booksArray.splice(j, 1);
-          const id = this.books.indexOf(book_id);
-          this.books.splice(id, 1)
           this.count--;
-          setTimeout(function () {
-            alert("Successfully deleted the book.");
-          }, 1);
+          await this.getCurrBooks();
         } catch (error) {
           console.log(error);
         }

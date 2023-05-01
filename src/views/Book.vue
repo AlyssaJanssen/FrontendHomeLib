@@ -6,9 +6,18 @@
         <div class="block sm:grid mx-auto ">
           <div class="ml-2">
             <a :href="volumeInfo.previewLink" target="_blank">
-              <img :src="volumeInfo.imageLinks.thumbnail" :alt="volumeInfo.title"
+              <div v-if="volumeInfo.imageLinks">
+              <img v-if="volumeInfo.imageLinks.thumbnail" :src="volumeInfo.imageLinks.thumbnail" :alt="volumeInfo.title"
                 title="Click to view preview on Google Books"
-                class="border border-gray-900 rounded-md hover:opacity-75 grid sm:grid-cols-1 md:grid-cols-8 lg:grid-cols-8 xl:grid-cols-8 2xl:grid-cols-8" width="300" height="200" />
+                class="border border-gray-900 rounded-md hover:opacity-75 grid sm:grid-cols-1 md:grid-cols-8 lg:grid-cols-8 xl:grid-cols-8 2xl:grid-cols-8"
+                width="300" height="200" />
+              </div>
+              <div v-else>
+              <img src="https://books.google.co.kr/googlebooks/images/no_cover_thumb.gif" :alt="volumeInfo.title"
+                title="Click to view preview on Google Books"
+                class="border border-gray-900 rounded-md hover:opacity-75 grid sm:grid-cols-1 md:grid-cols-8 lg:grid-cols-8 xl:grid-cols-8 2xl:grid-cols-8"
+                width="300" height="200" />
+              </div>
             </a>
             <p class="text-gray-900 dark:text-gray-400 mt-2 text-xs font-light">
               Data from Google Books

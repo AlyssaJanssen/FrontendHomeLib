@@ -10,8 +10,13 @@
             <!-- Form only holds inputs for email and displayName, to send them to be updated -->
             <form class="space-y-6 w-full" @submit.prevent="editUserAccount">
                 <div>
+                    <label for="username"
+                        class="flex mt-4 text-md font-medium text-gray-900 dark:text-white items-start justify-start">Username</label>
+                    <input type="username" name="username" id="username" autocomplete="displayName"
+                        class="bg-gray-50 border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-2 focus:outline-none focus:ring-sky-700 focus:border-sky-300 dark:focus:ring-sky-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-500 dark:text-white"
+                        required v-model="displayName" />
                     <label for="email"
-                        class="flex mt-6 text-md font-medium text-gray-900 dark:text-white items-start justify-start">Email</label>
+                        class="flex mt-4 text-md font-medium text-gray-900 dark:text-white items-start justify-start">Email</label>
                     <input type="email" name="email" id="email" autocomplete="email"
                         class="bg-gray-50 border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-2 focus:outline-none focus:ring-sky-700 focus:border-sky-300 dark:focus:ring-sky-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-500 dark:text-white"
                         required v-model="email" />
@@ -21,11 +26,6 @@
                     <input type="password" name="password" id="password"
                         class="bg-gray-50 border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-2 focus:outline-none focus:ring-sky-700 focus:border-sky-300 dark:focus:ring-sky-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-500 dark:text-white"
                         required v-model="password" />
-                    <label for="username"
-                        class="flex mt-4 text-md font-medium text-gray-900 dark:text-white items-start justify-start">Username</label>
-                    <input type="username" name="username" id="username" autocomplete="displayName"
-                        class="bg-gray-50 border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-2 focus:outline-none focus:ring-sky-700 focus:border-sky-300 dark:focus:ring-sky-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-500 dark:text-white"
-                        required v-model="displayName" />
                     <button type="submit"
                         class="w-full mt-10 text-white bg-indigo-600 hover:bg-indigo-500 focus:ring-1 focus:outline-none focus:ring-sky-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-indigo-500 dark:hover:bg-indigo-400 dark:focus:ring-sky-500">
                         Save Changes

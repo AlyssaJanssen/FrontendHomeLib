@@ -16,16 +16,16 @@
               class="link align-top shadow-xl text-xs bg-sky-600 hover:bg-sky-700 text-white font-bold py-2 px-2 rounded">
               Search
             </button>
-            <p class="text-sm font-extralight dark:text-gray-400">
+            <p class="text-gray-900 dark:text-gray-400 m-1 text-xs font-light">
               Search Results from Google Books
             </p>
           </div>
           <div>
             <select v-if="loadState == 'success'" name="order"
-              class="inline-block rounded my-1 py-1 px-2 border border-gray-800 text-black bg-gray-300 font-semibold hover:bg-slate-200"
+              class="dark:bg-gray-700  rounded-sm border border-gray-500 hover:border-sky-400"
               v-model="orderBy" @change="search">
-              <option class="font-bold" value="newest">newest</option>
               <option class="font-bold" value="relevance">most relevant</option>
+              <option class="font-bold" value="newest">newest</option>
             </select>
           </div>
         </form>
@@ -39,7 +39,7 @@
           <span class="ml-2">Go To Library</span>
         </RouterLink>
       </div>
-      <div class="text-center pl-8 container mx-auto flex flex-col justify-center items-center">
+      <div class="text-center px-2 pl-4 mr-8 container mx-auto flex flex-col justify-center items-center">
         <div role="status" v-if="loadState == 'loading'">
           <svg aria-hidden="true"
             class="inline w-14 h-14 text-gray-600 dark:fill-sky-600 animate-spin dark:text-gray-200 fill-sky-500"
@@ -71,8 +71,8 @@ export default {
     return {
       books: [],
       keyword: "",
-      orderBy: "newest",
-      maxResults: "32",
+      orderBy: "relevance",
+      maxResults: "24",
       loadState: "",
       countryName: "US",
     };
