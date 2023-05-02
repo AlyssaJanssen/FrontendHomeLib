@@ -13,7 +13,7 @@
       </div>
       <!--Book Title and Author here-->
       <div class="flex flex-col ">
-        <h3 class="text-lg flex flex-col h-14 justify-start font-bold font-serif text-ellipsis overflow-hidden text-sky-600 dark:text-sky-500">{{ volumeInfo.title }}</h3>
+        <h3 class="text-lg flex flex-col h-14 justify-start font-bold font-serif text-ellipsis overflow-hidden text-gray-800 dark:text-sky-500">{{ volumeInfo.title }}</h3>
         <p class="text-sm flex flex-col h-10 justify-start m-2 text-ellipsis overflow-hidden">
           <span v-if="!volumeInfo.authors">No authors to display</span>
           <span v-else>
