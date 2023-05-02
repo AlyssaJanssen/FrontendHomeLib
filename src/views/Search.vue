@@ -72,7 +72,7 @@ export default {
       books: [],
       keyword: "",
       orderBy: "relevance",
-      maxResults: "24",
+      maxResults: "28",
       loadState: "",
       countryName: "US",
     };
